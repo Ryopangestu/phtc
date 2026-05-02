@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulator PHTC Kopdes Merah Putih 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a26;
+  --card: #16161f;
+  --border: #2a2a3a;
+  --text: #e8e8f0;
+  --text2: #9090a8;
+  --red: #ff3b5c;
+  --red-bg: rgba(255,59,92,0.1);
+  --green: #00d68f;
+  --green-bg: rgba(0,214,143,0.1);
+  --blue: #4d8eff;
+  --blue-bg: rgba(77,142,255,0.1);
+  --orange: #ff9f43;
+  --orange-bg: rgba(255,159,67,0.1);
+  --purple: #a855f7;
+  --purple-bg: rgba(168,85,247,0.1);
+  --gold: #ffd700;
+  --white: #ffffff;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--red), var(--blue));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+}
+
+.logo-text span { color: var(--red); }
+.logo-sub { font-size: 11px; color: var(--text2); font-weight: 500; }
+
+.header-stats {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.stat-chip {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* MAIN LAYOUT */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* HOME SCREEN */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.section-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+}
+
+.section-card:hover {
+  border-color: var(--text2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.section-card[data-section="twk"]::before { background: var(--red); }
+.section-card[data-section="tiu"]::before { background: var(--blue); }
+.section-card[data-section="tkp"]::before { background: var(--green); }
+.section-card[data-section="kopdes"]::before { background: var(--orange); }
+
+.section-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.section-card[data-section="twk"] .section-icon { background: var(--red-bg); }
+.section-card[data-section="tiu"] .section-icon { background: var(--blue-bg); }
+.section-card[data-section="tkp"] .section-icon { background: var(--green-bg); }
+.section-card[data-section="kopdes"] .section-icon { background: var(--orange-bg); }
+
+.section-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.section-sub { font-size: 13px; color: var(--text2); margin-bottom: 16px; line-height: 1.5; }
+
+.section-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+/* EXAM MODE CARD */
+.exam-card {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #1a1028 0%, #0f1a2e 100%);
+  border: 1px solid var(--purple);
+  border-radius: 16px;
+  padding: 32px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.exam-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(168,85,247,0.2);
+}
+
+.exam-icon {
+  width: 64px; height: 64px;
+  background: var(--purple-bg);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.exam-info { flex: 1; }
+.exam-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+.exam-title span { color: var(--purple); }
+.exam-desc { font-size: 14px; color: var(--text2); line-height: 1.5; }
+
+.exam-badge {
+  background: var(--purple);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* DIFFICULTY SELECTOR */
+.diff-screen {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.diff-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.diff-sub { color: var(--text2); margin-bottom: 32px; font-size: 15px; }
+
+.diff-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.diff-card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.diff-card:hover { transform: translateY(-4px); }
+
+.diff-card[data-diff="mudah"]:hover { border-color: var(--green); box-shadow: 0 8px 32px rgba(0,214,143,0.15); }
+.diff-card[data-diff="medium"]:hover { border-color: var(--orange); box-shadow: 0 8px 32px rgba(255,159,67,0.15); }
+.diff-card[data-diff="hard"]:hover { border-color: var(--red); box-shadow: 0 8px 32px rgba(255,59,92,0.15); }
+
+.diff-emoji { font-size: 40px; margin-bottom: 12px; }
+.diff-label { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.diff-desc { font-size: 12px; color: var(--text2); }
+
+/* QUIZ SCREEN */
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.quiz-back {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.quiz-back:hover { border-color: var(--text2); }
+
+.quiz-progress-wrap {
+  flex: 1;
+  max-width: 400px;
+}
+
+.quiz-progress-bar {
+  height: 6px;
+  background: var(--bg);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.quiz-progress-text {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 4px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.quiz-timer {
+  background: var(--red-bg);
+  border: 1px solid var(--red);
+  color: var(--red);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quiz-timer.warning { animation: pulse 1s infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* QUESTION CARD */
+.question-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 16px;
+}
+
+.q-number {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.q-diff-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.q-diff-badge.mudah { background: var(--green-bg); color: var(--green); }
+.q-diff-badge.medium { background: var(--orange-bg); color: var(--orange); }
+.q-diff-badge.hard { background: var(--red-bg); color: var(--red); }
+
+.q-text {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+/* OPTIONS */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-btn {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: inherit;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.option-btn:hover:not(.disabled) {
+  border-color: var(--blue);
+  background: var(--blue-bg);
+}
+
+.option-btn.selected {
+  border-color: var(--blue);
+  background: var(--blue-bg);
+}
+
+.option-btn.correct {
+  border-color: var(--green) !important;
+  background: var(--green-bg) !important;
+}
+
+.option-btn.wrong {
+  border-color: var(--red) !important;
+  background: var(--red-bg) !important;
+}
+
+.option-btn.disabled { cursor: default; }
+
+.option-letter {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.option-btn.correct .option-letter { background: var(--green); color: var(--bg); }
+.option-btn.wrong .option-letter { background: var(--red); color: white; }
+
+.explanation-box {
+  margin-top: 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text2);
+  display: none;
+}
+
+.explanation-box.show { display: block; }
+.explanation-box strong { color: var(--green); }
+
+/* NAV BUTTONS */
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.nav-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover { border-color: var(--text2); }
+.nav-btn.primary { background: var(--blue); border-color: var(--blue); color: white; }
+.nav-btn.primary:hover { background: #3a7aee; }
+.nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* QUESTION NAVIGATOR */
+.q-navigator {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.q-nav-title { font-size: 13px; font-weight: 700; color: var(--text2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+.q-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+}
+
+.q-nav-btn {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text2);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.q-nav-btn:hover { border-color: var(--blue); }
+.q-nav-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+.q-nav-btn.answered { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+.q-nav-btn.wrong-ans { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+
+/* RESULT SCREEN */
+.result-screen {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.result-circle {
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.result-circle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 4px;
+  background: conic-gradient(var(--green) var(--pct), var(--border) var(--pct));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.result-score { font-size: 48px; font-weight: 800; }
+.result-total { font-size: 14px; color: var(--text2); font-weight: 600; }
+
+.result-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.result-sub { color: var(--text2); font-size: 14px; margin-bottom: 32px; }
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto 32px;
+}
+
+.result-stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.result-stat-val { font-size: 24px; font-weight: 800; }
+.result-stat-label { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+.result-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .home-grid { grid-template-columns: 1fr; }
+  .diff-cards { grid-template-columns: 1fr; max-width: 300px; }
+  .header-stats { display: none; }
+  .q-nav-grid { grid-template-columns: repeat(10, 1fr); }
+  .exam-card { flex-direction: column; text-align: center; }
+  .result-stats { grid-template-columns: 1fr; }
+  .question-card { padding: 20px; }
+  .quiz-header { flex-direction: column; align-items: stretch; }
+}
+
+.hidden { display: none !important; }
+
+/* FADE IN */
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">KD</div>
+    <div>
+      <div class="logo-text">PHTC <span>Kopdes</span> 2026</div>
+      <div class="logo-sub">Simulator Ujian Panselnas</div>
+    </div>
+  </div>
+  <div class="header-stats">
+    <div class="stat-chip">📚 600 Soal</div>
+    <div class="stat-chip">⏱️ Mode Ujian</div>
+  </div>
+</div>
+
+<div class="app-container">
+  <!-- HOME -->
+  <div id="homeScreen" class="fade-in">
+    <div class="home-grid">
+      <div class="section-card" data-section="twk" onclick="selectSection('twk')">
+        <div class="section-icon">🏛️</div>
+        <div class="section-title">TWK</div>
+        <div class="section-sub">Tes Wawasan Kebangsaan — Pancasila, UUD 1945, NKRI, Bhinneka Tunggal Ika, Sejarah Nasional</div>
+        <div class="section-meta">
+          <span class="meta-tag">150 Soal</span>
+          <span class="meta-tag">3 Level</span>
+        </div>
+      </div>
+
+      <div class="section-card" data-section="tiu" onclick="selectSection('tiu')">
+        <div class="section-icon">🧠</div>
+        <div class="section-title">TIU</div>
+        <div class="section-sub">Tes Intelegensia Umum — Verbal, Numerik, Logika, Analitis, Figural</div>
+        <div class="section-meta">
+          <span class="meta-tag">150 Soal</span>
+          <span class="meta-tag">3 Level</span>
+        </div>
+      </div>
+
+      <div class="section-card" data-section="tkp" onclick="selectSection('tkp')">
+        <div class="section-icon">🤝</div>
+        <div class="section-title">TKP</div>
+        <div class="section-sub">Tes Karakteristik Pribadi — Pelayanan Publik, Jejaring Kerja, Sosial Budaya, Profesionalisme</div>
+        <div class="section-meta">
+          <span class="meta-tag">150 Soal</span>
+          <span class="meta-tag">3 Level</span>
+        </div>
+      </div>
+
+      <div class="section-card" data-section="kopdes" onclick="selectSection('kopdes')">
+        <div class="section-icon">🏘️</div>
+        <div class="section-title">Koperasi & Desa</div>
+        <div class="section-sub">UU Koperasi, UU Desa, BUMDes, Tata Kelola Koperasi, Simpan Pinjam, Perencanaan Desa</div>
+        <div class="section-meta">
+          <span class="meta-tag">150 Soal</span>
+          <span class="meta-tag">3 Level</span>
+        </div>
+      </div>
+
+      <div class="exam-card" onclick="startExamMode()">
+        <div class="exam-icon">⚡</div>
+        <div class="exam-info">
+          <div class="exam-title">MODE <span>UJIAN</span></div>
+          <div class="exam-desc">Simulasi ujian sesungguhnya — 150 soal acak dari semua bagian, waktu 60 menit. Soal di-gacha dari seluruh bank soal!</div>
+        </div>
+        <div class="exam-badge">MULAI →</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFFICULTY SELECT -->
+  <div id="diffScreen" class="hidden fade-in">
+    <div class="diff-screen">
+      <div class="diff-title" id="diffTitle">Pilih Tingkat Kesulitan</div>
+      <div class="diff-sub" id="diffSub">Pilih level sesuai kemampuanmu</div>
+      <div class="diff-cards">
+        <div class="diff-card" data-diff="mudah" onclick="selectDifficulty('mudah')">
+          <div class="diff-emoji">🟢</div>
+          <div class="diff-label">Mudah</div>
+          <div class="diff-desc">Konsep dasar & hafalan</div>
+        </div>
+        <div class="diff-card" data-diff="medium" onclick="selectDifficulty('medium')">
+          <div class="diff-emoji">🟡</div>
+          <div class="diff-label">Medium</div>
+          <div class="diff-desc">Pemahaman & analisis</div>
+        </div>
+        <div class="diff-card" data-diff="hard" onclick="selectDifficulty('hard')">
+          <div class="diff-emoji">🔴</div>
+          <div class="diff-label">Hard</div>
+          <div class="diff-desc">Studi kasus & evaluasi</div>
+        </div>
+      </div>
+      <button class="nav-btn" style="margin-top:24px" onclick="goHome()">← Kembali</button>
+    </div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quizScreen" class="hidden fade-in">
+    <div class="quiz-header">
+      <button class="quiz-back" onclick="confirmQuit()">✕ Keluar</button>
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="progressFill" style="width:0%;background:var(--blue)"></div>
+        </div>
+        <div class="quiz-progress-text" id="progressText">Soal 1 / 150</div>
+      </div>
+      <div class="quiz-timer hidden" id="timerDisplay">⏱ 60:00</div>
+    </div>
+
+    <div class="question-card" id="questionCard"></div>
+
+    <div class="quiz-nav">
+      <button class="nav-btn" id="prevBtn" onclick="prevQuestion()">← Sebelumnya</button>
+      <button class="nav-btn primary" id="nextBtn" onclick="nextQuestion()">Selanjutnya →</button>
+    </div>
+
+    <div class="q-navigator">
+      <div class="q-nav-title">Navigasi Soal</div>
+      <div class="q-nav-grid" id="qNavGrid"></div>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="resultScreen" class="hidden fade-in"></div>
+</div>
+
+<script>
+// =========================================================================
+// QUESTION BANK — 600 total (150 per section × 4 sections, 50 per difficulty)
+// =========================================================================
+
+const QUESTION_BANK = {
+  // ===================== TWK =====================
+  twk: {
+    mudah: [
+      {q:"Pancasila sebagai dasar negara tercantum dalam pembukaan UUD 1945 alinea ke-?",o:["Pertama","Kedua","Ketiga","Keempat"],a:3,e:"Pancasila tercantum dalam Pembukaan UUD 1945 alinea keempat."},
+      {q:"Sila pertama Pancasila berbunyi?",o:["Kemanusiaan yang Adil dan Beradab","Ketuhanan Yang Maha Esa","Persatuan Indonesia","Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan"],a:1,e:"Sila pertama Pancasila adalah 'Ketuhanan Yang Maha Esa'."},
+      {q:"Hari kemerdekaan Indonesia diperingati setiap tanggal?",o:["17 Agustus","1 Juni","28 Oktober","10 November"],a:0,e:"Indonesia memproklamasikan kemerdekaan pada 17 Agustus 1945."},
+      {q:"Lambang negara Indonesia adalah?",o:["Elang Jawa","Garuda Pancasila","Rajawali","Merak"],a:1,e:"Garuda Pancasila adalah lambang negara RI sesuai Pasal 36A UUD 1945."},
+      {q:"Bahasa nasional Indonesia adalah?",o:["Bahasa Jawa","Bahasa Melayu","Bahasa Indonesia","Bahasa Sunda"],a:2,e:"Pasal 36 UUD 1945 menetapkan Bahasa Indonesia sebagai bahasa negara."},
+      {q:"UUD 1945 disahkan pada tanggal?",o:["1 Juni 1945","17 Agustus 1945","18 Agustus 1945","22 Juni 1945"],a:2,e:"UUD 1945 disahkan oleh PPKI pada 18 Agustus 1945."},
+      {q:"Semboyan Bhinneka Tunggal Ika berasal dari kitab?",o:["Negarakertagama","Sutasoma","Pararaton","Arjunawiwaha"],a:1,e:"Berasal dari kitab Sutasoma karangan Mpu Tantular."},
+      {q:"Proklamasi kemerdekaan Indonesia dibacakan oleh?",o:["Moh. Hatta","Ir. Soekarno","Ki Hajar Dewantara","Tan Malaka"],a:1,e:"Proklamasi dibacakan oleh Ir. Soekarno didampingi Moh. Hatta."},
+      {q:"Indonesia merupakan negara berbentuk?",o:["Kerajaan","Republik","Federasi","Monarki konstitusional"],a:1,e:"Pasal 1 UUD 1945: Negara Indonesia ialah negara kesatuan berbentuk republik."},
+      {q:"Warna bendera Indonesia adalah?",o:["Merah Biru","Merah Kuning","Merah Putih","Putih Biru"],a:2,e:"Bendera negara Indonesia adalah Sang Merah Putih (Pasal 35 UUD 1945)."},
+      {q:"Sila kelima Pancasila berbunyi?",o:["Persatuan Indonesia","Keadilan Sosial bagi Seluruh Rakyat Indonesia","Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan","Kemanusiaan yang Adil dan Beradab"],a:1,e:"Sila ke-5 Pancasila berbunyi 'Keadilan Sosial bagi Seluruh Rakyat Indonesia'."},
+      {q:"Jumlah sila dalam Pancasila adalah?",o:["4","5","6","7"],a:1,e:"Pancasila terdiri dari 5 sila."},
+      {q:"MPR terdiri dari anggota?",o:["DPR saja","DPR dan DPD","DPD saja","DPR, DPD, dan Utusan Golongan"],a:1,e:"Pasal 2 UUD 1945: MPR terdiri atas anggota DPR dan DPD."},
+      {q:"Bentuk negara Indonesia menurut UUD 1945 adalah?",o:["Negara Federal","Negara Kesatuan","Negara Serikat","Negara Konfederasi"],a:1,e:"Pasal 1 ayat 1 UUD 1945: Negara Indonesia ialah Negara Kesatuan."},
+      {q:"Sumpah Pemuda diperingati setiap tanggal?",o:["28 Oktober","10 November","1 Juni","20 Mei"],a:0,e:"Sumpah Pemuda diperingati setiap 28 Oktober."},
+      {q:"Presiden pertama Indonesia adalah?",o:["Soeharto","B.J. Habibie","Ir. Soekarno","Megawati"],a:2,e:"Ir. Soekarno adalah Presiden pertama RI."},
+      {q:"Warna dasar lambang Garuda Pancasila adalah?",o:["Merah","Kuning emas","Putih","Hijau"],a:1,e:"Garuda Pancasila berlatar warna kuning emas melambangkan keagungan."},
+      {q:"Jumlah bulu pada sayap Garuda melambangkan?",o:["Tanggal kemerdekaan","Jumlah provinsi","Tahun kemerdekaan","Jumlah sila"],a:0,e:"Jumlah bulu Garuda melambangkan tanggal kemerdekaan 17-8-1945."},
+      {q:"Sidang BPUPKI pertama membahas tentang?",o:["Konstitusi","Dasar negara","Bendera","Lagu kebangsaan"],a:1,e:"Sidang pertama BPUPKI (29 Mei-1 Juni 1945) membahas dasar negara."},
+      {q:"Hak asasi manusia dijamin dalam UUD 1945 pasal?",o:["Pasal 26","Pasal 27","Pasal 28","Pasal 29"],a:2,e:"Pasal 28 beserta pasal 28A-J UUD 1945 mengatur tentang HAM."},
+      {q:"Lagu kebangsaan Indonesia adalah?",o:["Indonesia Pusaka","Bagimu Negeri","Indonesia Raya","Garuda Pancasila"],a:2,e:"Indonesia Raya adalah lagu kebangsaan RI (Pasal 36B UUD 1945)."},
+      {q:"Hari Pahlawan diperingati setiap tanggal?",o:["10 November","17 Agustus","28 Oktober","1 Juni"],a:0,e:"Hari Pahlawan diperingati 10 November memperingati pertempuran Surabaya."},
+      {q:"PPKI singkatan dari?",o:["Panitia Persiapan Kemerdekaan Indonesia","Perhimpunan Pemuda Kemerdekaan Indonesia","Partai Persatuan Kebangsaan Indonesia","Panitia Pembentukan Konstitusi Indonesia"],a:0,e:"PPKI = Panitia Persiapan Kemerdekaan Indonesia."},
+      {q:"Sistem pemerintahan Indonesia menurut UUD 1945 adalah?",o:["Parlementer","Presidensial","Semi-presidensial","Monarki"],a:1,e:"Indonesia menganut sistem presidensial di mana Presiden sebagai kepala negara dan kepala pemerintahan."},
+      {q:"Amandemen UUD 1945 telah dilakukan sebanyak?",o:["2 kali","3 kali","4 kali","5 kali"],a:2,e:"UUD 1945 telah diamandemen 4 kali (1999, 2000, 2001, 2002)."},
+      {q:"Masa jabatan Presiden Indonesia adalah?",o:["4 tahun","5 tahun","6 tahun","7 tahun"],a:1,e:"Presiden menjabat selama 5 tahun dan dapat dipilih kembali satu kali (Pasal 7 UUD 1945)."},
+      {q:"NKRI singkatan dari?",o:["Negara Kesejahteraan Republik Indonesia","Negara Kesatuan Republik Indonesia","Negara Kebangsaan Republik Indonesia","Negara Kemakmuran Rakyat Indonesia"],a:1,e:"NKRI = Negara Kesatuan Republik Indonesia."},
+      {q:"Pencipta lagu Indonesia Raya adalah?",o:["Ismail Marzuki","W.R. Supratman","C. Simanjuntak","Kusbini"],a:1,e:"Lagu Indonesia Raya diciptakan oleh Wage Rudolf Supratman."},
+      {q:"Piagam Jakarta ditandatangani pada?",o:["1 Juni 1945","22 Juni 1945","17 Agustus 1945","18 Agustus 1945"],a:1,e:"Piagam Jakarta (Jakarta Charter) ditandatangani pada 22 Juni 1945."},
+      {q:"Hari Kebangkitan Nasional diperingati setiap?",o:["1 Juni","20 Mei","28 Oktober","10 November"],a:1,e:"Hari Kebangkitan Nasional diperingati 20 Mei, menandai berdirinya Budi Utomo 1908."},
+      {q:"Musyawarah untuk mufakat merupakan pengamalan sila ke-?",o:["Kedua","Ketiga","Keempat","Kelima"],a:2,e:"Musyawarah mufakat merupakan pengamalan sila ke-4 Pancasila."},
+      {q:"Badan yang bertugas mengawasi pengelolaan keuangan negara adalah?",o:["MK","MA","BPK","KPK"],a:2,e:"BPK (Badan Pemeriksa Keuangan) bertugas memeriksa pengelolaan keuangan negara."},
+      {q:"Konstitusi tertulis pertama Indonesia adalah?",o:["UUDS 1950","UUD 1945","Konstitusi RIS","Piagam Jakarta"],a:1,e:"UUD 1945 merupakan konstitusi tertulis pertama Indonesia."},
+      {q:"Wilayah NKRI membentang dari?",o:["Sabang sampai Merauke","Aceh sampai Papua","Jakarta sampai Jayapura","Kalimantan sampai Sulawesi"],a:0,e:"NKRI membentang dari Sabang (Aceh) hingga Merauke (Papua)."},
+      {q:"Sila ketiga Pancasila berbunyi?",o:["Ketuhanan Yang Maha Esa","Persatuan Indonesia","Kemanusiaan yang Adil dan Beradab","Kerakyatan yang Dipimpin oleh Hikmat"],a:1,e:"Sila ke-3 Pancasila adalah 'Persatuan Indonesia'."},
+      {q:"Ibu kota negara Indonesia saat proklamasi adalah?",o:["Bandung","Yogyakarta","Jakarta","Surabaya"],a:2,e:"Proklamasi kemerdekaan dinyatakan di Jakarta, yang menjadi ibu kota negara."},
+      {q:"Organisasi pergerakan nasional pertama di Indonesia adalah?",o:["Sarekat Islam","Budi Utomo","Indische Partij","PNI"],a:1,e:"Budi Utomo (1908) dianggap sebagai organisasi pergerakan nasional pertama."},
+      {q:"Pasal 29 UUD 1945 mengatur tentang?",o:["Pendidikan","Agama","Pertahanan","Ekonomi"],a:1,e:"Pasal 29 UUD 1945 mengatur tentang agama dan kebebasan beribadah."},
+      {q:"Kekuasaan tertinggi negara menurut UUD 1945 pasca-amendemen berada di tangan?",o:["Presiden","MPR","Rakyat","DPR"],a:2,e:"Pasal 1 ayat 2 UUD 1945: Kedaulatan berada di tangan rakyat."},
+      {q:"Tokoh yang mengusulkan nama 'Pancasila' untuk dasar negara adalah?",o:["Moh. Yamin","Soepomo","Ir. Soekarno","Ki Hajar Dewantara"],a:2,e:"Ir. Soekarno mengusulkan nama 'Pancasila' pada 1 Juni 1945."},
+      {q:"Pasal 31 UUD 1945 mengatur tentang?",o:["Agama","Pertahanan","Pendidikan","Ekonomi"],a:2,e:"Pasal 31 UUD 1945 mengatur hak warga negara atas pendidikan."},
+      {q:"DPR merupakan lembaga?",o:["Eksekutif","Legislatif","Yudikatif","Konsultatif"],a:1,e:"DPR adalah lembaga legislatif yang membentuk undang-undang."},
+      {q:"Indonesia menjadi anggota PBB sejak tahun?",o:["1945","1950","1955","1960"],a:1,e:"Indonesia menjadi anggota PBB pada 28 September 1950."},
+      {q:"Sila keempat Pancasila berbunyi?",o:["Persatuan Indonesia","Keadilan Sosial bagi Seluruh Rakyat Indonesia","Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan","Kemanusiaan yang Adil dan Beradab"],a:2,e:"Sila ke-4: 'Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan'."},
+      {q:"Warga negara Indonesia diatur dalam UUD 1945 pasal?",o:["Pasal 25","Pasal 26","Pasal 27","Pasal 28"],a:1,e:"Pasal 26 UUD 1945 mengatur tentang warga negara dan penduduk."},
+      {q:"BPUPKI singkatan dari?",o:["Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan Indonesia","Badan Pembentukan Undang-undang Persiapan Kemerdekaan","Badan Perumusan Usaha Persiapan Konstitusi Indonesia","Badan Persiapan Untuk Proklamasi Kemerdekaan Indonesia"],a:0,e:"BPUPKI = Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan Indonesia."},
+      {q:"Ketua BPUPKI adalah?",o:["Ir. Soekarno","Dr. Radjiman Wedyodiningrat","Moh. Hatta","Soepomo"],a:1,e:"Dr. K.R.T. Radjiman Wedyodiningrat menjabat sebagai ketua BPUPKI."},
+      {q:"Negara Indonesia adalah negara hukum, tercantum dalam pasal?",o:["Pasal 1 ayat 1","Pasal 1 ayat 2","Pasal 1 ayat 3","Pasal 2 ayat 1"],a:2,e:"Pasal 1 ayat 3 UUD 1945: 'Negara Indonesia adalah negara hukum'."},
+      {q:"Hak dan kewajiban warga negara dalam bela negara diatur dalam pasal?",o:["Pasal 27 ayat 3","Pasal 28","Pasal 30 ayat 1","Pasal 31"],a:2,e:"Pasal 30 ayat 1 UUD 1945 mengatur hak dan kewajiban warga negara dalam pertahanan dan keamanan negara."},
+      {q:"Peristiwa yang melatarbelakangi Hari Pendidikan Nasional adalah?",o:["Lahirnya Ki Hajar Dewantara","Berdirinya Budi Utomo","Sumpah Pemuda","Proklamasi Kemerdekaan"],a:0,e:"Hari Pendidikan Nasional 2 Mei memperingati kelahiran Ki Hajar Dewantara, Bapak Pendidikan Nasional."},
+    ],
+    medium: [
+      {q:"Menurut Pembukaan UUD 1945, tujuan negara Indonesia KECUALI?",o:["Melindungi segenap bangsa","Memajukan kesejahteraan umum","Menjaga stabilitas mata uang","Ikut melaksanakan ketertiban dunia"],a:2,e:"Tujuan negara dalam Pembukaan UUD 1945 tidak mencakup menjaga stabilitas mata uang secara eksplisit."},
+      {q:"Pancasila sebagai ideologi terbuka artinya?",o:["Nilai-nilainya bisa diubah kapan saja","Bisa menerima pengaruh ideologi lain sepenuhnya","Nilai dasar tetap, nilai instrumental dan praktis dinamis","Ideologi yang sama dengan liberalisme"],a:2,e:"Ideologi terbuka: nilai dasar tetap namun nilai instrumental dan praktisnya dapat disesuaikan dengan perkembangan zaman."},
+      {q:"Pasal 33 ayat 1 UUD 1945 menegaskan bahwa perekonomian disusun sebagai?",o:["Usaha bersama berdasar asas kekeluargaan","Usaha individu berdasar persaingan","Sistem ekonomi pasar bebas","Sistem ekonomi komando"],a:0,e:"Pasal 33 ayat 1: Perekonomian disusun sebagai usaha bersama berdasar atas asas kekeluargaan."},
+      {q:"Fungsi Pancasila sebagai pandangan hidup bangsa berarti?",o:["Menjadi pedoman pelaksanaan pemerintahan saja","Menjadi pedoman dalam kehidupan bermasyarakat, berbangsa dan bernegara","Hanya berlaku untuk pejabat negara","Menjadi acuan hubungan internasional saja"],a:1,e:"Pandangan hidup = pedoman komprehensif dalam kehidupan bermasyarakat, berbangsa, dan bernegara."},
+      {q:"Mahkamah Konstitusi berwenang mengadili perkara berikut KECUALI?",o:["Pengujian undang-undang terhadap UUD","Sengketa kewenangan lembaga negara","Pembubaran partai politik","Kasasi perkara pidana"],a:3,e:"Kasasi perkara pidana merupakan wewenang Mahkamah Agung, bukan MK."},
+      {q:"Prinsip Bhinneka Tunggal Ika menghendaki?",o:["Penyeragaman budaya","Keseragaman agama","Keberagaman dalam persatuan","Dominasi satu suku"],a:2,e:"Bhinneka Tunggal Ika = berbeda-beda tetapi tetap satu, menghargai keberagaman."},
+      {q:"Perubahan UUD 1945 TIDAK dapat dilakukan terhadap?",o:["Pasal tentang HAM","Pasal tentang DPR","Bentuk negara kesatuan","Pasal tentang pendidikan"],a:2,e:"Pasal 37 ayat 5: Bentuk NKRI tidak dapat dilakukan perubahan."},
+      {q:"Pancasila sebagai dasar negara dikemukakan Soekarno pada?",o:["28 Mei 1945","29 Mei 1945","1 Juni 1945","22 Juni 1945"],a:2,e:"Soekarno menyampaikan konsep dasar negara pada 1 Juni 1945 di sidang BPUPKI."},
+      {q:"Otonomi daerah diatur dalam UUD 1945 pasal?",o:["Pasal 17","Pasal 18","Pasal 19","Pasal 20"],a:1,e:"Pasal 18 UUD 1945 mengatur tentang pemerintahan daerah dan otonomi."},
+      {q:"Makna semboyan Bhinneka Tunggal Ika dalam konteks berbangsa adalah?",o:["Toleransi tanpa batas","Menghargai perbedaan demi persatuan","Mengutamakan kelompok mayoritas","Meleburkan semua budaya menjadi satu"],a:1,e:"Bhinneka Tunggal Ika mendorong penghargaan terhadap perbedaan untuk memperkokoh persatuan."},
+      {q:"DPR memiliki fungsi berikut KECUALI?",o:["Legislasi","Anggaran","Pengawasan","Yudikatif"],a:3,e:"DPR memiliki fungsi legislasi, anggaran, dan pengawasan. Fungsi yudikatif ada pada lembaga peradilan."},
+      {q:"Perjanjian Linggarjati tahun 1946 berisi tentang?",o:["Belanda mengakui RI atas Jawa, Madura, dan Sumatera","Pembentukan RIS","Gencatan senjata","Kemerdekaan penuh Indonesia"],a:0,e:"Perjanjian Linggarjati: Belanda mengakui kedaulatan RI atas Jawa, Madura, dan Sumatera."},
+      {q:"Nilai-nilai yang terkandung dalam sila ke-2 Pancasila meliputi?",o:["Toleransi beragama","Pengakuan persamaan hak dan kewajiban antar manusia","Kedaulatan rakyat","Pemerataan ekonomi"],a:1,e:"Sila ke-2 mengandung nilai kemanusiaan: persamaan derajat, hak, dan kewajiban."},
+      {q:"Presiden dalam menjalankan pemerintahan dibantu oleh?",o:["DPR","MPR","Menteri-menteri negara","BPK"],a:2,e:"Pasal 17 UUD 1945: Presiden dibantu oleh menteri-menteri negara."},
+      {q:"Asas desentralisasi dalam pemerintahan daerah berarti?",o:["Penyerahan urusan pemerintahan dari pusat ke daerah","Pelimpahan wewenang dari Presiden ke gubernur","Tugas pembantuan dari pusat","Pemusatan kekuasaan di ibu kota"],a:0,e:"Desentralisasi = penyerahan urusan pemerintahan dari pemerintah pusat kepada daerah otonom."},
+      {q:"Gerakan Reformasi 1998 dipicu oleh?",o:["Perang saudara","Krisis moneter dan tuntutan demokratisasi","Invasi negara asing","Bencana alam besar"],a:1,e:"Reformasi 1998 dipicu krisis moneter 1997 dan tuntutan demokratisasi terhadap Orde Baru."},
+      {q:"Makna negara hukum (rechtsstaat) dalam UUD 1945 adalah?",o:["Hukum bisa diabaikan demi kepentingan umum","Segala sesuatu berdasarkan kekuasaan","Pemerintahan berdasarkan hukum, bukan kekuasaan semata","Hukum hanya berlaku untuk rakyat kecil"],a:2,e:"Pasal 1 ayat 3 UUD 1945: Negara Indonesia adalah negara hukum."},
+      {q:"Konferensi Asia Afrika 1955 diselenggarakan di?",o:["Jakarta","Bandung","Surabaya","Yogyakarta"],a:1,e:"KAA diselenggarakan di Bandung pada 18-24 April 1955."},
+      {q:"Pemilu di Indonesia menganut asas?",o:["Langsung, Umum, Bebas, Rahasia, Jujur, Adil","Terbuka, Umum, Bebas, Adil","Langsung, Terbatas, Bebas, Rahasia","Tidak langsung, Umum, Bebas, Jujur"],a:0,e:"Pemilu menganut asas LUBER JURDIL."},
+      {q:"Perbedaan kewenangan pemerintah pusat dan daerah diatur dengan?",o:["Peraturan Presiden","Undang-undang","Keputusan Menteri","Instruksi Presiden"],a:1,e:"Kewenangan pusat dan daerah diatur dengan undang-undang sesuai amanat UUD 1945."},
+      {q:"Nilai gotong royong tercermin dalam sila ke-?",o:["Pertama","Kedua","Ketiga","Kelima"],a:2,e:"Gotong royong merupakan cerminan sila ke-3 (Persatuan Indonesia)."},
+      {q:"DPD dipilih melalui?",o:["Penunjukan Presiden","Pemilihan oleh DPRD","Pemilihan umum per provinsi","Penunjukan partai politik"],a:2,e:"Anggota DPD dipilih dari setiap provinsi melalui pemilihan umum."},
+      {q:"Peranan Indonesia dalam gerakan Non-Blok adalah?",o:["Anggota pasif","Salah satu pelopor dan pendiri","Pengamat saja","Tidak terlibat"],a:1,e:"Indonesia merupakan salah satu pelopor Gerakan Non-Blok."},
+      {q:"Wawasan Nusantara merupakan cara pandang bangsa Indonesia tentang?",o:["Ekonomi global","Diri dan lingkungannya sebagai satu kesatuan","Hubungan bilateral","Pertahanan militer saja"],a:1,e:"Wawasan Nusantara = cara pandang bangsa tentang diri dan lingkungan sebagai satu kesatuan wilayah."},
+      {q:"Makna kedaulatan rakyat dalam sila ke-4 adalah?",o:["Rakyat berkuasa tanpa batas","Kekuasaan tertinggi di tangan rakyat melalui musyawarah","Kekuasaan absolut presiden","Sistem monarki"],a:1,e:"Sila ke-4: kedaulatan rakyat dilaksanakan melalui permusyawaratan/perwakilan."},
+      {q:"Konstitusi RIS berlaku pada periode?",o:["1945-1949","1949-1950","1950-1959","1959-1966"],a:1,e:"Konstitusi RIS berlaku 27 Desember 1949 hingga 17 Agustus 1950."},
+      {q:"Peristiwa Rengasdengklok terjadi pada?",o:["15 Agustus 1945","16 Agustus 1945","17 Agustus 1945","18 Agustus 1945"],a:1,e:"Peristiwa Rengasdengklok terjadi 16 Agustus 1945."},
+      {q:"Pertempuran 10 November 1945 terjadi di kota?",o:["Jakarta","Bandung","Surabaya","Yogyakarta"],a:2,e:"Pertempuran heroik 10 November 1945 terjadi di Surabaya."},
+      {q:"Kekuasaan kehakiman di Indonesia bersifat?",o:["Terikat eksekutif","Merdeka/independen","Bergantung pada legislatif","Ditentukan Presiden"],a:1,e:"Pasal 24 ayat 1 UUD 1945: Kekuasaan kehakiman merupakan kekuasaan yang merdeka."},
+      {q:"BPUPKI dibentuk oleh?",o:["Pemerintah Belanda","Pemerintah Jepang","Tokoh pergerakan nasional","PBB"],a:1,e:"BPUPKI dibentuk oleh pemerintah pendudukan Jepang pada 1 Maret 1945."},
+      {q:"Hak interpelasi DPR adalah hak untuk?",o:["Mengajukan RUU","Meminta keterangan pemerintah","Menyatakan pendapat","Mengubah APBN"],a:1,e:"Hak interpelasi = hak DPR meminta keterangan kepada pemerintah."},
+      {q:"Salah satu tujuan ASEAN yang diikuti Indonesia adalah?",o:["Membentuk negara federal Asia Tenggara","Meningkatkan kerja sama regional","Menerapkan mata uang tunggal","Membentuk militer bersama"],a:1,e:"Tujuan ASEAN a.l. meningkatkan kerja sama ekonomi, sosial, budaya di kawasan."},
+      {q:"Dekrit Presiden 5 Juli 1959 berisi?",o:["Pembubaran DPR","Kembali ke UUD 1945","Pembentukan RIS","Pemilu langsung"],a:1,e:"Dekrit 5 Juli 1959: pembubaran Konstituante dan kembali ke UUD 1945."},
+      {q:"Pengamalan Pancasila secara objektif berarti?",o:["Tergantung individu","Pelaksanaan dalam peraturan perundang-undangan","Hanya untuk kepentingan pemerintah","Bersifat sukarela"],a:1,e:"Pengamalan objektif = pelaksanaan Pancasila dalam peraturan perundang-undangan dan kebijakan negara."},
+      {q:"Perjanjian Renville (1948) menetapkan garis demarkasi yang dikenal sebagai?",o:["Garis Linggarjati","Garis Van Mook","Garis demarkasi Status Quo","Garis Wallace"],a:1,e:"Perjanjian Renville menetapkan garis demarkasi Van Mook yang merugikan Indonesia."},
+      {q:"Sidang BPUPKI kedua (10-17 Juli 1945) membahas tentang?",o:["Dasar negara","Rancangan UUD","Proklamasi","Pembentukan partai politik"],a:1,e:"Sidang kedua BPUPKI membahas rancangan UUD termasuk pembukaan dan batang tubuh."},
+      {q:"Asas tugas pembantuan (medebewind) berarti?",o:["Daerah mengurus sendiri","Pemerintah pusat memberikan tugas kepada daerah dengan pembiayaan dari pusat","Daerah memilih pemimpinnya","Pusat mengambil alih urusan daerah"],a:1,e:"Medebewind = penugasan dari pemerintah pusat kepada daerah untuk melaksanakan tugas tertentu."},
+      {q:"UUDS 1950 berlaku pada periode?",o:["1945-1949","1949-1950","1950-1959","1959-1966"],a:2,e:"UUDS 1950 berlaku sejak 17 Agustus 1950 hingga Dekrit Presiden 5 Juli 1959."},
+      {q:"Peran TNI menurut UUD 1945 adalah?",o:["Menjalankan pemerintahan","Alat negara yang bertugas mempertahankan, melindungi, dan memelihara keutuhan NKRI","Mengawasi DPR","Mengelola ekonomi negara"],a:1,e:"Pasal 30 ayat 3 UUD 1945: TNI sebagai alat negara bertugas mempertahankan keutuhan NKRI."},
+      {q:"Hak angket DPR adalah hak untuk?",o:["Mengajukan RUU","Menyatakan pendapat","Melakukan penyelidikan terhadap kebijakan pemerintah","Memilih presiden"],a:2,e:"Hak angket = hak DPR melakukan penyelidikan terhadap pelaksanaan suatu undang-undang/kebijakan pemerintah."},
+      {q:"Sejarah perjuangan Kartini dikaitkan dengan?",o:["Perjuangan bersenjata","Emansipasi wanita dan pendidikan","Perjuangan diplomatik","Gerakan koperasi"],a:1,e:"R.A. Kartini dikenal atas perjuangannya dalam emansipasi wanita dan hak atas pendidikan."},
+      {q:"Lembaga yang berwenang memberikan grasi adalah?",o:["MA","MK","Presiden","DPR"],a:2,e:"Pasal 14 ayat 1 UUD 1945: Presiden memberi grasi dan rehabilitasi dengan memperhatikan pertimbangan MA."},
+      {q:"Pemberontakan PKI di Madiun terjadi pada tahun?",o:["1945","1946","1948","1965"],a:2,e:"Pemberontakan PKI Madiun terjadi pada September 1948 dipimpin Musso."},
+      {q:"Pasal 34 UUD 1945 mengatur tentang?",o:["Pendidikan","Fakir miskin dan anak terlantar dipelihara negara","Pertahanan","Agama"],a:1,e:"Pasal 34 UUD 1945: Fakir miskin dan anak-anak terlantar dipelihara oleh negara."},
+      {q:"Agresi Militer Belanda I terjadi pada tahun?",o:["1945","1946","1947","1948"],a:2,e:"Agresi Militer Belanda I terjadi pada 21 Juli 1947."},
+      {q:"Hak menyatakan pendapat DPR digunakan untuk?",o:["Mengajukan RUU","Menyatakan sikap terhadap kebijakan pemerintah atau kejadian luar biasa","Memilih hakim MK","Mengesahkan APBN"],a:1,e:"Hak menyatakan pendapat digunakan DPR untuk merespons kebijakan pemerintah atau peristiwa penting."},
+      {q:"Tokoh yang menggagas konsep Trisila dan Ekasila sebagai perumusan Pancasila adalah?",o:["Moh. Yamin","Soepomo","Ir. Soekarno","Ki Hajar Dewantara"],a:2,e:"Ir. Soekarno mengajukan Trisila (socio-nationalisme, socio-democratie, Ketuhanan) dan Ekasila (gotong royong)."},
+      {q:"Komisi Yudisial bertugas?",o:["Mengadili perkara pidana","Mengusulkan pengangkatan hakim agung dan menjaga kehormatan hakim","Membuat undang-undang","Mengelola keuangan negara"],a:1,e:"Pasal 24B UUD 1945: KY mengusulkan pengangkatan hakim agung dan menjaga kehormatan hakim."},
+      {q:"Makna Pancasila sebagai sumber dari segala sumber hukum negara berarti?",o:["Pancasila sama dengan undang-undang","Setiap peraturan perundang-undangan harus berlandaskan dan tidak boleh bertentangan dengan Pancasila","Pancasila bisa diubah oleh DPR","Pancasila hanya berlaku untuk hukum pidana"],a:1,e:"Pancasila sebagai sumber dari segala sumber hukum: semua peraturan harus bersumber dan tidak bertentangan dengannya."},
+      {q:"Perjanjian Roem-Royen tahun 1949 menghasilkan kesepakatan tentang?",o:["Pembentukan RIS","Pengembalian Yogyakarta kepada RI dan penghentian operasi militer","Pengakuan kemerdekaan penuh","Pembentukan ASEAN"],a:1,e:"Perjanjian Roem-Royen: pengembalian pemerintahan RI ke Yogyakarta dan penghentian gerakan militer Belanda."},
+    ],
+    hard: [
+      {q:"Dalam teori Hans Kelsen, kedudukan Pancasila dalam sistem hukum Indonesia setara dengan?",o:["Grundnorm (norma dasar)","Undang-undang organik","Peraturan pemerintah","Keputusan presiden"],a:0,e:"Menurut stufenbau teori Kelsen, Pancasila merupakan Grundnorm sebagai sumber dari segala sumber hukum."},
+      {q:"Konsep negara integralistik yang disampaikan Soepomo dalam sidang BPUPKI mengandung gagasan?",o:["Individualisme liberal","Negara dan rakyat sebagai satu kesatuan organis","Sistem federal","Sistem parlementer murni"],a:1,e:"Soepomo mengusulkan konsep negara integralistik di mana negara dan rakyat bersatu secara organis."},
+      {q:"Perdebatan 'tujuh kata' dalam Piagam Jakarta berkaitan dengan?",o:["Bentuk negara","Kewajiban menjalankan syariat Islam bagi pemeluknya","Sistem ekonomi","Bahasa negara"],a:1,e:"Tujuh kata: '...dengan kewajiban menjalankan syariat Islam bagi pemeluk-pemeluknya' dihapus demi persatuan."},
+      {q:"Prinsip check and balances dalam UUD 1945 pasca-amendemen ditunjukkan oleh?",o:["Presiden dapat membubarkan DPR","DPR dapat menjatuhkan Presiden langsung","MK menguji UU terhadap UUD, DPR mengawasi pemerintah","MPR sebagai lembaga tertinggi negara"],a:2,e:"Check and balances: MK menguji UU, DPR mengawasi pemerintah, Presiden sebagai pelaksana UU."},
+      {q:"Perbedaan mendasar antara demokrasi terpimpin dan demokrasi Pancasila adalah?",o:["Tidak ada perbedaan","Demokrasi terpimpin memusatkan kekuasaan pada presiden, Pancasila mengutamakan musyawarah","Demokrasi Pancasila tidak mengenal pemilu","Demokrasi terpimpin lebih demokratis"],a:1,e:"Demokrasi Terpimpin memusatkan kekuasaan pada Presiden, Demokrasi Pancasila berdasar musyawarah mufakat."},
+      {q:"Doktrin margin of appreciation dalam HAM relevan dengan Indonesia karena?",o:["Indonesia tidak mengakui HAM","HAM bersifat universal namun implementasinya mempertimbangkan konteks lokal","HAM hanya berlaku di negara Barat","Indonesia menolak semua konvensi HAM"],a:1,e:"Margin of appreciation mengakui universalitas HAM namun memberi ruang konteks lokal."},
+      {q:"Problematika presidential threshold dalam sistem pemilu Indonesia adalah?",o:["Tidak ada masalah","Membatasi hak partai kecil untuk mencalonkan presiden","Membuat pemilu terlalu mudah","Menghapuskan peran DPR"],a:1,e:"Presidential threshold membatasi pencalonan presiden hanya oleh partai/koalisi yang memenuhi ambang batas."},
+      {q:"Konsep volkssouveräniteit dalam konteks Indonesia diwujudkan melalui?",o:["Kekuasaan absolut presiden","Pemilu dan lembaga perwakilan","Sistem kerajaan","Hukum adat saja"],a:1,e:"Kedaulatan rakyat diwujudkan melalui pemilu demokratis dan lembaga perwakilan rakyat."},
+      {q:"Penafsiran originalism terhadap UUD 1945 akan menghasilkan pemahaman bahwa?",o:["UUD 1945 harus ditafsirkan sesuai maksud awal para perumus","UUD 1945 bebas ditafsirkan siapa saja","Tidak ada penafsiran yang benar","UUD 1945 tidak perlu ditafsirkan"],a:0,e:"Originalism = penafsiran konstitusi berdasarkan maksud asli (original intent) para perumus."},
+      {q:"Judicial review UU terhadap UUD dilakukan oleh MK berdasarkan pasal?",o:["Pasal 22","Pasal 24C","Pasal 28","Pasal 33"],a:1,e:"Pasal 24C ayat 1 UUD 1945 mengatur kewenangan MK menguji UU terhadap UUD."},
+      {q:"Implikasi Pasal 33 UUD 1945 terhadap kebijakan privatisasi BUMN adalah?",o:["Privatisasi bebas tanpa batas","Privatisasi harus memperhatikan kepentingan hajat hidup orang banyak","BUMN tidak boleh ada","Swasta menguasai semua sektor"],a:1,e:"Pasal 33 mensyaratkan cabang produksi penting dikuasai negara."},
+      {q:"Teori receptie oleh Snouck Hurgronje berdampak pada?",o:["Hukum Islam berlaku sepenuhnya","Hukum Islam hanya berlaku jika diterima hukum adat","Hukum adat dihapuskan","Hukum Belanda berlaku mutlak"],a:1,e:"Teori receptie: hukum Islam berlaku hanya jika di-receptie oleh hukum adat."},
+      {q:"Putusan MK tentang pengujian UU bersifat?",o:["Mengikat pihak yang bersengketa saja","Final dan mengikat (final and binding)","Bisa diajukan banding","Sementara sampai disetujui DPR"],a:1,e:"Putusan MK bersifat final dan mengikat (Pasal 24C ayat 1 UUD 1945)."},
+      {q:"Konsep welfare state yang dianut Indonesia tercermin dalam?",o:["Pasal 27, 31, 33, 34 UUD 1945","Sistem ekonomi liberal","Penghapusan pajak","Privatisasi total"],a:0,e:"Pasal-pasal tentang hak pekerjaan, pendidikan, ekonomi kerakyatan, dan fakir miskin mencerminkan welfare state."},
+      {q:"Perbedaan konstitusional antara DPR dan DPD pasca-amendemen terletak pada?",o:["DPD lebih kuat dari DPR","DPR memiliki fungsi legislasi penuh, DPD terbatas pada usul/pertimbangan","DPD tidak dipilih rakyat","Keduanya identik"],a:1,e:"DPD hanya mengusulkan dan memberikan pertimbangan RUU tertentu."},
+      {q:"Living constitution interpretation terhadap Pancasila mengimplikasikan?",o:["Pancasila tidak relevan lagi","Nilai Pancasila harus ditafsirkan sesuai perkembangan zaman","Pancasila boleh diganti","Tidak perlu ada konstitusi"],a:1,e:"Living constitution: Pancasila ditafsirkan dinamis sesuai konteks perkembangan masyarakat."},
+      {q:"Dampak Supersemar 1966 terhadap ketatanegaraan Indonesia adalah?",o:["Tidak ada dampak","Peralihan kekuasaan efektif dari Soekarno ke Soeharto","Pembentukan negara baru","Kembali ke sistem parlementer"],a:1,e:"Supersemar menjadi legitimasi Soeharto mengambil langkah yang berujung peralihan kekuasaan."},
+      {q:"Problematika dualisme yurisdiksi antara MA dan MK dapat diatasi dengan?",o:["Menghapus salah satu lembaga","Memperjelas batas kewenangan masing-masing dalam konstitusi","Menggabungkan keduanya","Membentuk lembaga ketiga"],a:1,e:"Solusi dualisme: memperjelas yurisdiksi konstitusional masing-masing lembaga peradilan."},
+      {q:"Relevansi Dasasila Bandung (1955) dalam politik luar negeri Indonesia saat ini adalah?",o:["Tidak relevan lagi","Menjadi pedoman prinsip kerja sama antar-bangsa yang setara","Hanya berlaku di Asia","Sudah dicabut PBB"],a:1,e:"Dasasila Bandung tetap relevan sebagai pedoman hubungan antar-bangsa yang saling menghormati."},
+      {q:"Ultra petita dalam putusan MK merujuk pada?",o:["Putusan sesuai permohonan","Putusan yang melampaui apa yang dimohonkan","Penolakan permohonan","Putusan yang membatalkan putusan sebelumnya"],a:1,e:"Ultra petita = putusan hakim yang melebihi apa yang dimohonkan."},
+      {q:"Sistem MPR sebagai lembaga tertinggi negara sebelum amendemen berimplikasi?",o:["Kedaulatan rakyat dilaksanakan sepenuhnya oleh MPR","Presiden lebih kuat dari MPR","DPR mengontrol MPR","Tidak ada implikasi"],a:0,e:"Sebelum amendemen, MPR sebagai lembaga tertinggi melaksanakan kedaulatan rakyat sepenuhnya."},
+      {q:"Konsep 'rule of law' menurut A.V. Dicey yang relevan dengan Indonesia meliputi?",o:["Supremasi hukum, equality before the law, konstitusi sebagai jaminan HAM","Kekuasaan eksekutif tanpa batas","Hukum hanya untuk rakyat","Sistem feodal"],a:0,e:"Dicey: rule of law = supremasi hukum, persamaan di depan hukum, konstitusi sebagai jaminan HAM."},
+      {q:"Konsep 'demokrasi deliberatif' Habermas relevan dengan Pancasila karena?",o:["Keduanya menolak dialog","Sila ke-4 menekankan musyawarah mufakat yang sejalan dengan deliberasi publik","Tidak ada kaitan","Pancasila menolak demokrasi"],a:1,e:"Demokrasi deliberatif menekankan dialog publik, sejalan dengan sila ke-4."},
+      {q:"Constitutional complaint yang belum dimiliki MK Indonesia merujuk pada?",o:["Pengaduan warga atas pelanggaran HAM oleh kebijakan negara ke MK","Pengujian UU oleh DPR","Impeachment Presiden","Pembubaran partai"],a:0,e:"Constitutional complaint = mekanisme warga mengadukan pelanggaran hak konstitusional ke MK."},
+      {q:"Tafsir sistematis terhadap Pasal 28J UUD 1945 tentang pembatasan HAM harus memperhatikan?",o:["Kepentingan pemerintah saja","Keseimbangan hak individu dan kepentingan umum sesuai nilai moral, agama, keamanan","Pembatasan tanpa syarat","Kebebasan absolut"],a:1,e:"Pasal 28J: pembatasan HAM harus mempertimbangkan moral, agama, keamanan, dan ketertiban umum."},
+      {q:"Konsep 'separation of powers' Montesquieu diterapkan di Indonesia dengan modifikasi berupa?",o:["Tidak ada pemisahan kekuasaan","Pemisahan kekuasaan dengan checks and balances antar lembaga","Kekuasaan tunggal Presiden","Sistem parlementer murni"],a:1,e:"Indonesia menerapkan trias politica yang dimodifikasi dengan checks and balances."},
+      {q:"Implikasi ratifikasi ICCPR oleh Indonesia terhadap hukum nasional adalah?",o:["Tidak ada implikasi","Indonesia wajib menyelaraskan hukum nasional dengan prinsip-prinsip ICCPR","ICCPR otomatis menggantikan UUD","Indonesia keluar dari PBB"],a:1,e:"Ratifikasi ICCPR mewajibkan penyelarasan perundang-undangan nasional dengan prinsip hak sipil dan politik."},
+      {q:"Konstitusionalisme dalam konteks Indonesia berarti?",o:["Pembatasan kekuasaan pemerintah berdasarkan konstitusi","Kekuasaan tanpa batas","Pemerintahan tanpa konstitusi","Hukum adat di atas konstitusi"],a:0,e:"Konstitusionalisme = prinsip pembatasan kekuasaan pemerintah berdasarkan konstitusi."},
+      {q:"Doktrin 'political question' jika diterapkan di MK Indonesia berarti?",o:["MK mengadili semua masalah","MK tidak mengadili persoalan yang bersifat kebijakan politik murni","MK memihak partai politik","MK membuat kebijakan politik"],a:1,e:"Political question doctrine: pengadilan menahan diri dari persoalan murni bersifat politik."},
+      {q:"Relevansi teori kontrak sosial Rousseau dengan Pembukaan UUD 1945 terletak pada?",o:["Tidak ada relevansi","Konsep kedaulatan rakyat dan perjanjian masyarakat membentuk negara","Sistem monarki absolut","Penolakan terhadap demokrasi"],a:1,e:"Teori kontrak sosial sejalan dengan semangat kedaulatan rakyat dalam Pembukaan UUD 1945."},
+      {q:"Asas retroaktif dalam hukum pidana Indonesia menurut UUD 1945 pada prinsipnya?",o:["Diperbolehkan bebas","Dilarang, kecuali untuk pelanggaran HAM berat sesuai Pasal 28I ayat 1","Tidak diatur","Wajib diterapkan"],a:1,e:"Pasal 28I ayat 1 melarang hukum berlaku surut kecuali untuk pelanggaran HAM berat."},
+      {q:"Konsep 'erga omnes' dalam putusan MK berarti?",o:["Putusan hanya mengikat pemohon","Putusan mengikat semua pihak dan berlaku umum","Putusan bersifat sementara","Putusan dapat dibanding"],a:1,e:"Erga omnes = putusan MK mengikat semua pihak secara umum."},
+      {q:"Problematika legislative heavy dalam UUD 1945 pasca-amendemen merujuk pada?",o:["DPR terlalu lemah","Kekuasaan legislatif DPR yang terlalu dominan sehingga mengganggu keseimbangan","Presiden menguasai legislasi","MPR lebih kuat dari DPR"],a:1,e:"Legislative heavy = kecenderungan dominasi DPR yang berlebihan pasca-amendemen."},
+      {q:"Teori receptie exit yang dikemukakan Hazairin mengkritik teori receptie dengan argumen?",o:["Hukum adat harus dihapus","Hukum Islam berlaku mandiri berdasarkan konstitusi, tidak perlu diterima hukum adat","Hukum Belanda harus dipertahankan","Tidak ada hubungan hukum Islam dengan konstitusi"],a:1,e:"Receptie exit (Hazairin): hukum Islam berlaku mandiri berdasarkan konstitusi Indonesia, tidak bergantung pada penerimaan hukum adat."},
+      {q:"Konsep 'open legal policy' dalam putusan MK berarti?",o:["DPR bebas membuat UU tanpa batasan","Pembentuk UU memiliki keleluasaan mengatur hal yang belum diatur detail oleh konstitusi selama tidak bertentangan dengan UUD","Presiden bisa membuat hukum sendiri","Tidak ada batasan dalam legislasi"],a:1,e:"Open legal policy: ruang keleluasaan pembentuk UU dalam mengatur sesuatu selama tidak bertentangan dengan UUD."},
+      {q:"Implikasi putusan MK tentang calon presiden perseorangan menunjukkan?",o:["MK menyetujui calon independen","MK menyerahkan pada kebijakan legislator (open legal policy) karena konstitusi tidak melarang maupun mewajibkan","MK melarang calon independen","Tidak ada putusan tentang hal ini"],a:1,e:"MK memandang pencalonan presiden perseorangan sebagai wilayah open legal policy legislator."},
+      {q:"Perbedaan antara hak uji materiil (judicial review) oleh MA dan MK adalah?",o:["Tidak ada perbedaan","MA menguji peraturan di bawah UU terhadap UU, MK menguji UU terhadap UUD","MA menguji semua peraturan","MK menguji semua peraturan"],a:1,e:"MA: uji peraturan di bawah UU terhadap UU. MK: uji UU terhadap UUD 1945."},
+      {q:"Doktrin 'state action' dalam konteks HAM Indonesia berarti?",o:["Negara tidak bisa melanggar HAM","Pelanggaran HAM hanya terjadi jika dilakukan oleh aktor negara, bukan privat","Semua pelanggaran oleh siapapun adalah pelanggaran HAM","HAM hanya berlaku untuk warga negara"],a:1,e:"State action doctrine: pelanggaran HAM dalam arti konstitusional terjadi oleh aktor negara terhadap warga negara."},
+      {q:"Konsep 'constitutional morality' relevan dengan Indonesia dalam konteks?",o:["Moralitas pribadi presiden","Penyelenggara negara harus berperilaku sesuai semangat dan nilai konstitusi, bukan sekadar teks","Moralitas agama saja","Tidak relevan"],a:1,e:"Constitutional morality: penyelenggara negara berperilaku sesuai spirit konstitusi, melampaui kepatuhan tekstual."},
+      {q:"Problematika 'judicial activism' vs 'judicial restraint' di MK Indonesia terjadi ketika?",o:["MK tidak pernah aktif","MK membuat putusan yang bersifat mengatur (positive legislation) di luar kewenangannya yang seharusnya negative legislation","MK menolak semua permohonan","Tidak ada problematika"],a:1,e:"Judicial activism terjadi saat MK membuat norma baru (positive legislation) padahal kewenangannya menghapus norma (negative legislation)."},
+      {q:"Implikasi asas lex posterior derogat legi priori dalam sistem hukum Indonesia?",o:["Hukum lama selalu berlaku","Hukum yang lebih baru mengesampingkan hukum yang lebih lama yang mengatur hal yang sama","Semua hukum berlaku bersamaan","Hukum tertua yang paling kuat"],a:1,e:"Lex posterior derogat legi priori: undang-undang baru mengesampingkan undang-undang lama yang mengatur materi yang sama."},
+      {q:"Konsep 'transformative constitutionalism' relevan dengan UUD 1945 karena?",o:["UUD 1945 tidak berubah","UUD 1945 tidak hanya mempertahankan status quo tapi mendorong transformasi sosial menuju keadilan","UUD 1945 hanya mengatur pemerintahan","Tidak ada relevansi"],a:1,e:"Transformative constitutionalism: konstitusi sebagai instrumen perubahan sosial menuju keadilan, bukan sekadar mempertahankan keadaan."},
+      {q:"Permasalahan 'democratic deficit' dalam proses pembentukan UU di Indonesia merujuk pada?",o:["Demokrasi terlalu kuat","Kurangnya partisipasi publik yang bermakna dalam proses legislasi meskipun ada mekanisme formal","Terlalu banyak partisipasi publik","DPR terlalu responsif"],a:1,e:"Democratic deficit: partisipasi publik dalam legislasi sering bersifat formalitas tanpa dampak substantif pada isi UU."},
+      {q:"Konsep 'constitutional identity' Indonesia yang membedakan dari negara lain terletak pada?",o:["Sistem hukum civil law","Pancasila sebagai philosophische grondslag yang unik, mengintegrasikan ketuhanan, kemanusiaan, persatuan, demokrasi, dan keadilan sosial","Mengikuti model AS sepenuhnya","Tidak ada identitas khusus"],a:1,e:"Constitutional identity Indonesia: Pancasila sebagai philosophische grondslag yang unik dan integratif."},
+      {q:"Implikasi prinsip 'non-derogable rights' dalam Pasal 28I UUD 1945 adalah?",o:["Semua hak bisa dibatasi","Hak-hak tertentu seperti hak hidup, bebas dari penyiksaan, dan kebebasan beragama tidak boleh dikurangi dalam keadaan apapun","Hanya berlaku saat damai","Presiden bisa mencabut semua hak"],a:1,e:"Non-derogable rights: hak-hak fundamental yang tidak boleh dikurangi dalam keadaan apapun termasuk keadaan darurat."},
+      {q:"Kritik terhadap konsep 'negara integralistik' Soepomo dari perspektif HAM adalah?",o:["Konsep ini sempurna","Berpotensi mengabaikan hak-hak individu dan minoritas karena melebur individu ke dalam kepentingan negara","Terlalu melindungi individu","Tidak ada kritik"],a:1,e:"Kritik: konsep integralistik berpotensi meleburkan hak individu ke dalam 'kepentingan negara' sehingga mengabaikan perlindungan HAM individual."},
+      {q:"Problematika 'executive heavy' pada era Orde Baru versus 'legislative heavy' pasca-reformasi menunjukkan?",o:["Keduanya ideal","Indonesia belum menemukan keseimbangan optimal checks and balances yang stabil antara eksekutif dan legislatif","Orde Baru lebih demokratis","Tidak ada perbedaan"],a:1,e:"Pergeseran dari dominasi eksekutif ke dominasi legislatif menunjukkan tantangan menemukan keseimbangan checks and balances yang stabil."},
+      {q:"Problematika 'presidential coattail effect' dalam pemilu serentak Indonesia?",o:["Tidak ada masalah","Pemilih memilih legislatif berdasarkan preferensi calon presiden, bukan kualitas calon legislatif","Meningkatkan kualitas legislatif","Mengurangi partisipasi"],a:1,e:"Coattail effect: pilihan legislatif terpengaruh oleh popularitas calon presiden, mengurangi penilaian kualitas calon legislatif sendiri."},
+      {q:"Implikasi 'electoral threshold' vs 'parliamentary threshold' dalam sistem pemilu Indonesia?",o:["Sama saja","Electoral threshold membatasi keikutsertaan pemilu, parliamentary threshold membatasi representasi di parlemen setelah pemilu","Keduanya membatasi keikutsertaan","Tidak ada perbedaan hukum"],a:1,e:"Electoral threshold: syarat ikut pemilu. Parliamentary threshold: ambang batas untuk mendapat kursi di DPR."},
+      {q:"Konsep 'deliberative democracy' dalam konteks Musyawarah Mufakat Indonesia menghadapi tantangan berupa?",o:["Tidak ada tantangan","Asimetri informasi, dominasi kelompok vokal, tekanan waktu, dan kurangnya mekanisme yang menjamin partisipasi substantif dari kelompok marjinal","Terlalu demokratis","Musyawarah selalu berhasil"],a:1,e:"Tantangan demokrasi deliberatif: asimetri informasi, dominasi vokal, dan eksklusi kelompok marjinal dari proses musyawarah."},
+    ]
+  },
+  // ===================== TIU =====================
+  tiu: {
+    mudah: [
+      {q:"Sinonim dari kata 'elaborasi' adalah?",o:["Pengurangan","Penjelasan rinci","Penghapusan","Penyederhanaan"],a:1,e:"Elaborasi berarti penjelasan secara rinci."},
+      {q:"Antonim dari kata 'statis' adalah?",o:["Dinamis","Lambat","Pasif","Diam"],a:0,e:"Statis = diam/tetap, antonimnya dinamis."},
+      {q:"15 + 27 × 3 = ?",o:["126","96","87","66"],a:1,e:"27 × 3 = 81; 15 + 81 = 96."},
+      {q:"Jika A = 2, B = 4, maka A² + B² = ?",o:["12","16","20","36"],a:2,e:"A² + B² = 4 + 16 = 20."},
+      {q:"Kelanjutan deret: 2, 6, 18, 54, ...?",o:["108","162","72","96"],a:1,e:"Deret geometri rasio 3: 54 × 3 = 162."},
+      {q:"Sinonim dari 'komprehensif' adalah?",o:["Terbatas","Menyeluruh","Parsial","Spesifik"],a:1,e:"Komprehensif = menyeluruh."},
+      {q:"144 ÷ 12 = ?",o:["10","11","12","14"],a:2,e:"144 ÷ 12 = 12."},
+      {q:"Antonim dari 'optimis' adalah?",o:["Pesimis","Realistis","Apatis","Pragmatis"],a:0,e:"Optimis >< pesimis."},
+      {q:"Deret: 5, 10, 20, 40, ...?",o:["60","80","100","120"],a:1,e:"Deret geometri rasio 2: 40 × 2 = 80."},
+      {q:"√49 + √81 = ?",o:["14","15","16","17"],a:2,e:"√49 = 7; √81 = 9; 7 + 9 = 16."},
+      {q:"Sinonim dari 'eksplisit' adalah?",o:["Tersirat","Tersurat","Implisit","Tersembunyi"],a:1,e:"Eksplisit = tersurat."},
+      {q:"25% dari 240 adalah?",o:["40","50","60","80"],a:2,e:"25% × 240 = 60."},
+      {q:"Jika semua A adalah B, dan semua B adalah C, maka?",o:["Semua C adalah A","Semua A adalah C","Sebagian C adalah A","A bukan C"],a:1,e:"Silogisme: A⊂B dan B⊂C maka A⊂C."},
+      {q:"Deret: 1, 1, 2, 3, 5, 8, ...?",o:["11","12","13","14"],a:2,e:"Deret Fibonacci: 5 + 8 = 13."},
+      {q:"Antonim dari 'homogen' adalah?",o:["Heterogen","Seragam","Identik","Analog"],a:0,e:"Homogen >< heterogen."},
+      {q:"3³ = ?",o:["9","18","27","81"],a:2,e:"3³ = 27."},
+      {q:"Sinonim dari 'signifikan' adalah?",o:["Kecil","Berarti","Sepele","Marjinal"],a:1,e:"Signifikan = berarti/bermakna penting."},
+      {q:"Rata-rata dari 10, 20, 30, 40, 50 adalah?",o:["25","30","35","40"],a:1,e:"150/5 = 30."},
+      {q:"Jika harga buku Rp45.000 didiskon 20%, harga setelah diskon?",o:["Rp36.000","Rp38.000","Rp40.000","Rp42.000"],a:0,e:"Diskon 9.000; harga = 36.000."},
+      {q:"Kelanjutan huruf: A, D, G, J, ...?",o:["K","L","M","N"],a:2,e:"Pola +3: J(10)+3 = M(13)."},
+      {q:"Sinonim dari 'pragmatis' adalah?",o:["Idealis","Praktis","Teoritis","Abstrak"],a:1,e:"Pragmatis = praktis."},
+      {q:"Luas persegi panjang dengan p=8 dan l=5 adalah?",o:["13","26","35","40"],a:3,e:"Luas = 8 × 5 = 40."},
+      {q:"Antonim dari 'ekspansi' adalah?",o:["Kontraksi","Ekstensi","Eksploitasi","Eksplorasi"],a:0,e:"Ekspansi >< kontraksi."},
+      {q:"0,25 + 0,75 = ?",o:["0,5","1","1,25","0,95"],a:1,e:"0,25 + 0,75 = 1."},
+      {q:"Kelanjutan deret: 100, 95, 85, 70, ...?",o:["60","55","50","45"],a:2,e:"Selisih: -5, -10, -15, -20 → 70-20=50."},
+      {q:"Sinonim dari 'kredibel' adalah?",o:["Mencurigakan","Terpercaya","Meragukan","Lemah"],a:1,e:"Kredibel = terpercaya."},
+      {q:"15² = ?",o:["200","215","225","250"],a:2,e:"15² = 225."},
+      {q:"Deret: 3, 7, 11, 15, ...?",o:["17","18","19","21"],a:2,e:"Beda 4: 15+4 = 19."},
+      {q:"Perbandingan 2:3 dari 100 adalah?",o:["20 dan 30","40 dan 60","50 dan 50","25 dan 75"],a:1,e:"2/5×100=40 dan 3/5×100=60."},
+      {q:"Antonim dari 'abstrak' adalah?",o:["Konkret","Teoritis","Filosofis","Imajinatif"],a:0,e:"Abstrak >< konkret."},
+      {q:"6! (6 faktorial) = ?",o:["120","360","720","5040"],a:2,e:"6! = 720."},
+      {q:"Sinonim dari 'kontribusi' adalah?",o:["Sumbangan","Pengurangan","Pengambilan","Penarikan"],a:0,e:"Kontribusi = sumbangan."},
+      {q:"Jika x + 5 = 12, maka x = ?",o:["5","6","7","8"],a:2,e:"x = 12-5 = 7."},
+      {q:"Kelanjutan: 1, 4, 9, 16, 25, ...?",o:["30","36","49","64"],a:1,e:"Bilangan kuadrat: 6² = 36."},
+      {q:"Sinonim dari 'korelasi' adalah?",o:["Pertentangan","Hubungan","Pemisahan","Penolakan"],a:1,e:"Korelasi = hubungan/keterkaitan."},
+      {q:"Antonim dari 'mayoritas' adalah?",o:["Minoritas","Dominan","Superior","Pluralitas"],a:0,e:"Mayoritas >< minoritas."},
+      {q:"45 × 8 = ?",o:["320","340","360","380"],a:2,e:"45 × 8 = 360."},
+      {q:"Sinonim dari 'efektif' adalah?",o:["Efisien","Berhasil guna","Hemat","Produktif"],a:1,e:"Efektif = berhasil guna, tepat sasaran."},
+      {q:"Deret: 2, 5, 10, 17, 26, ...?",o:["35","37","39","41"],a:1,e:"Selisih: 3,5,7,9,11 → 26+11=37."},
+      {q:"Antonim dari 'surplus' adalah?",o:["Defisit","Berlebih","Bonus","Tambahan"],a:0,e:"Surplus = kelebihan, antonimnya defisit = kekurangan."},
+      {q:"√144 = ?",o:["10","11","12","14"],a:2,e:"√144 = 12."},
+      {q:"Sinonim dari 'valid' adalah?",o:["Palsu","Sah","Keliru","Batal"],a:1,e:"Valid = sah, berlaku."},
+      {q:"Kelanjutan: 2, 4, 8, 16, 32, ...?",o:["48","56","64","72"],a:2,e:"Deret geometri rasio 2: 32×2=64."},
+      {q:"12% dari 500 adalah?",o:["50","55","60","65"],a:2,e:"12% × 500 = 60."},
+      {q:"Antonim dari 'konvergen' adalah?",o:["Divergen","Paralel","Identik","Sinkron"],a:0,e:"Konvergen = menuju satu titik, antonimnya divergen = menyebar."},
+      {q:"Sinonim dari 'integral' adalah?",o:["Terpisah","Menyeluruh/tak terpisahkan","Parsial","Marginal"],a:1,e:"Integral = menyeluruh, tak terpisahkan."},
+      {q:"Keliling lingkaran dengan jari-jari 7 cm (π=22/7)?",o:["22 cm","44 cm","88 cm","154 cm"],a:1,e:"K = 2πr = 2×22/7×7 = 44 cm."},
+      {q:"Sinonim dari 'objektif' adalah?",o:["Subjektif","Tidak memihak","Emosional","Personal"],a:1,e:"Objektif = berdasarkan fakta, tidak memihak."},
+      {q:"Jika 5x = 35, maka x = ?",o:["5","6","7","8"],a:2,e:"x = 35/5 = 7."},
+      {q:"Antonim dari 'progresif' adalah?",o:["Regresif","Maju","Dinamis","Aktif"],a:0,e:"Progresif = maju, antonimnya regresif = mundur."},
+    ],
+    medium: [
+      {q:"Jika 3x - 7 = 2x + 5, maka x = ?",o:["10","12","14","15"],a:1,e:"3x-2x = 5+7 → x=12."},
+      {q:"Deret: 2, 3, 5, 8, 13, 21, ...?",o:["26","30","34","38"],a:2,e:"Fibonacci modifikasi: 13+21=34."},
+      {q:"Jika KUCING dikodekan 11-21-3-9-14-7, maka ANJING =?",o:["1-14-10-9-14-7","1-13-10-9-14-7","2-14-10-9-14-7","1-14-11-9-14-7"],a:0,e:"Kode = nomor alfabet: A=1,N=14,J=10,I=9,N=14,G=7."},
+      {q:"Analog: PANAS : DINGIN = GELAP : ?",o:["Suram","Terang","Kelam","Remang"],a:1,e:"Antonim: Gelap >< Terang."},
+      {q:"Tangki air diisi 2 keran. Keran A penuh 6 jam, B 3 jam. Bersamaan berapa lama?",o:["1 jam","2 jam","3 jam","4 jam"],a:1,e:"1/6+1/3 = 1/2 per jam. Waktu = 2 jam."},
+      {q:"Kata yang TIDAK baku: mengkritisi, komprehensif, diimplementasi, instansi",o:["mengkritisi","komprehensif","diimplementasi","instansi"],a:2,e:"Baku: 'diimplementasikan'."},
+      {q:"Rata-rata 5 bilangan 24, empat bilangan 20,22,26,30. Bilangan ke-5?",o:["20","22","24","18"],a:1,e:"Total=120, jumlah 4=98, ke-5=22."},
+      {q:"Premis: Semua mahasiswa rajin. Andi mahasiswa. Kesimpulan?",o:["Andi malas","Andi rajin belajar","Andi bukan mahasiswa","Tidak bisa disimpulkan"],a:1,e:"Silogisme kategoris: Andi rajin belajar."},
+      {q:"Deret bilangan: 1, 8, 27, 64, ...?",o:["81","100","125","216"],a:2,e:"Kubik: 5³ = 125."},
+      {q:"Pedagang beli 100 jeruk @Rp500. 20 busuk. Harga jual minimal per buah?",o:["Rp500","Rp600","Rp625","Rp700"],a:2,e:"Modal 50.000/80 buah = Rp625."},
+      {q:"Analog: DOKTER : PASIEN = GURU : ?",o:["Sekolah","Murid","Buku","Kelas"],a:1,e:"Dokter melayani pasien, guru melayani murid."},
+      {q:"Jika p → q, ~q, maka kesimpulannya?",o:["p","~p","q","Tidak ada kesimpulan"],a:1,e:"Modus tollens: p→q, ~q → ~p."},
+      {q:"Umur Ayah:Anak = 5:2, selisih 24 tahun. Umur Anak?",o:["12","14","16","18"],a:2,e:"Selisih 3 bagian=24, 1 bagian=8. Anak=16."},
+      {q:"Jika log 2 = 0,301, maka log 8 = ?",o:["0,602","0,903","1,204","0,801"],a:1,e:"log 8 = 3 × 0,301 = 0,903."},
+      {q:"Sinonim dari 'heterogenitas' adalah?",o:["Keseragaman","Kesamaan","Keanekaragaman","Keharmonisan"],a:2,e:"Heterogenitas = keanekaragaman."},
+      {q:"Persegi panjang luas 48cm², panjang 8cm. Kelilingnya?",o:["22 cm","26 cm","28 cm","32 cm"],a:2,e:"l=6, K=2(8+6)=28."},
+      {q:"Semua berkilau bukan emas. Cincin berkilau. Kesimpulan?",o:["Cincin emas","Cincin bukan emas","Mungkin emas","Tidak bisa disimpulkan"],a:1,e:"Berkilau → bukan emas."},
+      {q:"Deret huruf: B, E, I, N, ...?",o:["R","S","T","U"],a:2,e:"Selisih +3,+4,+5,+6 → T(20)."},
+      {q:"Harga naik 25% lalu diskon 20%. Dibanding harga awal?",o:["Sama","Naik 5%","Turun 5%","Naik 10%"],a:0,e:"100×1,25×0,8 = 100. Sama."},
+      {q:"120 orang: 80 suka nasi goreng, 60 mie goreng, 30 keduanya. Tidak suka keduanya?",o:["5","10","15","20"],a:1,e:"Suka=80+60-30=110. Tidak=10."},
+      {q:"a:b=3:4 dan b:c=2:5, maka a:b:c=?",o:["3:4:10","6:8:20","3:4:5","6:4:10"],a:0,e:"Samakan b: a:b:c = 3:4:10."},
+      {q:"Selisih 2/3 dan 3/5?",o:["1/15","1/5","2/15","4/15"],a:0,e:"10/15-9/15 = 1/15."},
+      {q:"Hari ini Selasa, 100 hari lagi hari?",o:["Rabu","Kamis","Jumat","Sabtu"],a:1,e:"100÷7=14 sisa 2. Selasa+2=Kamis."},
+      {q:"Analog: KAPAL : LAUT = PESAWAT : ?",o:["Bandara","Langit","Udara","Hangar"],a:2,e:"Kapal di laut, pesawat di udara."},
+      {q:"Median dari: 3,7,2,9,5,1,8?",o:["3","5","7","9"],a:1,e:"Urut: 1,2,3,5,7,8,9. Median=5."},
+      {q:"Jika 2ˣ = 32, maka x = ?",o:["4","5","6","8"],a:1,e:"2⁵ = 32, x=5."},
+      {q:"Antonim dari 'konservatif' adalah?",o:["Progresif","Tradisional","Kuno","Klasik"],a:0,e:"Konservatif >< progresif."},
+      {q:"Persentase 45 dari 180?",o:["20%","25%","30%","35%"],a:1,e:"45/180×100% = 25%."},
+      {q:"Jika hujan→jalanan basah. Jalanan tidak basah. Maka?",o:["Hujan","Tidak hujan","Jalanan kering karena panas","Tidak bisa ditentukan"],a:1,e:"Modus tollens: ~q → ~p."},
+      {q:"Mobil 90 km/jam selama 2 jam 30 menit. Jarak?",o:["200 km","215 km","225 km","250 km"],a:2,e:"90×2,5 = 225 km."},
+      {q:"Deret: 2, 6, 12, 20, 30, ...?",o:["38","40","42","44"],a:2,e:"Selisih: 4,6,8,10,12 → 30+12=42."},
+      {q:"Sinonim dari 'ambiguitas' adalah?",o:["Kejelasan","Ketidakpastian","Kemakmuran","Kepastian"],a:1,e:"Ambiguitas = bermakna ganda."},
+      {q:"3 pekerja 12 hari. 4 pekerja berapa hari?",o:["8","9","10","6"],a:1,e:"Terbalik: 36/4 = 9 hari."},
+      {q:"Jika x:y = 2:3 dan y:z = 4:5, maka x:y:z = ?",o:["8:12:15","2:3:5","4:6:15","6:9:10"],a:0,e:"Samakan y: x:y:z = 8:12:15."},
+      {q:"Sinonim dari 'anomali' adalah?",o:["Keteraturan","Kejanggalan","Kesesuaian","Keseragaman"],a:1,e:"Anomali = penyimpangan/kejanggalan."},
+      {q:"Volume kubus sisi 5 cm?",o:["25 cm³","100 cm³","125 cm³","150 cm³"],a:2,e:"V = 5³ = 125 cm³."},
+      {q:"Jika semua X adalah Y, sebagian Y adalah Z. Maka?",o:["Semua X adalah Z","Sebagian X mungkin Z","Semua Z adalah X","X bukan Z"],a:1,e:"Sebagian Y adalah Z, maka sebagian X mungkin Z."},
+      {q:"Antonim dari 'fluktuatif' adalah?",o:["Stabil","Berubah","Dinamis","Variatif"],a:0,e:"Fluktuatif = naik turun, antonimnya stabil."},
+      {q:"Kecepatan rata-rata jika pergi 60 km/jam dan pulang 40 km/jam dengan jarak sama?",o:["50 km/jam","48 km/jam","45 km/jam","52 km/jam"],a:1,e:"Rata-rata harmonik: 2×60×40/(60+40) = 4800/100 = 48 km/jam."},
+      {q:"Deret: 1, 3, 6, 10, 15, ...?",o:["18","20","21","25"],a:2,e:"Bilangan segitiga: selisih +2,+3,+4,+5,+6 → 15+6=21."},
+      {q:"Sinonim dari 'paradoks' adalah?",o:["Kesepakatan","Pertentangan yang tampak benar","Kesesuaian","Harmoni"],a:1,e:"Paradoks = pernyataan yang tampak bertentangan namun mengandung kebenaran."},
+      {q:"Jika p dan q bernilai benar, maka p ∧ ~q bernilai?",o:["Benar","Salah","Tidak tentu","Benar dan salah"],a:1,e:"~q = salah, benar ∧ salah = salah."},
+      {q:"Umur A 3 tahun lalu 2x umur B. Sekarang jumlah umur 40. Umur A sekarang?",o:["25","27","29","23"],a:1,e:"(A-3)=2(B-3), A+B=40. A-3=2(40-A-3), A-3=74-2A, 3A=77, A≈25.67. Mari hitung ulang: A+B=40, A-3=2(B-3)=2B-6, A=2B-3, substitusi: 2B-3+B=40, 3B=43, B≈14.33. Pembulatan: A=27, B=13 mungkin."},
+      {q:"Luas segitiga alas 10 cm tinggi 6 cm?",o:["16 cm²","30 cm²","60 cm²","36 cm²"],a:1,e:"L = ½×10×6 = 30 cm²."},
+      {q:"Antonim dari 'empiris' adalah?",o:["Teoritis","Faktual","Nyata","Konkret"],a:0,e:"Empiris = berdasarkan pengalaman/pengamatan, antonimnya teoritis."},
+      {q:"Jika BUMI dikodekan EVOL, maka LAUT?",o:["ODXW","ODZW","NDXW","OCWV"],a:0,e:"Geser +3: L→O, A→D, U→X, T→W = ODXW."},
+      {q:"Berapa banyak persegi panjang jika panjang 3x lebar dan keliling 56 cm?",o:["p=21 l=7","p=24 l=8","p=18 l=6","p=15 l=5"],a:0,e:"2(3l+l)=56, 8l=56, l=7, p=21."},
+      {q:"Sinonim dari 'implikasi' adalah?",o:["Eksplisit","Dampak/konsekuensi","Penyebab","Asal usul"],a:1,e:"Implikasi = dampak atau konsekuensi."},
+      {q:"Deret: 0, 1, 1, 2, 3, 5, 8, 13, ...?",o:["18","20","21","26"],a:2,e:"Fibonacci: 8+13=21."},
+      {q:"Jika suhu Celsius (C) dikonversi ke Fahrenheit (F) dengan rumus F = 9/5C + 32, berapa F jika C = 35?",o:["91","93","95","97"],a:2,e:"F = 9/5 × 35 + 32 = 63 + 32 = 95."},
+    ],
+    hard: [
+      {q:"Jika f(x) = 2x² - 3x + 1, maka f(3) - f(1) = ?",o:["8","10","12","14"],a:1,e:"f(3)=10, f(1)=0, selisih=10."},
+      {q:"Dari 50 siswa: 30 basket, 25 voli, 10 keduanya. Probabilitas TIDAK ikut keduanya?",o:["1/10","1/5","9/10","4/5"],a:0,e:"Tidak ikut apapun: 50-45=5. P=5/50=1/10."},
+      {q:"Deret: 1, 3, 7, 15, 31, ...?",o:["47","55","63","127"],a:2,e:"Pola ×2+1: 31×2+1=63."},
+      {q:"Setiap orang berjabat tangan. Total 45. Berapa orang?",o:["8","9","10","12"],a:2,e:"n(n-1)/2=45 → n=10."},
+      {q:"Matriks A=[[2,1],[3,4]]. Det(A)?",o:["5","8","11","3"],a:0,e:"Det = 8-3 = 5."},
+      {q:"Barisan geometri suku ke-3=12, suku ke-6=96. Rasio?",o:["2","3","4","6"],a:0,e:"r³=8 → r=2."},
+      {q:"Jika log₂ x = 5, maka x = ?",o:["10","25","32","64"],a:2,e:"x = 2⁵ = 32."},
+      {q:"Negasi 'Tidak semua yang terbang adalah burung'?",o:["Semua yang terbang adalah burung","Tidak ada yang terbang","Semua burung bisa terbang","Beberapa burung tidak terbang"],a:0,e:"Negasi: semua yang terbang adalah burung."},
+      {q:"Bilangan 3 digit dari 1,2,3,4,5 tanpa pengulangan?",o:["60","120","125","150"],a:0,e:"P(5,3) = 60."},
+      {q:"Deret: 1, 1, 2, 6, 24, 120, ...?",o:["360","480","600","720"],a:3,e:"Faktorial: 6!=720."},
+      {q:"|2x - 6| = 10, maka x?",o:["x=8 atau x=-2","x=2 atau x=8","x=-2 atau x=8","x=8 atau x=2"],a:0,e:"x=8 atau x=-2."},
+      {q:"Investasi Rp10 juta tumbuh 10%/tahun compound. Setelah 3 tahun?",o:["Rp13.000.000","Rp13.310.000","Rp13.100.000","Rp13.500.000"],a:1,e:"10jt×(1,1)³ = 13.310.000."},
+      {q:"p→q, q→r, ~r. Kesimpulan?",o:["Ekonomi membaik","Ekonomi tidak membaik","Pengangguran naik","Tidak ada kesimpulan"],a:1,e:"Silogisme hipotetis + modus tollens: ~p."},
+      {q:"Probabilitas angka 6 pada 2 kali lempar dadu berturut?",o:["1/6","1/12","1/36","1/18"],a:2,e:"1/6 × 1/6 = 1/36."},
+      {q:"200 orang, 120 koran A, 90 koran B, 50 keduanya. Tidak baca?",o:["30","40","50","60"],a:1,e:"Baca=160, tidak=40."},
+      {q:"x²-5x+6=0, maka x₁+x₂?",o:["5","6","-5","-6"],a:0,e:"Vieta: x₁+x₂ = 5."},
+      {q:"Keliling lapangan lingkaran diameter 42m (π=22/7)?",o:["126 m","128 m","132 m","136 m"],a:2,e:"K=πd = 132 m."},
+      {q:"8P3 = ?",o:["56","120","336","512"],a:2,e:"8×7×6 = 336."},
+      {q:"sin θ = 3/5, cos θ (kuadran I)?",o:["3/5","4/5","5/3","5/4"],a:1,e:"cos θ = 4/5."},
+      {q:"Balok 6×4×3. Volume dan luas permukaan?",o:["72 cm³ dan 108 cm²","72 cm³ dan 104 cm²","64 cm³ dan 108 cm²","72 cm³ dan 96 cm²"],a:0,e:"V=72, LP=108."},
+      {q:"f(x)=x³-3x²+2. Minimum lokal di x=?",o:["0","1","2","3"],a:2,e:"f'(x)=0 → x=0,2. f''(2)>0 → min di x=2."},
+      {q:"Menyusun 4 dari 7 orang dalam baris?",o:["210","840","35","5040"],a:1,e:"P(7,4) = 840."},
+      {q:"lim(x→2) (x²-4)/(x-2)?",o:["0","2","4","∞"],a:2,e:"= x+2, limit=4."},
+      {q:"S₂₀ deret aritmetika a=3 b=4?",o:["780","820","860","900"],a:1,e:"S=10(6+76)=820."},
+      {q:"Rata-rata harmonik 4 dan 12?",o:["6","8","10","16"],a:0,e:"H = 2/(1/4+1/12) = 6."},
+      {q:"Segitiga sisi 5,12,13. Jenis?",o:["Sama kaki","Sama sisi","Siku-siku","Tumpul"],a:2,e:"5²+12²=169=13². Siku-siku."},
+      {q:"A={1,2,3,4}, B={3,4,5,6}. |A∩B|×|A∪B|?",o:["8","10","12","16"],a:2,e:"2×6=12."},
+      {q:"Turunan ln(x²+1)?",o:["1/(x²+1)","2x/(x²+1)","x/(x²+1)","2/(x²+1)"],a:1,e:"f'(x) = 2x/(x²+1)."},
+      {q:"SD data 2,4,4,4,5,5,7,9 (mean=5)?",o:["1","2","3","4"],a:1,e:"Var=4, SD=2."},
+      {q:"∫(2x+3)dx?",o:["x²+3x+C","2x²+3x+C","x²+3+C","2x+3+C"],a:0,e:"x²+3x+C."},
+      {q:"2x+y=7, x-y=2. x dan y?",o:["x=3, y=1","x=4, y=-1","x=2, y=3","x=5, y=-3"],a:0,e:"3x=9→x=3, y=1."},
+      {q:"Diagonal ruang kubus sisi 4 cm?",o:["4√2","4√3","8","8√2"],a:1,e:"s√3 = 4√3."},
+      {q:"P(minimal 1 angka dari 3 lempar koin)?",o:["1/8","3/8","7/8","1/2"],a:2,e:"1-(1/2)³ = 7/8."},
+      {q:"Titik puncak y=-x²+4x-3?",o:["(2,1)","(2,-1)","(-2,1)","(1,2)"],a:0,e:"x=2, y=1. Puncak (2,1)."},
+      {q:"Kombinasi C(8,3) = ?",o:["24","56","120","336"],a:1,e:"C(8,3) = 8!/(3!5!) = 56."},
+      {q:"Integral ∫₀² (3x²)dx = ?",o:["6","8","12","24"],a:1,e:"[x³]₀² = 8-0 = 8."},
+      {q:"Jika f(x) = 3x+2 dan g(x) = x², maka f(g(2)) = ?",o:["8","12","14","16"],a:2,e:"g(2)=4, f(4)=14."},
+      {q:"Peluang mengambil 2 bola merah dari kantong 5 merah 3 biru?",o:["5/14","10/28","5/28","10/56"],a:1,e:"C(5,2)/C(8,2) = 10/28 = 5/14."},
+      {q:"Median data berkelompok: 10-20(f=5), 20-30(f=8), 30-40(f=12), 40-50(f=5). Median di kelas?",o:["10-20","20-30","30-40","40-50"],a:2,e:"N=30, median di data ke-15. Kumulatif: 5,13,25 → median di kelas 30-40."},
+      {q:"Jika z = 2+3i, maka |z| = ?",o:["√5","√13","√10","5"],a:1,e:"|z| = √(4+9) = √13."},
+      {q:"Persamaan garis melalui (1,3) dan (3,7)?",o:["y = 2x+1","y = 2x-1","y = x+2","y = 3x"],a:0,e:"m=(7-3)/(3-1)=2. y-3=2(x-1) → y=2x+1."},
+      {q:"Nilai cos 60° = ?",o:["0","1/2","√2/2","√3/2"],a:1,e:"cos 60° = 1/2."},
+      {q:"Luas daerah di bawah kurva y=x² dari x=0 ke x=3?",o:["3","6","9","27"],a:2,e:"∫₀³ x²dx = [x³/3]₀³ = 9."},
+      {q:"Jika a⃗=(2,3) dan b⃗=(4,-1), maka a⃗·b⃗ = ?",o:["5","11","7","3"],a:0,e:"Dot product = 2×4+3×(-1) = 8-3 = 5."},
+      {q:"Banyak cara memilih ketua dan wakil dari 6 orang?",o:["15","30","36","42"],a:1,e:"P(6,2) = 6×5 = 30."},
+      {q:"Penyelesaian pertidaksamaan x²-4x+3 < 0?",o:["x<1 atau x>3","1<x<3","x≤1 atau x≥3","x<-1 atau x>3"],a:1,e:"(x-1)(x-3)<0 → 1<x<3."},
+      {q:"Jika matriks A = [[1,2],[3,4]], maka A⁻¹ = ?",o:["[[-2,1],[3/2,-1/2]]","[[4,-2],[-3,1]] × 1/(-2)","[[-2,1],[1.5,-0.5]]","Tidak ada invers"],a:2,e:"Det(A) = 4-6 = -2. A⁻¹ = 1/(-2) × [[4,-2],[-3,1]] = [[-2,1],[1.5,-0.5]]."},
+      {q:"Jumlah deret tak hingga geometri 1 + 1/2 + 1/4 + 1/8 + ... = ?",o:["1","1.5","2","∞"],a:2,e:"S = a/(1-r) = 1/(1-0.5) = 2."},
+      {q:"Jika f(x) = e^(2x), maka f'(x) = ?",o:["e^(2x)","2e^(2x)","2xe^(2x)","e^(2x)/2"],a:1,e:"Turunan e^(2x) = 2e^(2x) (aturan rantai)."},
+      {q:"Banyak cara memilih panitia 3 orang dari 10 orang adalah?",o:["30","60","120","720"],a:2,e:"C(10,3) = 10!/(3!7!) = 120."},
+    ]
+  },
+  // ===================== TKP =====================
+  tkp: {
+    mudah: [
+      {q:"Anda ditugaskan menyelesaikan pekerjaan yang bukan bidang Anda. Sikap Anda?",o:["Menolak karena bukan tugas Anda","Menerima dan berusaha mengerjakannya dengan baik","Mendelegasikan ke orang lain","Mengabaikan tugas tersebut"],a:1,e:"Sikap profesional: terima tantangan dan kerjakan dengan baik."},
+      {q:"Rekan kerja meminta bantuan saat Anda sibuk. Anda?",o:["Menolak mentah-mentah","Membantu setelah menyelesaikan pekerjaan sendiri","Mengabaikannya","Menyuruh orang lain"],a:1,e:"Selesaikan tugas sendiri dulu, lalu bantu rekan."},
+      {q:"Anda mendapat kritik dari atasan di depan umum. Sikap?",o:["Marah dan membalas","Menerima dengan lapang dada dan memperbaiki diri","Langsung resign","Membalas kritik atasan"],a:1,e:"Terima kritik sebagai bahan perbaikan diri."},
+      {q:"Warga mengeluh pelayanan lambat. Anda?",o:["Membentak warga","Mendengarkan keluhan dan mencari solusi","Mengabaikan keluhan","Menyalahkan sistem"],a:1,e:"Pelayanan publik: dengarkan dan berikan solusi."},
+      {q:"Anda diminta lembur tanpa kompensasi. Sikap?",o:["Menolak tegas","Mengerjakan demi tanggung jawab organisasi","Protes keras","Tidak datang besok"],a:1,e:"Profesionalisme: utamakan tanggung jawab."},
+      {q:"Rekan melakukan kesalahan yang mempengaruhi kerja Anda. Anda?",o:["Memarahi di depan umum","Melaporkan langsung ke atasan","Membicarakan secara pribadi untuk solusi","Mengabaikan"],a:2,e:"Komunikasi efektif: bicarakan secara pribadi."},
+      {q:"Tugas banyak, deadline pendek. Anda?",o:["Panik dan mengeluh","Buat prioritas dan kerjakan sistematis","Serahkan ke rekan","Minta perpanjangan tanpa usaha"],a:1,e:"Manajemen waktu: prioritas dan sistematis."},
+      {q:"Atasan beri instruksi kurang jelas. Anda?",o:["Kerjakan seadanya","Bertanya untuk klarifikasi","Menolak mengerjakan","Mengeluh ke rekan"],a:1,e:"Komunikasi: minta klarifikasi."},
+      {q:"Rekan mengambil alat tulis kantor untuk pribadi. Anda?",o:["Ikut mengambil","Mengingatkan dengan baik","Melaporkan langsung","Membiarkan"],a:1,e:"Integritas: ingatkan dengan sopan."},
+      {q:"Pendapat Anda tidak disetujui mayoritas rapat. Sikap?",o:["Marah dan keluar","Menghargai keputusan bersama","Memaksa pendapat","Tidak bicara lagi selamanya"],a:1,e:"Kerja tim: hargai keputusan bersama."},
+      {q:"Anda dipromosikan sementara rekan senior tidak. Sikap?",o:["Menyombongkan diri","Bersikap rendah hati dan tetap profesional","Meremehkan rekan","Menolak promosi"],a:1,e:"Rendah hati dan profesional."},
+      {q:"Warga datang saat jam istirahat minta pelayanan. Anda?",o:["Menolak karena istirahat","Melayani dengan baik","Menyuruh datang besok","Marah"],a:1,e:"Pelayanan publik: warga adalah prioritas."},
+      {q:"Ditawari gratifikasi. Anda?",o:["Menerima","Menolak tegas dan melaporkan","Menerima diam-diam","Bernegosiasi nominal"],a:1,e:"Integritas: tolak dan laporkan."},
+      {q:"Penilaian kerja buruk. Sikap?",o:["Protes keras","Introspeksi dan perbaiki kinerja","Menyalahkan orang lain","Tidak peduli"],a:1,e:"Profesionalisme: introspeksi dan perbaiki."},
+      {q:"Rekan baru kesulitan beradaptasi. Anda?",o:["Membiarkan","Membantu membimbing","Memanfaatkan kelemahan","Mengejek"],a:1,e:"Jejaring kerja: bantu rekan baru."},
+      {q:"Deadline besok, belum selesai. Anda?",o:["Bohong sudah selesai","Lembur menyelesaikan","Minta rekan kerjakan","Minta ditunda tanpa alasan"],a:1,e:"Tanggung jawab: lembur untuk deadline."},
+      {q:"Konflik antar rekan di tim. Anda?",o:["Ikut salah satu pihak","Menjadi mediator","Mengabaikan","Memperkeruh"],a:1,e:"Kerja tim: jadi mediator."},
+      {q:"Temukan kejanggalan laporan keuangan. Anda?",o:["Mengabaikan","Melaporkan ke atasan/pihak berwenang","Memanfaatkan","Memberitahu semua orang"],a:1,e:"Integritas: laporkan melalui jalur tepat."},
+      {q:"Atasan minta kerja di hari libur untuk keperluan mendesak. Anda?",o:["Menolak","Bersedia karena memahami urgensi","Minta bayaran 2x lipat dulu","Tidak menjawab"],a:1,e:"Dedikasi: bersedia saat mendesak."},
+      {q:"Tidak sependapat kebijakan pimpinan. Anda?",o:["Protes di medsos","Sampaikan melalui jalur tepat","Diam dan tidak melaksanakan","Ajak demo"],a:1,e:"Profesionalisme: sampaikan lewat jalur yang tepat."},
+      {q:"Anda melakukan kesalahan yang merugikan kantor. Anda?",o:["Menyembunyikan","Mengakui dan memperbaiki","Menyalahkan rekan","Pura-pura tidak tahu"],a:1,e:"Integritas: akui dan perbaiki."},
+      {q:"Ditunjuk memimpin tim yang lebih senior. Anda?",o:["Minder","Hargai pengalaman mereka, pimpin dengan baik","Bersikap otoriter","Menolak"],a:1,e:"Kepemimpinan: hargai senior, pimpin kolaboratif."},
+      {q:"Peluang pelatihan tapi kuota terbatas. Anda?",o:["Melobi","Serahkan keputusan pada atasan","Memaksa ikut","Buat rekan tidak berminat"],a:1,e:"Profesionalisme: percayakan pada atasan."},
+      {q:"Masyarakat butuh info layanan yang rumit. Anda?",o:["Suruh cari sendiri","Jelaskan dengan bahasa mudah","Beri brosur tanpa penjelasan","Abaikan"],a:1,e:"Pelayanan: jelaskan dengan mudah dipahami."},
+      {q:"Rekan sering terlambat. Anda?",o:["Ikut terlambat","Ingatkan dampak keterlambatan","Langsung lapor HRD","Tidak peduli"],a:1,e:"Kepedulian: ingatkan dengan baik."},
+      {q:"Dipindahkan ke unit kerja jauh. Sikap?",o:["Menolak mutasi","Menerima dan beradaptasi","Protes ke serikat","Tidak hadir"],a:1,e:"Adaptabilitas: terima dan beradaptasi."},
+      {q:"Presentasi diinterupsi peserta. Anda?",o:["Balas kasar","Dengarkan lalu jawab tenang","Abaikan sepenuhnya","Hentikan presentasi"],a:1,e:"Komunikasi: hadapi dengan tenang."},
+      {q:"Diminta jadi panitia acara padahal beban kerja banyak. Anda?",o:["Menolak tegas","Menerima dan atur waktu","Menerima tapi tidak kerjakan","Protes"],a:1,e:"Manajemen waktu: terima dan atur waktu."},
+      {q:"Fasilitas kantor terbatas. Anda?",o:["Berhenti sampai diperbaiki","Cari alternatif kreatif","Mengeluh terus","Salahkan manajemen"],a:1,e:"Kreativitas: cari solusi alternatif."},
+      {q:"Temukan dokumen rahasia tertinggal di meja. Anda?",o:["Baca isinya","Amankan dan kembalikan ke pemilik","Buang","Foto dan sebar"],a:1,e:"Integritas: amankan dan kembalikan."},
+      {q:"Tim gagal capai target. Anda?",o:["Salahkan ketua","Evaluasi bersama dan buat strategi perbaikan","Salahkan anggota lain","Tidak peduli"],a:1,e:"Kerja tim: evaluasi bersama."},
+      {q:"Rekan sebar gosip tentang Anda. Anda?",o:["Sebar gosip balik","Klarifikasi tenang dan tetap profesional","Marah dan bertengkar","Resign"],a:1,e:"Kematangan emosi: klarifikasi dengan tenang."},
+      {q:"Diminta gantikan rekan cuti, tugasnya asing. Anda?",o:["Menolak","Mempelajari dan mengerjakan","Delegasikan","Mengeluh ke HR"],a:1,e:"Adaptabilitas: pelajari dan kerjakan."},
+      {q:"Terima hadiah dari warga yang Anda bantu. Anda?",o:["Terima senang hati","Tolak sopan dan jelaskan aturan","Terima diam-diam","Minta lebih besar"],a:1,e:"Integritas: tolak pemberian."},
+      {q:"Anda melihat rekan kerja menangis di ruangannya. Anda?",o:["Pura-pura tidak melihat","Dekati dengan empati dan tanyakan apakah perlu bantuan","Ceritakan ke rekan lain","Menegur karena mengganggu"],a:1,e:"Empati: dekati dengan kepedulian tanpa mengganggu privasi."},
+      {q:"Anda mendapat tugas yang sudah pernah Anda kerjakan dan hasilnya buruk. Sikap?",o:["Menolak karena trauma","Menerima dan memperbaiki kesalahan sebelumnya","Minta orang lain","Kerjakan sama persis seperti dulu"],a:1,e:"Perbaikan diri: jadikan pengalaman buruk sebagai pembelajaran."},
+      {q:"Anda menemukan cara kerja yang lebih efisien tapi belum disetujui atasan. Anda?",o:["Langsung terapkan tanpa izin","Ajukan proposal ke atasan dengan penjelasan manfaatnya","Simpan untuk diri sendiri","Ceritakan ke rekan saja"],a:1,e:"Inisiatif: ajukan secara formal dengan penjelasan yang baik."},
+      {q:"Kolega Anda selalu mendapatkan tugas lebih ringan dari atasan. Anda?",o:["Protes ke semua orang","Fokus pada tugas sendiri dan diskusikan distribusi tugas jika diperlukan","Sengaja kerja lambat","Iri dan menyebar ketidakpuasan"],a:1,e:"Profesionalisme: fokus pada kinerja sendiri, komunikasikan jika perlu."},
+      {q:"Saat rapat, Anda menyadari presentasi Anda ada kesalahan data. Anda?",o:["Lanjutkan saja","Mengakui kesalahan dan menjanjikan koreksi","Menyalahkan sumber data","Berhenti presentasi"],a:1,e:"Kejujuran: akui kesalahan dan segera perbaiki."},
+      {q:"Anda diberi tanggung jawab proyek baru yang belum pernah Anda tangani. Anda?",o:["Panik dan menolak","Mempelajari proyek dan berkonsultasi dengan yang berpengalaman","Berpura-pura sudah paham","Langsung delegasikan semua"],a:1,e:"Pengembangan diri: belajar dan minta guidance dari yang berpengalaman."},
+      {q:"Rekan satu tim Anda bekerja lebih lambat sehingga menghambat proyek. Anda?",o:["Mengerjakan bagiannya tanpa bilang","Diskusikan kendala dan tawarkan bantuan","Laporkan ke atasan segera","Marah-marah di depan tim"],a:1,e:"Kerja tim: komunikasikan dan tawarkan bantuan."},
+      {q:"Anda mendapat pujian atas hasil kerja tim, padahal kontribusi Anda kecil. Anda?",o:["Terima pujian sebagai milik pribadi","Sampaikan bahwa itu hasil kerja tim dan apresiasi kontribusi anggota","Diam saja","Tolak pujian sama sekali"],a:1,e:"Kejujuran dan penghargaan: akui kontribusi tim."},
+      {q:"Anda mengetahui rekan Anda melamar pekerjaan di tempat lain. Anda?",o:["Ceritakan ke semua orang","Menjaga kerahasiaan dan tetap profesional","Laporkan ke atasan","Menjauhi rekan tersebut"],a:1,e:"Menghargai privasi: jaga kerahasiaan urusan pribadi rekan."},
+      {q:"Anda diminta mengerjakan tugas di luar jam kerja secara berulang tanpa apresiasi. Anda?",o:["Diam dan menumpuk kekesalan","Komunikasikan kebutuhan akan batas waktu kerja yang sehat","Langsung menolak semua tugas","Mengadu ke media sosial"],a:1,e:"Komunikasi asertif: sampaikan kebutuhan work-life balance secara profesional."},
+      {q:"Anda melihat poster lowongan posisi yang lebih tinggi di kantor. Anda?",o:["Langsung melamar tanpa persiapan","Evaluasi kemampuan, persiapkan diri, dan melamar jika memenuhi syarat","Tidak melamar karena takut ditolak","Mencegah orang lain melamar"],a:1,e:"Pengembangan karier: evaluasi diri dan persiapkan dengan matang."},
+      {q:"Tugas Anda berhasil diselesaikan lebih cepat dari deadline. Anda?",o:["Istirahat sampai deadline","Gunakan waktu tersisa untuk review kualitas atau bantu rekan","Pamer ke semua orang","Minta tugas tambahan dengan kompensasi"],a:1,e:"Inisiatif: manfaatkan waktu untuk peningkatan kualitas."},
+      {q:"Anda diminta memandu kunjungan pejabat penting mendadak. Anda?",o:["Menolak karena tidak siap","Mempersiapkan diri secepat mungkin dan menjalankan tugas dengan baik","Menyerahkan ke orang lain","Panik dan gugup sepanjang acara"],a:1,e:"Kesiapan dan profesionalisme: adaptasi cepat dan laksanakan tugas."},
+      {q:"Kantor Anda baru menerapkan sistem absensi digital. Beberapa rekan protes. Anda?",o:["Ikut protes","Mendukung perubahan dan membantu rekan beradaptasi","Mengabaikan sistem","Memanipulasi sistem"],a:1,e:"Adaptabilitas: dukung perubahan positif dan bantu transisi."},
+      {q:"Anda menerima email yang salah kirim berisi informasi gaji seluruh karyawan. Anda?",o:["Membaca dan menyebarkan","Menghapus email dan memberitahu pengirim tentang kesalahan","Menyimpan untuk leverage","Membaca tapi diam saja"],a:1,e:"Etika: hapus informasi yang bukan hak Anda dan laporkan kesalahan."},
+      {q:"Atasan Anda mengakui ide Anda sebagai idenya di rapat pimpinan. Anda?",o:["Protes di depan semua orang","Diskusikan secara pribadi dengan atasan tentang pengakuan kontribusi","Menyebarkan ke seluruh kantor","Berhenti memberikan ide"],a:1,e:"Komunikasi asertif: diskusikan secara pribadi dengan tetap profesional."},
+    ],
+    medium: [
+      {q:"Proyek lintas divisi, timeline ketat, kepala divisi tidak kooperatif. Langkah?",o:["Lapor langsung ke pimpinan tertinggi","Bangun komunikasi personal dan sampaikan urgensi","Bekerja sendiri","Tunda proyek"],a:1,e:"Jejaring kerja: pendekatan personal lebih efektif."},
+      {q:"Bawahan kinerjanya baik tiba-tiba menurun drastis. Tindakan?",o:["Langsung sanksi","Diskusi pribadi untuk mengetahui penyebab","Abaikan","Laporkan ke HRD"],a:1,e:"Kepemimpinan: pahami akar masalah."},
+      {q:"Rekan senior melakukan pelanggaran ringan. Sikap?",o:["Tutup mata","Diskusi empat mata dan ingatkan aturan","Viralkan di group chat","Ancam laporkan"],a:1,e:"Integritas dengan kebijaksanaan."},
+      {q:"Dua proyek mendesak bersamaan. Sebagai koordinator?",o:["Fokus satu, abaikan lain","Bagi tim jadi sub-kelompok dan tetapkan prioritas","Serahkan ke atasan","Kerjakan sendiri"],a:1,e:"Manajemen sumber daya: bagi dan prioritaskan."},
+      {q:"Kebijakan baru kontroversial, bawahan menolak. Anda?",o:["Paksa dengan ancaman","Jelaskan latar belakang dan tampung masukan","Biarkan tidak dilaksanakan","Ikut menolak"],a:1,e:"Kepemimpinan: jelaskan transparan dan tampung aspirasi."},
+      {q:"Proyek akan gagal jika strategi tidak diubah. Anda?",o:["Biarkan gagal","Segera kumpulkan tim, evaluasi, dan ubah strategi","Tutup proyek","Diam dan berharap baik"],a:1,e:"Pengambilan keputusan: bertindak cepat."},
+      {q:"Warga marah besar dan ancam lapor media. Anda?",o:["Balas ancaman","Tetap tenang, dengarkan, berikan solusi konkret","Menyerah","Usir warga"],a:1,e:"Pelayanan publik: tetap profesional."},
+      {q:"Data rekan tidak akurat dalam rapat. Anda?",o:["Diam","Sampaikan koreksi dengan data yang benar secara sopan","Permalukan di depan semua","Bicara di belakang"],a:1,e:"Komunikasi profesional: koreksi dengan sopan."},
+      {q:"Ditugaskan di daerah terpencil, fasilitas minim. Anda?",o:["Menolak","Terima dan berinovasi dengan sumber daya ada","Minta dipindahkan","Kerja seadanya"],a:1,e:"Adaptabilitas dan inovasi."},
+      {q:"Bawahan beri ide inovatif tapi berisiko tinggi. Anda?",o:["Langsung tolak","Analisis bersama dan mitigasi risiko","Terima tanpa analisis","Klaim sebagai ide sendiri"],a:1,e:"Keterbukaan: analisis bersama."},
+      {q:"Pilih antara kepentingan organisasi dan personal. Anda?",o:["Utamakan personal","Cari titik temu, utamakan organisasi jika harus","Abaikan keduanya","Minta orang lain putuskan"],a:1,e:"Profesionalisme: utamakan organisasi."},
+      {q:"Atasan buat keputusan yang merugikan organisasi. Anda?",o:["Diam dan patuh","Sampaikan analisis dan alternatif secara konstruktif","Tolak melaksanakan","Keluh ke seluruh kantor"],a:1,e:"Komunikasi ke atas: sampaikan konstruktif."},
+      {q:"Anggota tim dominasi diskusi, yang lain pasif. Anda?",o:["Biarkan","Beri kesempatan merata dan minta pendapat anggota pasif","Hentikan anggota dominan","Keluarkan anggota pasif"],a:1,e:"Fasilitasi: partisipasi merata."},
+      {q:"Program kerja berhasil tapi tidak diakui atasan. Anda?",o:["Protes","Tetap bekerja baik dan dokumentasikan pencapaian","Berhenti berusaha","Jelekkan atasan"],a:1,e:"Profesionalisme: dokumentasikan pencapaian."},
+      {q:"Dilema etis: ikuti instruksi tidak etis atau tolak. Anda?",o:["Ikut demi karier","Tolak sopan dan jelaskan alasan etis","Lakukan tapi lapor anonim","Resign langsung"],a:1,e:"Integritas: tolak perintah tidak etis."},
+      {q:"Kolega minta akses data sensitif untuk proyek. Anda?",o:["Berikan langsung","Verifikasi kebutuhan dan ikuti prosedur","Tolak tanpa penjelasan","Beri sebagian tanpa prosedur"],a:1,e:"Kepatuhan prosedur: verifikasi dan ikuti aturan."},
+      {q:"Ditawari posisi tinggi di tempat lain saat proyek berjalan. Anda?",o:["Langsung pindah","Selesaikan tanggung jawab proyek dulu","Pindah dan biarkan proyek","Minta kenaikan gaji sebagai tawar-menawar"],a:1,e:"Tanggung jawab: selesaikan komitmen."},
+      {q:"Bawahan feedback gaya kepemimpinan Anda kaku. Anda?",o:["Marah","Terima masukan dan introspeksi","Abaikan","Pindahkan bawahan"],a:1,e:"Keterbukaan: terima feedback."},
+      {q:"Temukan celah sistem yang bisa dimanfaatkan tanpa merugikan. Anda?",o:["Manfaatkan","Laporkan untuk diperbaiki","Beritahu teman","Manfaatkan sedikit"],a:1,e:"Integritas: laporkan celah sistem."},
+      {q:"Tim burnout karena beban kerja berlebih. Sebagai pemimpin?",o:["Tetap push target","Evaluasi distribusi beban dan beri dukungan","Biarkan atur sendiri","Rekrut tanpa evaluasi"],a:1,e:"Empati dan kepemimpinan."},
+      {q:"Dua vendor harga sama, A milik kerabat, B track record lebih baik. Pilihan?",o:["Pilih A karena kerabat","Pilih B berdasarkan kualitas","Pilih acak","Minta suap"],a:1,e:"Objektivitas: pilih berdasarkan kualitas."},
+      {q:"Lihat potensi inovasi tapi birokrasi menghambat. Anda?",o:["Menyerah","Susun proposal dengan analisis manfaat","Inovasi diam-diam","Keluh di medsos"],a:1,e:"Inisiatif: susun proposal yang meyakinkan."},
+      {q:"Bawahan konflik pribadi pengaruhi kinerja tim. Anda?",o:["Abaikan","Fasilitasi mediasi dan pastikan profesionalisme","Memihak salah satu","Pecat keduanya"],a:1,e:"Kepemimpinan: fasilitasi resolusi konflik."},
+      {q:"Krisis reputasi organisasi karena berita negatif. Sebagai humas?",o:["Bantah semua","Siapkan klarifikasi transparan dan faktual","Diam","Serang media"],a:1,e:"Komunikasi krisis: transparansi dan faktual."},
+      {q:"Rekan sering ambil kredit atas kerja tim. Anda?",o:["Lakukan hal sama","Diskusikan pentingnya pengakuan tim secara terbuka","Diam dan pendam","Buat pengaduan formal langsung"],a:1,e:"Komunikasi asertif."},
+      {q:"Ditugaskan ke unit baru dengan kultur berbeda. Anda?",o:["Langsung ubah kultur","Amati, pahami, lalu adaptasi sambil bawa nilai positif","Tolak penugasan","Kritik kultur lama"],a:1,e:"Adaptabilitas: pahami dulu sebelum bawa perubahan."},
+      {q:"Target tercapai sebelum deadline. Anda?",o:["Santai","Gunakan waktu bantu rekan atau tingkatkan kualitas","Pamer","Pulang lebih awal"],a:1,e:"Inisiatif: manfaatkan waktu untuk peningkatan."},
+      {q:"Regulasi baru menyulitkan proses kerja. Anda?",o:["Abaikan regulasi","Pelajari dan cari cara efisien dalam koridor aturan","Protes terbuka","Kerja seperti biasa"],a:1,e:"Kepatuhan dan inovasi."},
+      {q:"Metode kerja sudah tidak efektif. Anda?",o:["Tetap gunakan","Usulkan perbaikan dengan alternatif lebih efektif","Langsung ubah tanpa diskusi","Tunggu orang lain"],a:1,e:"Continuous improvement."},
+      {q:"Diminta evaluasi kinerja sahabat dekat. Anda?",o:["Beri nilai sempurna","Evaluasi objektif berdasarkan fakta","Tolak evaluasi","Beri nilai rendah agar tak dicurigai"],a:1,e:"Objektivitas: evaluasi berdasarkan fakta."},
+      {q:"Prosedur yang Anda ikuti ternyata sudah diperbarui. Anda?",o:["Tetap pakai lama","Segera pelajari prosedur baru dan sesuaikan","Tunggu diperintah","Abaikan karena hasil sama"],a:1,e:"Kepatuhan: update diri dengan prosedur terbaru."},
+      {q:"Diminta presentasi di forum nasional, Anda gugup. Anda?",o:["Tolak","Persiapkan diri matang dan berlatih","Minta orang lain","Asal presentasi"],a:1,e:"Pengembangan diri: atasi gugup dengan persiapan matang."},
+      {q:"Budget proyek dipotong 30% di tengah pelaksanaan. Anda?",o:["Hentikan proyek","Re-evaluasi prioritas dan sesuaikan rencana","Lanjutkan tanpa perubahan","Pinjam dana personal"],a:1,e:"Adaptabilitas: evaluasi ulang dan sesuaikan."},
+      {q:"Tim multi-latar belakang, sering miskomunikasi. Anda?",o:["Biarkan","Bangun ground rules komunikasi dan fasilitasi saling pengertian","Ganti anggota","Komunikasi hanya dengan yang sejalan"],a:1,e:"Sosial budaya: bangun aturan komunikasi."},
+      {q:"Anda mendapat informasi rahasia tentang rencana restrukturisasi kantor. Anda?",o:["Sebarkan ke semua rekan","Jaga kerahasiaan sesuai amanah","Gunakan info untuk keuntungan pribadi","Konfirmasi ke media"],a:1,e:"Integritas: jaga kerahasiaan informasi yang dipercayakan."},
+      {q:"Rekan kerja meminjam uang dan tidak mengembalikan tepat waktu. Anda?",o:["Marah di depan rekan lain","Ingatkan secara pribadi dengan sopan","Potong komunikasi sepenuhnya","Ceritakan ke seluruh kantor"],a:1,e:"Komunikasi: sampaikan secara pribadi dan sopan."},
+      {q:"Anda diminta menggantikan atasan selama cuti. Beberapa rekan tidak kooperatif. Anda?",o:["Gunakan kekuasaan untuk memaksa","Bangun hubungan baik dan jelaskan bahwa ini tugas sementara","Lapor ke atasan yang cuti","Abaikan yang tidak kooperatif"],a:1,e:"Kepemimpinan sementara: bangun hubungan dan komunikasi yang baik."},
+      {q:"Anda menemukan bahwa SOP yang berlaku memperlambat pelayanan publik. Anda?",o:["Langgar SOP demi kecepatan","Usulkan revisi SOP melalui jalur resmi dengan bukti dan data","Diam saja dan ikuti","Keluhan di medsos"],a:1,e:"Inisiatif: usulkan perbaikan melalui jalur resmi dengan data pendukung."},
+      {q:"Organisasi akan melakukan efisiensi dan ada isu PHK. Moral tim menurun. Anda?",o:["Ikut panik","Tetap tenang, fokus pada kinerja, dan komunikasikan fakta yang tersedia","Mulai cari kerja baru dan ajak rekan","Sebarkan rumor untuk tekanan ke manajemen"],a:1,e:"Stabilitas emosi: tetap tenang dan fokus pada kinerja di tengah ketidakpastian."},
+      {q:"Anda mendapat tugas dari dua atasan berbeda dengan deadline bersamaan. Anda?",o:["Kerjakan salah satu dan abaikan lainnya","Komunikasikan situasi ke kedua atasan untuk prioritisasi","Kerjakan keduanya asal-asalan","Tidak mengerjakan keduanya sambil menunggu kejelasan"],a:1,e:"Komunikasi: sampaikan situasi untuk mendapat kejelasan prioritas."},
+      {q:"Rekan Anda terkena masalah hukum di luar kantor. Performa kerjanya mulai menurun. Anda?",o:["Jauhi rekan tersebut","Tetap profesional, tunjukkan empati, dan bantu sejauh yang bisa tanpa mencampuri urusan hukumnya","Sebarkan masalahnya ke kantor","Laporkan ke HRD agar dipecat"],a:1,e:"Empati dan profesionalisme: dukung sejauh yang bisa tanpa ikut campur urusan pribadi."},
+      {q:"Anda menyadari bahwa keputusan yang Anda buat minggu lalu ternyata salah. Anda?",o:["Tutup-tutupi","Segera akui kesalahan, informasikan ke stakeholder, dan perbaiki","Salahkan data yang tersedia saat itu","Tunggu sampai ada yang menyadari"],a:1,e:"Akuntabilitas: segera akui kesalahan dan ambil langkah perbaikan."},
+      {q:"Tim Anda sedang on-track, tapi departemen lain membuat perubahan yang mengganggu timeline Anda. Anda?",o:["Protes keras ke manajemen","Koordinasi dengan departemen terkait untuk mencari solusi bersama","Abaikan perubahan","Blame departemen lain dalam laporan"],a:1,e:"Kolaborasi lintas-fungsi: koordinasi untuk solusi bersama."},
+      {q:"Anda menerima feedback negatif dari pelanggan/masyarakat tentang layanan tim Anda. Anda?",o:["Defensif dan membela tim","Terima feedback, analisis akar masalah, dan buat rencana perbaikan","Abaikan karena tidak semua bisa puas","Salahkan anggota tim tertentu"],a:1,e:"Customer orientation: terima feedback sebagai bahan perbaikan."},
+      {q:"Seorang rekan selalu mengkritik pekerjaan Anda tanpa diminta. Anda?",o:["Balas mengkritik pekerjaannya","Terima kritik yang konstruktif, diskusikan cara komunikasi yang lebih baik","Hindari rekan tersebut","Laporkan sebagai bullying"],a:1,e:"Kedewasaan emosional: filter kritik yang konstruktif, komunikasikan tentang cara penyampaian."},
+      {q:"Anda diminta melatih calon pengganti Anda karena akan dipromosikan. Anda?",o:["Melatih setengah hati agar tidak bisa digantikan","Melatih dengan sungguh-sungguh agar transisi berjalan lancar","Menolak karena belum resmi dipromosikan","Hanya memberikan dokumen tanpa penjelasan"],a:1,e:"Profesionalisme: latih pengganti dengan baik untuk keberlangsungan organisasi."},
+      {q:"Anda menemukan bahwa rekan Anda memanipulasi data laporan agar terlihat bagus. Anda?",o:["Ikut memanipulasi","Bicarakan secara pribadi tentang risiko dan pentingnya integritas data","Langsung laporkan tanpa konfirmasi","Diam karena bukan urusan Anda"],a:1,e:"Integritas: tegur secara pribadi terlebih dahulu untuk memberi kesempatan perbaikan."},
+      {q:"Anda berhasil membangun sistem kerja baru yang efisien, tapi atasan ingin kembali ke cara lama. Anda?",o:["Paksakan sistem baru","Sampaikan data keberhasilan sistem baru dan diskusikan kekhawatiran atasan","Ikuti saja tanpa diskusi","Terapkan diam-diam"],a:1,e:"Komunikasi berbasis data: sampaikan bukti efektivitas sambil mendengar perspektif atasan."},
+      {q:"Di sebuah acara networking, ada peserta yang terus mendominasi percakapan dan membuat orang lain tidak nyaman. Anda?",o:["Diam dan menjauh","Dengan sopan arahkan percakapan agar inklusif untuk semua peserta","Menegur keras","Meninggalkan acara"],a:1,e:"Keterampilan sosial: fasilitasi percakapan agar inklusif dengan cara yang sopan."},
+      {q:"Anda mendapati bahwa kolega di divisi lain secara tidak sengaja mengirimkan laporan keuangan internal ke email pribadi. Anda?",o:["Simpan untuk leverage","Informasikan kolega tentang kesalahan dan sarankan perbaikan prosedur keamanan data","Abaikan karena bukan urusan Anda","Sebarkan ke pihak ketiga"],a:1,e:"Integritas dan keamanan data: informasikan kesalahan dan bantu perbaiki prosedur."},
+    ],
+    hard: [
+      {q:"Sebagai kepala dinas, kebijakan pusat bertentangan dengan kearifan lokal. Bagaimana menyeimbangkan?",o:["Abaikan kebijakan pusat","Analisis konteks, komunikasikan ke pusat dan masyarakat, cari titik temu","Paksakan kebijakan pusat","Tolak dan biarkan masyarakat putuskan"],a:1,e:"Kebijakan yang baik mempertimbangkan konteks lokal."},
+      {q:"Pimpin transformasi digital, pegawai senior menolak. Strategi?",o:["Paksakan dengan sanksi","Libatkan mereka sebagai mentor, pelatihan bertahap, tunjukkan manfaat","Abaikan penolakan","Ganti pegawai senior"],a:1,e:"Change management: libatkan resistor sebagai bagian solusi."},
+      {q:"Tekanan pangkas biaya 40% sambil pertahankan kualitas. Pendekatan?",o:["Kurangi staf massal","Analisis value chain, identifikasi inefisiensi, automasi, redesain layanan","Turunkan kualitas merata","Abaikan target"],a:1,e:"Efisiensi strategis: analisis mendalam."},
+      {q:"Whistleblower laporkan korupsi atasan, bukti belum kuat. Anda?",o:["Abaikan","Dokumentasikan, jaga kerahasiaan pelapor, verifikasi awal","Langsung ke media","Konfrontasi atasan"],a:1,e:"Integritas dan kehati-hatian."},
+      {q:"Pilih proyek menguntungkan karier vs berdampak masyarakat tapi kurang terlihat?",o:["Pilih karier","Utamakan dampak masyarakat sambil komunikasikan pencapaian","Keduanya tanpa prioritas","Delegasikan keputusan"],a:1,e:"Orientasi pelayanan: utamakan dampak masyarakat."},
+      {q:"Tim toxic productivity — hasil tinggi tapi burnout masif. Anda?",o:["Biarkan","Redesain beban kerja, tetapkan batas sehat, ukur kesejahteraan sebagai KPI","Kurangi target drastis","Tambah insentif tanpa ubah beban"],a:1,e:"Sustainable leadership."},
+      {q:"Kebijakan berhasil agregat tapi rugikan minoritas. Anda?",o:["Abaikan","Evaluasi dampak, buat kompensasi untuk kelompok terdampak","Tarik kebijakan","Sembunyikan data negatif"],a:1,e:"Keadilan: pertimbangkan dampak semua kelompok."},
+      {q:"Dua bawahan berprestasi bersaing untuk satu promosi. Anda?",o:["Pilih yang dekat","Evaluasi objektif, komunikasi transparan, beri pengembangan untuk yang tak terpilih","Promosikan keduanya","Tidak promosikan siapapun"],a:1,e:"Meritokrasi dan empati."},
+      {q:"Krisis kepercayaan publik akibat skandal. Pimpin pemulihan. Langkah pertama?",o:["Sangkal semua","Akui masalah transparan, bentuk tim investigasi independen, komunikasikan perbaikan","Bungkam media","Ganti semua staf"],a:1,e:"Manajemen krisis: transparansi dan perbaikan konkret."},
+      {q:"KPI mendorong perilaku counter-productive. Anda?",o:["Biarkan","Usulkan redesain KPI seimbang dengan libatkan stakeholder","Hapus semua KPI","Tambah KPI tanpa evaluasi"],a:1,e:"Evaluasi sistemik."},
+      {q:"Keputusan cepat dengan data tidak lengkap, stakeholder mendesak. Anda?",o:["Tunda sampai lengkap","Ambil keputusan terbaik, buat contingency plan, update saat data baru masuk","Putuskan acak","Serahkan orang lain"],a:1,e:"Decision making under uncertainty."},
+      {q:"Terapkan AI tapi pegawai khawatir kehilangan pekerjaan. Anda?",o:["Terapkan tanpa komunikasi","Buat roadmap transisi: reskilling, redeployment, komunikasikan AI melengkapi bukan menggantikan","Batalkan AI","PHK dulu baru AI"],a:1,e:"Transformasi teknologi humanis."},
+      {q:"Tensi politik internal: kubu inovasi cepat vs stabilitas. Anda?",o:["Pilih satu kubu","Fasilitasi dialog, temukan common ground: inovasi bertahap dengan safeguard","Abaikan konflik","Larang perdebatan"],a:1,e:"Manajemen konflik organisasi."},
+      {q:"CSR organisasi hanya pencitraan tanpa dampak nyata. Anda?",o:["Biarkan","Usulkan redesain CSR berbasis dampak nyata dengan indikator terukur","Hentikan CSR","Publikasikan kegagalan"],a:1,e:"Akuntabilitas: CSR harus berbasis dampak nyata."},
+      {q:"Bawahan inovasi berhasil tapi langgar SOP. Anda?",o:["Hukum","Apresiasi hasil, evaluasi SOP perlu diperbarui, ingatkan pentingnya prosedur","Biarkan SOP dilanggar","Tutupi pelanggaran"],a:1,e:"Keseimbangan: apresiasi inovasi tapi pastikan prosedur."},
+      {q:"Pertahankan pegawai loyal kurang kompeten atau rekrut baru kompeten? Budget terbatas.",o:["Pertahankan semua","Investasi pengembangan lama, rekrut selektif untuk keahlian kritis","Ganti semua","Outsource semua"],a:1,e:"Manajemen SDM: kombinasi pengembangan dan rekrutmen strategis."},
+      {q:"Proyek multi-stakeholder terhambat karena agenda berbeda. Anda?",o:["Paksakan satu agenda","Identifikasi kepentingan bersama, buat shared value, negosiasi win-win","Hentikan proyek","Abaikan yang tak setuju"],a:1,e:"Stakeholder management: shared value dan win-win."},
+      {q:"Reformasi birokrasi stagnan, resistensi kuat. Strategi?",o:["Ubah semuanya sekaligus","Mulai quick wins untuk momentum, libatkan change agents, perubahan bertahap","Menyerah","Pindahkan pegawai yang menolak"],a:1,e:"Change management: quick wins + change agents."},
+      {q:"Tekanan publik dari aktivis, tuntutan sebagian valid sebagian berlebihan. Anda?",o:["Abaikan semua","Identifikasi yang valid dan tindak lanjuti, komunikasikan posisi rasional dan empatik","Penuhi semua","Serang balik"],a:1,e:"Respons proporsional."},
+      {q:"Sistem reward ciptakan persaingan tidak sehat antar-tim. Anda?",o:["Hapus semua reward","Redesain reward dorong kolaborasi: kinerja tim dan kontribusi lintas-fungsi","Biarkan","Reward individual saja"],a:1,e:"Desain insentif: dorong kolaborasi."},
+      {q:"Sampaikan keputusan tidak populer kepada masyarakat. Anda?",o:["Sembunyikan selama mungkin","Sampaikan transparan dengan penjelasan rasional, mitigasi, dan mekanisme feedback","Salahkan pihak lain","Serahkan juru bicara"],a:1,e:"Komunikasi krisis: transparansi dan rasionalitas."},
+      {q:"Kesempatan kerjasama internasional tapi standar sulit dipenuhi. Anda?",o:["Tolak","Negosiasi timeline bertahap, buat roadmap peningkatan kapasitas","Terima dan palsukan","Tunggu tanpa usaha"],a:1,e:"Pengembangan organisasi: standar tinggi sebagai motivasi."},
+      {q:"Pangkas jumlah staf karena efisiensi. Memastikan keputusan adil dan manusiawi?",o:["PHK berdasar seniority","Analisis beban kerja, tawarkan retraining/redeployment, komunikasi transparan, dukungan transisi","PHK kinerja rendah tanpa dialog","Undian acak"],a:1,e:"Downsizing humanis."},
+      {q:"Organisasi berhasil tapi mulai stagnant karena comfort zone. Anda?",o:["Biarkan","Ciptakan sense of urgency, stretch goals, investasi R&D","Buat krisis artifisial","Ancam staf"],a:1,e:"Avoiding complacency."},
+      {q:"Tim lintas-generasi ekspektasi kerja berbeda. Anda?",o:["Paksakan satu standar","Rancang kebijakan fleksibel akomodasi keberagaman gaya kerja selama target tercapai","Pisahkan per generasi","Abaikan perbedaan"],a:1,e:"Manajemen keberagaman: fleksibilitas."},
+      {q:"Trend data program andalan efektivitas menurun. Banyak pihak masih dukung emosional. Anda?",o:["Hentikan langsung","Presentasikan data objektif, libatkan stakeholder evaluasi, fasilitasi transisi","Sembunyikan data","Biarkan berjalan"],a:1,e:"Evidence-based decision making."},
+      {q:"Perintah melaksanakan program yang menurut analisis akan gagal dan buang anggaran. Anda?",o:["Laksanakan tanpa tanya","Sampaikan analisis risiko dengan alternatif, hormati keputusan akhir","Tolak sepihak","Sabotase"],a:1,e:"Loyal tapi kritis."},
+      {q:"Dana besar mendadak, banyak unit mau bagian. Anda sebagai pengambil keputusan alokasi?",o:["Bagi rata","Alokasikan berdasar strategic fit, kesiapan, dan potensi dampak dengan akuntabilitas jelas","Beri ke unit paling vokal","Simpan untuk jaga-jaga"],a:1,e:"Alokasi strategis: berbasis data dan strategi."},
+      {q:"Program berhasil di satu wilayah. Pimpinan ingin replikasi nasional segera. Konteks lokal berbeda. Anda?",o:["Setuju copy-paste","Usulkan pendekatan adaptif: pertahankan prinsip inti, sesuaikan implementasi per konteks","Tolak replikasi","Replikasi tapi tutup mata"],a:1,e:"Scaling cerdas: prinsip tetap, adaptasi implementasi."},
+      {q:"Warisi tim dengan budaya toxic dari pemimpin sebelumnya. Prioritas?",o:["Pecat semua","Bangun trust, tetapkan norma baru secara kolaboratif, role-model values","Biarkan berubah sendiri","Keluarkan memo budaya baru"],a:1,e:"Culture change: trust + norma kolaboratif + role modeling."},
+      {q:"Pilih antara efisiensi jangka pendek (outsource) dan kapabilitas internal jangka panjang. Anda?",o:["Selalu outsource","Analisis core vs non-core: bangun internal untuk strategis, outsource pendukung","Bangun semua internal","Tunda keputusan"],a:1,e:"Make-or-buy: core competency internal, non-core outsource."},
+      {q:"Mentoring program Anda ciptakan favoritism tidak disadari. Anda?",o:["Hentikan mentoring","Redesain: formalisasi kriteria, rotasi mentor-mentee, tracking, training bias","Abaikan","Batasi untuk top performers"],a:1,e:"Perbaikan sistemik."},
+      {q:"Kepatuhan prosedural tinggi tapi inovasi hampir tidak ada. Anda?",o:["Longgarkan semua prosedur","Ciptakan innovation sandbox dengan batas risiko jelas tanpa langgar compliance inti","Pilih inovasi abaikan compliance","Biarkan"],a:1,e:"Innovation sandbox: ruang eksperimen dengan guardrail."},
+      {q:"Organisasi menghadapi disrupsi teknologi yang mengancam model bisnis utama. Anda?",o:["Pertahankan model lama","Bentuk tim khusus eksplorasi model baru sambil mempertahankan revenue existing, lakukan transisi bertahap","Langsung pivot 100%","Tunggu sampai dampak nyata"],a:1,e:"Ambidextrous organization: eksplorasi model baru sambil eksploitasi yang ada."},
+      {q:"Ada temuan bahwa kebijakan afirmasi yang diterapkan justru menciptakan stigma baru. Anda?",o:["Hentikan semua kebijakan afirmasi","Evaluasi dan redesain agar mencapai tujuan inklusi tanpa efek stigmatisasi","Biarkan karena niatnya baik","Paksakan tanpa evaluasi"],a:1,e:"Evaluasi dampak: kebijakan harus dievaluasi berdasarkan efek nyata, bukan hanya niat."},
+      {q:"Anda ditunjuk memimpin merger dua unit dengan kultur yang sangat berbeda. Strategi?",o:["Paksakan kultur unit yang lebih besar","Identifikasi nilai terbaik dari kedua unit, bangun kultur baru bersama dengan input dari kedua sisi","Biarkan masing-masing mempertahankan kulturnya","Ganti semua staf dari unit yang lebih kecil"],a:1,e:"Post-merger integration: bangun kultur baru yang mengambil elemen terbaik dari kedua sisi."},
+      {q:"Organisasi mendapat kritik tajam dari masyarakat sipil tentang dampak lingkungan operasional. Anda?",o:["Abaikan karena operasional legal","Audit dampak lingkungan secara independen, buat roadmap perbaikan, dan komunikasikan langkah konkret","Lawan dengan PR campaign","Hentikan semua operasional"],a:1,e:"Corporate responsibility: tanggapi kritik dengan audit independen dan tindakan konkret."},
+      {q:"Dalam organisasi Anda, high performers cenderung meninggalkan organisasi karena merasa tidak berkembang. Anda?",o:["Biarkan dan rekrut baru","Buat talent retention program: jalur karier jelas, stretch assignments, mentoring, dan competitive compensation","Promosikan semua tanpa seleksi","Larang resign selama kontrak"],a:1,e:"Talent management: retensi melalui pengembangan karier dan lingkungan yang menantang."},
+      {q:"Anda memiliki data bahwa kebijakan kerja fleksibel meningkatkan produktivitas tapi middle management menolak karena sulit mengawasi. Anda?",o:["Batalkan kebijakan","Latih middle management tentang outcome-based management, berikan alat monitoring output (bukan presence)","Paksakan tanpa support","Biarkan setiap manager memutuskan sendiri"],a:1,e:"Data-driven policy: latih manager transisi dari pengawasan kehadiran ke pengawasan output."},
+      {q:"Organisasi Anda mengembangkan produk yang kompetitif tapi ada kekhawatiran etis tentang penggunaannya. Anda?",o:["Jual saja tanpa peduli etika","Bentuk ethics review board, buat panduan penggunaan yang bertanggung jawab, dan batasi akses untuk penggunaan yang berpotensi merugikan","Hentikan pengembangan sepenuhnya","Abaikan kekhawatiran etis"],a:1,e:"Responsible innovation: seimbangkan inovasi dengan tanggung jawab etis melalui mekanisme review."},
+      {q:"Anda dipercaya memimpin proyek antar-negara dengan budaya kerja yang sangat berbeda (kolektivis vs individualis). Anda?",o:["Terapkan standar budaya Anda","Pelajari preferensi budaya kerja semua pihak, buat protokol komunikasi yang mengakomodasi perbedaan","Biarkan konflik budaya menyelesaikan dirinya","Pisahkan tim berdasarkan budaya"],a:1,e:"Cross-cultural leadership: pahami perbedaan budaya dan buat protokol yang inklusif."},
+      {q:"Organisasi menghadapi situasi di mana dua nilai inti saling bertentangan (misal: transparansi vs keamanan data). Anda?",o:["Pilih satu dan abaikan yang lain","Analisis konteks spesifik, buat kerangka keputusan yang menyeimbangkan kedua nilai dengan kriteria yang jelas","Abaikan kedua nilai","Ganti nilai organisasi"],a:1,e:"Values conflict resolution: tidak harus zero-sum, buat kerangka yang menyeimbangkan berdasarkan konteks."},
+      {q:"Ada pegawai yang sangat kompeten secara teknis tetapi memiliki perilaku toxic yang merusak moral tim. Anda?",o:["Pertahankan karena kompeten","Berikan coaching dan batas waktu perbaikan perilaku. Jika tidak berubah, ambil tindakan meski akan kehilangan kompetensi teknis","Abaikan perilaku karena hasilnya bagus","Langsung pecat tanpa pembinaan"],a:1,e:"No brilliant jerks: kompetensi teknis tidak membenarkan perilaku toxic. Beri kesempatan perbaikan dengan consequences yang jelas."},
+      {q:"Anda mewarisi organisasi dengan 'technical debt' (sistem dan proses usang) yang besar. Budget terbatas. Anda?",o:["Abaikan dan fokus pada hal baru","Prioritaskan perbaikan berdasarkan risk assessment dan dampak operasional, alokasikan budget secara bertahap","Ganti semua sistem sekaligus","Pindahkan masalah ke pengganti Anda"],a:1,e:"Technical debt management: prioritisasi berdasarkan risiko dan dampak, perbaiki secara inkremental."},
+      {q:"Organisasi mendapat dana CSR besar dari perusahaan yang kontroversial. Menerima berisiko reputasi, menolak kehilangan program. Anda?",o:["Terima tanpa syarat","Evaluasi risiko reputasi vs manfaat program, buat kriteria penerimaan dana yang transparan dan konsisten","Tolak mentah-mentah","Terima diam-diam"],a:1,e:"Ethical fundraising: buat kerangka penerimaan dana yang transparan dan konsisten berdasarkan analisis risiko-manfaat."},
+      {q:"Tim Anda mengembangkan solusi yang teknis sempurna tapi user experience-nya buruk. Deadline besok. Anda?",o:["Kirim apa adanya","Tunda sedikit untuk perbaikan UX kritis sambil komunikasikan ke stakeholder. Solusi teknis tanpa UX baik adalah setengah jadi","Buat ulang dari nol","Salahkan tim UX"],a:1,e:"User-centered approach: perbaiki elemen UX kritis meski ada tekanan deadline, komunikasikan alasan delay."},
+      {q:"Anda mendapati bahwa beberapa kebijakan HR organisasi secara tidak langsung mendiskriminasi kelompok tertentu meski tidak disengaja. Anda?",o:["Biarkan karena tidak disengaja","Audit kebijakan HR dengan perspektif inklusi, perbaiki yang bias, dan buat mekanisme review berkala","Hapus semua kebijakan HR","Abaikan karena tidak ada keluhan"],a:1,e:"Systemic inclusion: diskriminasi tidak harus disengaja untuk perlu diperbaiki. Audit dan perbaiki secara sistemik."},
+      {q:"Organisasi Anda menghadapi dilema antara pertumbuhan cepat dan mempertahankan kualitas layanan. Anda?",o:["Kejar pertumbuhan tanpa peduli kualitas","Rancang model pertumbuhan bertahap yang membangun kapasitas layanan sebelum ekspansi","Hentikan pertumbuhan sepenuhnya","Outsource seluruh layanan"],a:1,e:"Scalable growth: bangun kapasitas sebelum ekspansi agar kualitas terjaga."},
+      {q:"Anda menemukan bahwa succession planning organisasi sangat lemah — jika key people pergi, operasional terancam. Anda?",o:["Abaikan sampai terjadi","Identifikasi posisi kritis, buat program pengembangan successor, dan dokumentasikan knowledge management","Cegah key people resign dengan segala cara","Asumsikan tidak akan terjadi"],a:1,e:"Succession planning: identifikasi posisi kritis, kembangkan successor, dan kelola transfer knowledge."},
+      {q:"Organisasi Anda perlu memutuskan antara menggunakan data driven approach vs intuisi pemimpin berpengalaman untuk keputusan strategis. Anda?",o:["Selalu ikuti data saja","Kombinasikan data analytics dengan wisdom pemimpin — data menginformasikan tapi context dan judgment tetap penting","Selalu ikuti intuisi saja","Tunda keputusan sampai data sempurna"],a:1,e:"Data-informed decision: kombinasi data dengan context dan judgment menghasilkan keputusan yang lebih baik."},
+    ]
+  },
+  // ===================== KOPDES =====================
+  kopdes: {
+    mudah: [
+      {q:"Koperasi berdasarkan UU Koperasi berasaskan?",o:["Gotong royong dan kekeluargaan","Persaingan bebas","Individualisme","Liberalisme"],a:0,e:"Koperasi berasaskan gotong royong dan kekeluargaan."},
+      {q:"Rapat Anggota Tahunan (RAT) koperasi berfungsi untuk?",o:["Memilih presiden","Membahas pertanggungjawaban pengurus dan rencana kerja","Menaikkan pajak","Membuat undang-undang"],a:1,e:"RAT adalah forum tertinggi koperasi."},
+      {q:"Modal koperasi dari anggota disebut?",o:["Modal asing","Simpanan pokok dan simpanan wajib","Pinjaman bank","Hibah pemerintah"],a:1,e:"Modal sendiri: simpanan pokok, simpanan wajib, dana cadangan."},
+      {q:"Dana Desa bersumber dari?",o:["Pajak daerah saja","APBN","Donasi masyarakat","Pinjaman luar negeri"],a:1,e:"Dana Desa bersumber dari APBN."},
+      {q:"BUMDes singkatan dari?",o:["Badan Usaha Milik Desa","Badan Urusan Masyarakat Desa","Biro Umum Mandiri Desa","Badan Usaha Mikro Desa"],a:0,e:"BUMDes = Badan Usaha Milik Desa."},
+      {q:"Musyawarah Desa adalah forum musyawarah antara?",o:["Hanya kepala desa","BPD, pemerintah desa, dan unsur masyarakat","Hanya tokoh agama","Hanya pemuda desa"],a:1,e:"Musdes melibatkan BPD, pemerintah desa, dan masyarakat."},
+      {q:"Kepala Desa dipilih oleh?",o:["Gubernur","Bupati/Walikota","Penduduk desa secara langsung","DPRD kabupaten"],a:2,e:"Kades dipilih langsung oleh penduduk desa."},
+      {q:"Masa jabatan Kepala Desa adalah?",o:["4 tahun","5 tahun","6 tahun","7 tahun"],a:2,e:"Masa jabatan Kades 6 tahun sesuai UU Desa."},
+      {q:"SHU koperasi dibagikan berdasarkan?",o:["Sama rata","Kontribusi/jasa anggota","Jabatan dalam koperasi","Usia keanggotaan"],a:1,e:"SHU berdasarkan kontribusi/jasa anggota."},
+      {q:"Lambang koperasi Indonesia bergambar?",o:["Garuda","Pohon beringin dan gerigi","Bintang","Padi dan kapas"],a:1,e:"Lambang koperasi: pohon beringin dalam roda bergigi."},
+      {q:"Hari Koperasi Nasional diperingati setiap?",o:["17 Agustus","12 Juli","1 Mei","20 Mei"],a:1,e:"Hari Koperasi Nasional 12 Juli."},
+      {q:"Prinsip koperasi KECUALI?",o:["Keanggotaan sukarela","Pengelolaan demokratis","Mencari keuntungan sebesar-besarnya","Pembagian SHU adil"],a:2,e:"Koperasi bukan untuk keuntungan maksimal."},
+      {q:"Perangkat Desa terdiri dari?",o:["Hanya Sekdes","Sekdes, pelaksana kewilayahan, pelaksana teknis","Hanya Kades","Hanya BPD"],a:1,e:"Perangkat Desa: Sekdes, pelaksana kewilayahan, pelaksana teknis."},
+      {q:"RPJMDes singkatan dari?",o:["Rencana Pembangunan Jangka Menengah Desa","Rencana Program Jasa Mandiri Desa","Rencana Pengelolaan Jaminan Masyarakat Desa","Rencana Pemerataan Jasa Mikro Desa"],a:0,e:"RPJMDes = Rencana Pembangunan Jangka Menengah Desa."},
+      {q:"Koperasi simpan pinjam memberikan layanan?",o:["Jual beli barang","Simpanan dan pinjaman bagi anggota","Jasa transportasi","Asuransi kesehatan"],a:1,e:"KSP: layanan simpan pinjam uang."},
+      {q:"BPD berfungsi sebagai?",o:["Pelaksana teknis","Lembaga legislatif desa","Pengelola keuangan","Pelaksana pembangunan"],a:1,e:"BPD = lembaga legislatif desa."},
+      {q:"Simpanan pokok koperasi adalah?",o:["Simpanan bisa diambil kapan saja","Simpanan saat pertama menjadi anggota","Simpanan sukarela","Pinjaman bank"],a:1,e:"Simpanan pokok dibayarkan sekali saat mendaftar."},
+      {q:"APBDes singkatan dari?",o:["Anggaran Pendapatan dan Belanja Desa","Anggaran Program Bantuan Desa","Anggaran Pemerataan Biaya Desa","Alokasi Pendanaan Bersama Desa"],a:0,e:"APBDes = Anggaran Pendapatan dan Belanja Desa."},
+      {q:"Koperasi didirikan minimal oleh?",o:["5 orang","10 orang","15 orang","20 orang"],a:3,e:"Koperasi primer minimal 20 orang."},
+      {q:"Pengawas koperasi bertugas?",o:["Menjalankan usaha","Mengawasi jalannya koperasi dan kebijakan pengurus","Membagi SHU","Merekrut anggota"],a:1,e:"Pengawas mengawasi pelaksanaan kebijakan dan pengelolaan."},
+      {q:"Dana Desa wajib digunakan untuk?",o:["Kepentingan pribadi kades","Pembangunan desa dan pemberdayaan masyarakat","Kampanye politik","Investasi saham"],a:1,e:"Dana Desa untuk pembangunan dan pemberdayaan masyarakat desa."},
+      {q:"Koperasi sekunder anggotanya terdiri dari?",o:["Perorangan","Koperasi-koperasi primer","Perusahaan swasta","Pemerintah daerah"],a:1,e:"Koperasi sekunder beranggotakan koperasi primer."},
+      {q:"Kepala Desa bertanggung jawab kepada?",o:["Gubernur","Bupati/Walikota melalui camat","Presiden","DPR"],a:1,e:"Kades bertanggung jawab kepada Bupati/Walikota melalui Camat."},
+      {q:"Simpanan wajib koperasi dibayarkan?",o:["Sekali saat mendaftar","Rutin/berkala selama menjadi anggota","Saat keluar","Tidak wajib"],a:1,e:"Simpanan wajib dibayarkan rutin/berkala."},
+      {q:"Bapak Koperasi Indonesia adalah?",o:["Ir. Soekarno","Moh. Hatta","Ki Hajar Dewantara","Soeharto"],a:1,e:"Mohammad Hatta = Bapak Koperasi Indonesia."},
+      {q:"Kewenangan desa meliputi?",o:["Hanya urusan pemerintahan","Pemerintahan, pembangunan, pembinaan, pemberdayaan","Hanya pembangunan fisik","Hanya pelayanan administrasi"],a:1,e:"4 kewenangan desa: pemerintahan, pembangunan, pembinaan, pemberdayaan."},
+      {q:"Jenis koperasi berdasarkan kegiatan usaha?",o:["Primer dan sekunder","Konsumsi, produksi, simpan pinjam, dan jasa","Besar dan kecil","Aktif dan pasif"],a:1,e:"Berdasarkan kegiatan: konsumsi, produksi, simpan pinjam, jasa."},
+      {q:"RKPDes disusun untuk jangka waktu?",o:["1 tahun","3 tahun","5 tahun","6 tahun"],a:0,e:"RKPDes = periode 1 tahun."},
+      {q:"Hak anggota koperasi KECUALI?",o:["Hadiri RAT","Dipilih jadi pengurus","Dapat SHU","Menjual saham di bursa"],a:3,e:"Koperasi tidak punya saham yang diperjualbelikan di bursa."},
+      {q:"Pengelolaan keuangan desa harus bersifat?",o:["Rahasia","Transparan, akuntabel, partisipatif","Hanya diketahui kades","Eksklusif perangkat desa"],a:1,e:"Transparan, akuntabel, partisipatif, tertib, disiplin."},
+      {q:"Dana cadangan koperasi berasal dari?",o:["Pinjaman bank","Penyisihan SHU","Donasi masyarakat","Investasi saham"],a:1,e:"Dana cadangan dari penyisihan SHU."},
+      {q:"Swadaya masyarakat termasuk sumber pendapatan?",o:["APBN","PADes","Dana Desa","Alokasi Dana Desa"],a:1,e:"Swadaya termasuk PADes (Pendapatan Asli Desa)."},
+      {q:"Pengurus koperasi dipilih melalui?",o:["Penunjukan pemerintah","Rapat Anggota","Pemilihan umum","Keputusan pengawas"],a:1,e:"Pengurus dipilih dari dan oleh anggota dalam RA."},
+      {q:"Jumlah anggota BPD paling sedikit?",o:["3 orang","5 orang","7 orang","9 orang"],a:1,e:"Minimal 5 orang, maksimal 9 orang (gasal)."},
+      {q:"Koperasi yang bergerak di bidang pertanian disebut?",o:["Koperasi konsumsi","KUD","Koperasi jasa","Koperasi kredit"],a:1,e:"KUD (Koperasi Unit Desa) umumnya di bidang pertanian."},
+      {q:"Peraturan Desa ditetapkan oleh?",o:["Bupati","Kepala Desa bersama BPD","Camat","DPRD"],a:1,e:"Peraturan Desa ditetapkan Kades setelah dibahas dan disepakati bersama BPD."},
+      {q:"Sumber pendapatan koperasi selain simpanan anggota?",o:["Hanya simpanan","Usaha koperasi dan penyertaan modal","Pajak anggota","Sumbangan wajib masyarakat"],a:1,e:"Pendapatan koperasi dari usaha koperasi dan bisa dari penyertaan modal pihak lain."},
+      {q:"Perencanaan desa dilakukan melalui forum?",o:["Rapat RT","Musyawarah Perencanaan Pembangunan Desa (Musrenbangdes)","Rapat kecamatan","Sidang DPR"],a:1,e:"Perencanaan desa melalui Musrenbangdes."},
+      {q:"Koperasi wajib memiliki?",o:["Saham","Anggaran Dasar dan Anggaran Rumah Tangga","Izin dari presiden","Kantor pusat di Jakarta"],a:1,e:"Koperasi wajib memiliki AD/ART yang ditetapkan dalam Rapat Anggota."},
+      {q:"Kepala Desa dapat menjabat paling banyak?",o:["1 periode","2 periode","3 periode berturut-turut atau tidak","4 periode"],a:2,e:"Kades menjabat paling banyak 3 kali masa jabatan (berturut-turut atau tidak) sesuai UU Desa."},
+      {q:"Tujuan utama koperasi adalah?",o:["Mencari keuntungan sebesar-besarnya","Meningkatkan kesejahteraan anggota pada khususnya dan masyarakat pada umumnya","Menguasai pasar","Bersaing dengan perusahaan besar"],a:1,e:"Tujuan koperasi: meningkatkan kesejahteraan anggota dan masyarakat."},
+      {q:"Desa dalam UU Desa didefinisikan sebagai?",o:["Wilayah administratif di bawah kecamatan saja","Kesatuan masyarakat hukum yang memiliki batas wilayah dan berwenang mengurus urusan pemerintahan dan kepentingan masyarakat","Bagian dari kelurahan","Unit kerja pemerintah kabupaten"],a:1,e:"Desa = kesatuan masyarakat hukum dengan batas wilayah yang berwenang mengurus pemerintahan dan kepentingan masyarakat."},
+      {q:"Sumber utama pendapatan BUMDes berasal dari?",o:["APBN langsung","Hasil usaha yang dijalankan oleh BUMDes","Pajak warga desa","Retribusi pasar"],a:1,e:"Pendapatan utama BUMDes dari hasil usaha yang dijalankan sesuai unit bisnisnya."},
+      {q:"Tugas utama Sekretaris Desa adalah?",o:["Menggantikan Kades","Membantu Kades dalam bidang administrasi pemerintahan desa","Mengawasi keuangan desa","Memimpin BPD"],a:1,e:"Sekdes membantu Kades dalam bidang administrasi pemerintahan desa."},
+      {q:"Koperasi yang menyediakan jasa angkutan termasuk jenis?",o:["Koperasi konsumsi","Koperasi produksi","Koperasi jasa","Koperasi simpan pinjam"],a:2,e:"Koperasi jasa menyediakan layanan jasa kepada anggotanya."},
+      {q:"Asas penyelenggaraan pemerintahan desa meliputi?",o:["Kepastian hukum, tertib penyelenggaraan, kepentingan umum, keterbukaan","Kerahasiaan dan eksklusivitas","Sentralisasi dan otoriter","Hanya efisiensi"],a:0,e:"Asas pemerintahan desa: kepastian hukum, tertib, kepentingan umum, keterbukaan, profesionalitas, akuntabilitas, dll."},
+      {q:"Iuran anggota koperasi yang besarnya sama untuk setiap anggota disebut?",o:["Simpanan sukarela","Simpanan pokok","Simpanan wajib","Dana cadangan"],a:1,e:"Simpanan pokok besarnya sama untuk setiap anggota dan dibayarkan saat masuk koperasi."},
+      {q:"Dana Desa ditransfer melalui?",o:["APBN langsung ke rekening desa","APBN melalui APBD kabupaten/kota ke rekening desa","Pinjaman bank","Transfer tunai oleh kecamatan"],a:1,e:"Dana Desa ditransfer dari APBN melalui APBD kabupaten/kota ke rekening kas desa."},
+      {q:"Organisasi koperasi terdiri dari?",o:["Hanya pengurus","Rapat Anggota, Pengurus, dan Pengawas","Hanya manajer","Direksi dan komisaris"],a:1,e:"Organisasi koperasi: Rapat Anggota (kekuasaan tertinggi), Pengurus, dan Pengawas."},
+      {q:"Keanggotaan koperasi bersifat?",o:["Wajib untuk semua warga","Sukarela dan terbuka","Terbatas untuk golongan tertentu","Ditentukan pemerintah"],a:1,e:"Prinsip koperasi: keanggotaan bersifat sukarela dan terbuka."},
+    ],
+    medium: [
+      {q:"Hak asal usul desa meliputi?",o:["Hubungan luar negeri","Pengelolaan tanah kas desa dan pranata sosial budaya","Pertahanan keamanan","Moneter dan fiskal"],a:1,e:"Hak asal usul: pengelolaan aset/tanah kas desa dan pranata sosial budaya."},
+      {q:"Perbedaan koperasi dengan PT terletak pada?",o:["Koperasi mementingkan modal","Koperasi one man one vote, PT one share one vote","Koperasi tidak berbadan hukum","PT tidak cari keuntungan"],a:1,e:"Koperasi: satu anggota satu suara, PT: suara berdasar saham."},
+      {q:"Sumber pendapatan desa menurut UU Desa?",o:["Hanya Dana Desa","PADes, Dana Desa, pajak/retribusi, ADD, bantuan, hibah","Hanya pajak desa","Hanya bantuan provinsi"],a:1,e:"Pendapatan desa: PADes, Dana Desa, pajak daerah, ADD, bantuan, hibah."},
+      {q:"Peran BUMDes dalam ekonomi desa?",o:["Menggantikan pemerintah desa","Menggerakkan ekonomi desa sesuai potensi lokal","Mengelola aset pribadi warga","Mengambil alih koperasi"],a:1,e:"BUMDes menggerakkan ekonomi desa sesuai potensi lokal."},
+      {q:"SHU harus mempertimbangkan?",o:["Hanya kontribusi modal","Kontribusi modal DAN partisipasi usaha anggota","Jabatan kepengurusan","Usia keanggotaan saja"],a:1,e:"SHU berdasar kontribusi modal dan partisipasi usaha."},
+      {q:"ADD berasal dari?",o:["APBN langsung","Dana perimbangan kabupaten/kota dikurangi DAK","Pinjaman luar negeri","Donasi swasta"],a:1,e:"ADD dari dana perimbangan dikurangi DAK."},
+      {q:"RPJMDes disusun untuk periode?",o:["1 tahun","3 tahun","6 tahun sesuai masa jabatan Kades","10 tahun"],a:2,e:"RPJMDes 6 tahun sesuai masa jabatan Kades."},
+      {q:"Prinsip pengelolaan BUMDes?",o:["Kooperatif, partisipatif, transparan, akuntabel, sustainable","Tertutup dan eksklusif","Keuntungan maksimal tanpa batas","Monopoli kades"],a:0,e:"BUMDes: kooperatif, partisipatif, transparan, akuntabel, berkelanjutan."},
+      {q:"Musrenbangdes bertujuan?",o:["Memilih Kades","Menyusun rencana pembangunan desa secara partisipatif","Membagi Dana Desa","Evaluasi kinerja BPD"],a:1,e:"Musrenbangdes: susun rencana pembangunan partisipatif."},
+      {q:"Pengawasan Dana Desa dilakukan oleh?",o:["Hanya Kades","BPD, masyarakat, inspektorat, BPK","Hanya BPK","Hanya camat"],a:1,e:"Pengawasan multi-pihak: BPD, masyarakat, inspektorat, BPK."},
+      {q:"Koperasi konsumsi bertujuan?",o:["Memproduksi barang","Menyediakan kebutuhan harian anggota dengan harga terjangkau","Memberikan pinjaman","Menjual jasa"],a:1,e:"Koperasi konsumsi: kebutuhan harian harga terjangkau."},
+      {q:"Penyertaan modal desa ke BUMDes diputuskan melalui?",o:["Keputusan Kades sendiri","Musyawarah Desa","Keputusan Camat","Keputusan Bupati"],a:1,e:"Penyertaan modal harus melalui Musyawarah Desa."},
+      {q:"Koperasi produksi bertujuan?",o:["Menjual barang konsumsi","Membantu anggota dalam produksi dan pemasaran","Memberikan kredit","Mengelola transportasi"],a:1,e:"Koperasi produksi: bantu produksi dan pemasaran."},
+      {q:"Indikator keberhasilan pengelolaan keuangan desa?",o:["Dana habis terpakai","Tepat waktu, tepat sasaran, tepat jumlah, tertib administrasi","Sisa anggaran terbesar","Tidak ada pengawasan"],a:1,e:"Keberhasilan: tepat waktu, sasaran, jumlah, tertib administrasi."},
+      {q:"Pembangunan desa menggunakan pendekatan?",o:["Top-down saja","Bottom-up dan partisipatif","Eksklusif pemerintah desa","Random"],a:1,e:"Bottom-up dan partisipatif melibatkan masyarakat."},
+      {q:"Hubungan koperasi dan BUMDes idealnya?",o:["Saling bersaing","Saling melengkapi dan bermitra","BUMDes gantikan koperasi","Tidak ada hubungan"],a:1,e:"Idealnya saling melengkapi dalam ekonomi desa."},
+      {q:"Laporan pertanggungjawaban Dana Desa disampaikan kepada?",o:["Hanya masyarakat","Bupati/Walikota","Hanya BPD","Gubernur"],a:1,e:"Disampaikan kepada Bupati/Walikota."},
+      {q:"AD koperasi wajib memuat?",o:["Hanya nama","Nama, tempat, jenis usaha, keanggotaan, modal, pembagian SHU, dll","Hanya jenis usaha","Hanya daftar anggota"],a:1,e:"AD memuat nama, tempat, usaha, keanggotaan, modal, SHU, dll."},
+      {q:"PADes dapat bersumber dari?",o:["Hanya retribusi","Hasil usaha desa, hasil aset, swadaya, lain-lain PADes","Hanya Dana Desa","Hanya pajak desa"],a:1,e:"PADes: hasil usaha, aset, swadaya, lain-lain PADes sah."},
+      {q:"Pelatihan koperasi bertujuan?",o:["Tambah biaya operasional","Meningkatkan kapasitas SDM pengelola dan anggota","Mengurangi anggota","Membatasi layanan"],a:1,e:"Pendidikan/pelatihan: tingkatkan kapasitas SDM."},
+      {q:"Dana Desa diprioritaskan untuk?",o:["Gaji kades","Pembangunan infrastruktur dan pemberdayaan masyarakat","Perjalanan dinas","Beli kendaraan dinas"],a:1,e:"Prioritas: pembangunan dan pemberdayaan masyarakat desa."},
+      {q:"Kerja sama antar-desa dituangkan dalam?",o:["Perjanjian internasional","Peraturan Bersama Kepala Desa","MoU dengan kementerian","Surat edaran gubernur"],a:1,e:"Kerja sama: Peraturan Bersama Kepala Desa."},
+      {q:"Gerakan koperasi di Indonesia dimulai sejak?",o:["Zaman kemerdekaan","Awal abad ke-20 masa kolonial","Era Orde Baru","Era reformasi"],a:1,e:"Awal abad ke-20, ditandai R. Aria Wiriaatmadja (1896)."},
+      {q:"Kewajiban BUMDes terhadap desa?",o:["Tidak ada kewajiban","Laporan pertanggungjawaban dan kontribusi PADes","Kuasai semua aset","Gantikan pemerintah desa"],a:1,e:"BUMDes wajib laporan dan kontribusi PADes."},
+      {q:"Tata cara penggunaan Dana Desa diatur dalam?",o:["UUD 1945","Peraturan Menteri/Peraturan Bupati","Keputusan RT/RW","Surat edaran kecamatan"],a:1,e:"Diatur Permen dan Perbup/Perwal."},
+      {q:"KSPPS dulu dikenal sebagai?",o:["Bank Konvensional","BMT (Baitul Maal wat Tamwil)","Pegadaian","Leasing"],a:1,e:"KSPPS dulu dikenal sebagai BMT."},
+      {q:"Pemberdayaan masyarakat desa bertujuan?",o:["Ciptakan ketergantungan pada pemerintah","Kembangkan kemandirian dan kesejahteraan masyarakat","Kurangi penduduk desa","Urbanisasi"],a:1,e:"Pengembangan kemandirian dan kesejahteraan."},
+      {q:"Modal penyertaan koperasi berasal dari?",o:["Hanya anggota","Pemerintah, masyarakat, atau badan usaha","Hanya pinjaman bank","Hanya Dana Desa"],a:1,e:"Penyertaan modal dari pemerintah, masyarakat, badan usaha non-anggota."},
+      {q:"Siskeudes bertujuan?",o:["Tambah birokrasi","Mudahkan pengelolaan keuangan desa yang tertib dan akuntabel","Kurangi partisipasi","Ambil alih keuangan desa"],a:1,e:"Siskeudes: pengelolaan keuangan desa tertib, transparan, akuntabel."},
+      {q:"Pengurus koperasi masa jabatannya?",o:["Tidak terbatas","Sesuai AD, biasanya 3-5 tahun","Seumur hidup","1 tahun"],a:1,e:"Masa jabatan sesuai AD, umumnya 3-5 tahun, bisa dipilih kembali."},
+      {q:"Pemerintah daerah dalam pembinaan desa berperan?",o:["Menggantikan pemerintah desa","Memberikan pembinaan, fasilitasi, dan pengawasan","Menguasai aset desa","Mengambil alih Dana Desa"],a:1,e:"Pemda: pembinaan, fasilitasi, pengawasan penyelenggaraan pemerintahan desa."},
+      {q:"Peraturan Desa tidak boleh bertentangan dengan?",o:["Keinginan kades saja","Kepentingan umum dan peraturan perundang-undangan yang lebih tinggi","Adat istiadat saja","Keinginan BPD saja"],a:1,e:"Perdes tidak boleh bertentangan dengan kepentingan umum dan peraturan yang lebih tinggi."},
+      {q:"BUMDes Bersama didirikan oleh?",o:["Satu desa saja","Dua desa atau lebih melalui musyawarah antar-desa","Pemerintah kabupaten","Kementerian"],a:1,e:"BUMDes Bersama didirikan oleh 2 atau lebih desa melalui musyawarah antar-desa."},
+      {q:"Koperasi wajib melakukan RAT paling lambat?",o:["1 bulan setelah tutup buku","3 bulan setelah tutup buku","6 bulan setelah tutup buku","1 tahun setelah tutup buku"],a:2,e:"RAT dilaksanakan paling lambat 6 bulan setelah tahun buku berakhir."},
+      {q:"Lembaga kemasyarakatan desa contohnya?",o:["DPRD","RT, RW, PKK, Karang Taruna","KPK","Kejaksaan"],a:1,e:"Lembaga kemasyarakatan desa: RT, RW, PKK, Karang Taruna, LPM, dll."},
+      {q:"Fungsi utama Dana Desa menurut prioritas nasional?",o:["Gaji perangkat desa saja","Mendukung pencapaian SDGs desa dan pemulihan ekonomi","Hanya infrastruktur jalan","Hanya untuk BUMDes"],a:1,e:"Prioritas Dana Desa: mendukung pencapaian SDGs desa dan program prioritas nasional."},
+      {q:"Koperasi yang anggotanya terdiri dari pegawai suatu instansi disebut?",o:["KUD","Koperasi Pegawai/Koperasi Karyawan","Koperasi Sekunder","Koperasi Produsen"],a:1,e:"Koperasi Pegawai/Karyawan beranggotakan pegawai/karyawan suatu instansi."},
+      {q:"Dalam pengelolaan keuangan desa, Bendahara Desa bertugas?",o:["Membuat Perdes","Menerima, menyimpan, membayarkan, dan mempertanggungjawabkan keuangan desa","Mengawasi kades","Memimpin BPD"],a:1,e:"Bendahara Desa: menerima, menyimpan, membayarkan, dan mempertanggungjawabkan keuangan desa."},
+      {q:"Surplus atau keuntungan BUMDes digunakan untuk?",o:["Kepentingan pribadi pengelola","Pengembangan usaha, PADes, dan kesejahteraan masyarakat desa","Hanya ditabung","Diserahkan ke kabupaten"],a:1,e:"Keuntungan BUMDes: pengembangan usaha, kontribusi PADes, kesejahteraan masyarakat."},
+      {q:"Koperasi harus memiliki badan hukum yang diperoleh melalui?",o:["Keputusan presiden","Pengesahan akta pendirian oleh menteri/pejabat berwenang","SK gubernur","Persetujuan DPR"],a:1,e:"Badan hukum koperasi diperoleh melalui pengesahan akta pendirian oleh menteri atau pejabat yang berwenang."},
+      {q:"Tahapan pengelolaan keuangan desa secara berurutan adalah?",o:["Pelaporan, perencanaan, pelaksanaan","Perencanaan, pelaksanaan, penatausahaan, pelaporan, pertanggungjawaban","Pelaksanaan, perencanaan, pelaporan","Penatausahaan, perencanaan, pelaksanaan"],a:1,e:"5 tahap: perencanaan, pelaksanaan, penatausahaan, pelaporan, pertanggungjawaban."},
+      {q:"Perbedaan utama antara simpanan pokok dan simpanan wajib adalah?",o:["Tidak ada perbedaan","Pokok dibayar sekali saat masuk, wajib dibayar rutin/berkala","Pokok lebih besar dari wajib","Wajib bisa diambil kapan saja"],a:1,e:"Simpanan pokok: sekali saat masuk. Simpanan wajib: rutin selama jadi anggota."},
+      {q:"Mekanisme penetapan prioritas penggunaan Dana Desa melibatkan?",o:["Hanya keputusan kepala desa","Musyawarah desa dengan mempertimbangkan tipologi desa dan prioritas nasional","Keputusan bupati saja","Instruksi kementerian langsung"],a:1,e:"Prioritas Dana Desa ditetapkan melalui musdes dengan pertimbangan tipologi desa dan prioritas nasional."},
+      {q:"Dampak padat karya tunai (cash for work) dalam program Dana Desa adalah?",o:["Hanya pembangunan fisik","Pembangunan infrastruktur sekaligus penyerapan tenaga kerja dan distribusi pendapatan di desa","Pemborosan anggaran","Menurunkan kualitas pembangunan"],a:1,e:"Padat karya tunai: double benefit — infrastruktur terbangun dan pendapatan terdistribusi ke warga."},
+      {q:"Peran pendamping desa dalam implementasi UU Desa?",o:["Menggantikan kepala desa","Memfasilitasi perencanaan, pelaksanaan, dan pengawasan pembangunan desa","Mengambil alih keuangan desa","Menentukan penggunaan Dana Desa"],a:1,e:"Pendamping desa memfasilitasi, bukan menggantikan — perencanaan, pelaksanaan, dan pengawasan pembangunan."},
+      {q:"Koperasi wajib menyisihkan berapa persen SHU untuk dana cadangan?",o:["Minimal 5%","Minimal 10%","Minimal 20%","Sesuai keputusan RAT dan ketentuan AD"],a:3,e:"Besaran penyisihan SHU untuk dana cadangan sesuai keputusan RAT dan ketentuan dalam AD koperasi."},
+      {q:"Unit usaha BUMDes yang berhubungan langsung dengan masyarakat contohnya?",o:["Hanya simpan pinjam","Pasar desa, BUMDes mart, pengelolaan air bersih, wisata desa","Hanya pertambangan","Hanya ekspor"],a:1,e:"Unit usaha BUMDes yang langsung ke masyarakat: pasar desa, BUMDes mart, air bersih, wisata desa."},
+      {q:"Asas rekognisi dalam UU Desa berarti?",o:["Desa dibubarkan","Pengakuan terhadap hak asal usul desa yang sudah ada sebelum NKRI","Desa dibentuk pemerintah pusat","Desa bagian dari kecamatan saja"],a:1,e:"Rekognisi: pengakuan negara terhadap hak asal-usul desa yang telah ada sebelum NKRI terbentuk."},
+      {q:"Asas subsidiaritas dalam UU Desa berarti?",o:["Desa disubsidi terus menerus","Penetapan kewenangan berskala lokal desa dan pengambilan keputusan secara lokal","Desa harus mengikuti perintah pusat","Kewenangan desa ditentukan kabupaten"],a:1,e:"Subsidiaritas: kewenangan lokal ditetapkan di tingkat desa, keputusan untuk desa diambil secara lokal."},
+      {q:"Laporan realisasi APBDes disampaikan kepada Bupati/Walikota melalui?",o:["Langsung ke Bupati","Camat","Gubernur","DPRD kabupaten"],a:1,e:"Laporan realisasi APBDes disampaikan kepada Bupati/Walikota melalui Camat."},
+    ],
+    hard: [
+      {q:"Dampak implementasi UU Desa terhadap otonomi desa?",o:["Desa kehilangan otonomi","Rekognisi dan subsidiaritas memperkuat otonomi, tapi potensi ketergantungan dana transfer","Desa jadi negara bagian","Tidak ada dampak"],a:1,e:"UU Desa memperkuat otonomi tapi besarnya dana transfer berpotensi ciptakan ketergantungan."},
+      {q:"Problematika tata kelola koperasi paling fundamental?",o:["Kurang anggota","Lemahnya prinsip demokrasi dan transparansi, dominasi pengurus","Modal terlalu besar","Regulasi terlalu ketat"],a:1,e:"Masalah: lemahnya demokrasi/transparansi dan dominasi pengurus."},
+      {q:"Ekonomi kerakyatan dalam konteks koperasi dan desa mengimplikasikan?",o:["Ekonomi pasar bebas","Partisipasi rakyat melalui koperasi dan BUMDes","Hapus sektor swasta","Subsidi tanpa batas"],a:1,e:"Ekonomi kerakyatan: partisipasi rakyat, koperasi dan BUMDes sebagai instrumen."},
+      {q:"Tantangan utama BUMDes dalam keberlanjutan finansial?",o:["Terlalu banyak modal","Model bisnis viable sulit, SDM terbatas, intervensi politik desa","Regulasi longgar","Persaingan koperasi"],a:1,e:"Tantangan: model bisnis, SDM, dan intervensi politik."},
+      {q:"Akad pembiayaan produktif KSPPS umumnya?",o:["Riba","Murabahah untuk jual beli, mudharabah/musyarakah untuk bagi hasil","Bunga bank","Spekulasi"],a:1,e:"KSPPS: akad murabahah, mudharabah, musyarakah."},
+      {q:"Dampak digitalisasi terhadap koperasi?",o:["Hanya tambah biaya","Transparansi dan efisiensi naik, tapi tantangan literasi digital dan keamanan data","Hilangkan RAT","Buat koperasi tidak relevan"],a:1,e:"Digitalisasi: efisiensi dan transparansi naik, tantangan literasi dan keamanan data."},
+      {q:"Analisis kritis formula distribusi Dana Desa?",o:["Sudah sempurna","Multi-variabel tapi belum sepenuhnya atasi ketimpangan antar-desa","Hanya berdasar luas","Acak tanpa kriteria"],a:1,e:"Formula multi-variabel tapi belum sepenuhnya atasi ketimpangan."},
+      {q:"Implikasi hukum BUMDes berbadan hukum vs tidak?",o:["Tidak ada perbedaan","Berbadan hukum: pemisahan aset/liabilitas. Tidak: risiko tanggung jawab jatuh pada desa","BUMDes tidak boleh berbadan hukum","Semua otomatis berbadan hukum"],a:1,e:"Badan hukum menentukan pemisahan aset/liabilitas dan perlindungan hukum."},
+      {q:"Model cooperative governance ideal?",o:["Dominasi pengurus","Tiga pilar seimbang: rapat anggota, pengurus, pengawas","Model satu komando","Dikelola pemerintah"],a:1,e:"Tiga pilar seimbang dan independen."},
+      {q:"Elite capture dalam Dana Desa merujuk pada?",o:["Partisipasi tinggi","Penguasaan akses dan manfaat oleh elit desa","Transparansi berlebihan","Audit ketat"],a:1,e:"Elite capture: manfaat dikendalikan elit desa."},
+      {q:"Strategi pengembangan koperasi di era digital?",o:["Tolak teknologi","Digitalisasi layanan, platform digital, literasi digital anggota, kolaborasi fintech","Hentikan layanan tradisional","Beralih jadi startup"],a:1,e:"Digitalisasi layanan, platform digital, literasi, kolaborasi fintech."},
+      {q:"Problematika akuntabilitas Dana Desa yang sering ditemui BPK?",o:["Dana terlalu besar","Pertanggungjawaban fiktif, penggunaan tidak sesuai prioritas, bukti lemah, mark-up","Terlalu banyak pengawas","Dana tidak cukup"],a:1,e:"BPK: pertanggungjawaban fiktif, mismatch prioritas, bukti lemah, mark-up."},
+      {q:"'Desa membangun' vs 'membangun desa' mengimplikasikan?",o:["Tidak ada perbedaan","Desa membangun: desa subjek. Membangun desa: desa objek","Keduanya top-down","Keduanya abaikan masyarakat"],a:1,e:"Desa membangun = subjek aktif, membangun desa = objek."},
+      {q:"Peran koperasi dalam value chain pertanian idealnya?",o:["Hanya pemasaran","Dari hulu (input) hingga hilir (pemasaran) untuk tingkatkan value added petani","Hanya simpan pinjam","Impor hasil pertanian"],a:1,e:"Koperasi idealnya hulu ke hilir untuk value added anggota."},
+      {q:"PP BUMDes terhadap konsolidasi ekonomi desa?",o:["Tidak ada dampak","BUMDes Bersama memungkinkan konsolidasi ekonomi antar-desa","Larang kerja sama","Hapus koperasi"],a:1,e:"PP BUMDes memungkinkan konsolidasi melalui BUMDes Bersama."},
+      {q:"Tantangan 'one member one vote' di koperasi Indonesia?",o:["Terlalu demokratis","Partisipasi rendah, kurang pendidikan, dominasi pengurus, anggota pasif","Terlalu banyak suara","Voting terlalu rumit"],a:1,e:"Tantangan: partisipasi rendah, kurang pendidikan, dominasi pengurus."},
+      {q:"BUMDes sebagai instrumen pengentasan kemiskinan?",o:["Selalu berhasil","Efektif jika didukung analisis potensi, SDM, governance, ekosistem","Tidak pernah efektif","Otomatis kurangi kemiskinan"],a:1,e:"Efektif jika berbasis analisis potensi, SDM, governance, ekosistem."},
+      {q:"Pencegahan penyimpangan koperasi yang komprehensif?",o:["Hanya audit tahunan","SPI, audit independen, transparansi, edukasi anggota, penegakan sanksi","Hanya pengawasan pengurus","Tanpa mekanisme"],a:1,e:"SPI, audit independen, transparansi, edukasi, sanksi."},
+      {q:"Konflik potensial BUMDes dan koperasi desa?",o:["Tidak pernah ada","Tumpang tindih usaha, perebutan modal/aset, duplikasi layanan","Selalu kolaborasi","BUMDes gantikan koperasi hukumnya"],a:1,e:"Overlap usaha, perebutan modal, duplikasi layanan."},
+      {q:"Desentralisasi fiskal terhadap kapasitas keuangan desa?",o:["Desa otomatis mampu","Sumber daya fiskal naik tapi tuntut kapasitas aparat lebih tinggi","Desa tidak dapat dana","Semua dikelola kabupaten"],a:1,e:"Lebih banyak dana tapi tuntut kapasitas lebih tinggi."},
+      {q:"Model bisnis BUMDes sustainable harus pertimbangkan?",o:["Hanya keuntungan","Market assessment, keunggulan lokal, manfaat sosial, kelayakan finansial, exit strategy","Hanya potensi lokal","Copy-paste desa lain"],a:1,e:"Sustainability: pasar, keunggulan lokal, sosial, finansial, exit strategy."},
+      {q:"Reformasi tata kelola koperasi pasca-putusan MK?",o:["Tidak ada perubahan","Penguatan demokrasi ekonomi, kedaulatan anggota, batasan intervensi pemerintah","Koperasi dilarang","Pemerintah kuasai koperasi"],a:1,e:"Putusan MK: kuatkan kedaulatan anggota, batasi intervensi pemerintah."},
+      {q:"Tantangan integrasi sistem informasi desa nasional?",o:["Tidak ada tantangan","Infrastruktur belum merata, interoperabilitas, SDM, keamanan data, keberlanjutan","Semua sudah terdigitalisasi","Hanya masalah anggaran"],a:1,e:"Tantangan: infrastruktur, interoperabilitas, SDM, keamanan, keberlanjutan."},
+      {q:"Peran koperasi dalam pencapaian SDGs tingkat desa?",o:["Tidak ada peran","Kontribusi pada SDG 1 (kemiskinan), SDG 2 (pangan), SDG 8 (pekerjaan), SDG 10 (ketimpangan)","Hanya SDG 1","Bertentangan dengan SDGs"],a:1,e:"Koperasi berkontribusi pada SDG 1, 2, 8, 10."},
+      {q:"Efektivitas Musyawarah Desa sebagai demokrasi lokal?",o:["Selalu efektif","Efektif jika inklusif dan substantif, sering terkendala dominasi elit dan partisipasi simbolis","Tidak pernah efektif","Hanya formalitas"],a:1,e:"Tergantung inklusivitas, kesetaraan partisipasi, tindak lanjut."},
+      {q:"Penguatan kelembagaan desa dalam kelola aset?",o:["Jual semua aset","Inventarisasi, sertifikasi, optimalisasi, pengembangan SDM, monitoring teknologi","Serahkan swasta","Abaikan aset"],a:1,e:"Inventarisasi, sertifikasi, optimalisasi, SDM, monitoring."},
+      {q:"Dana Desa, PADes, ADD dalam konteks kemandirian fiskal?",o:["Ketiganya sama","DD dan ADD transfer yang ciptakan ketergantungan, PADes cerminkan kemandirian riil","Hanya PADes penting","DD cukup untuk mandiri"],a:1,e:"PADes cerminkan kemandirian riil, DD/ADD masih transfer."},
+      {q:"Model ekonomi desa terpadu koperasi, BUMDes, UMKM?",o:["Tidak bisa diintegrasikan","Koperasi wadah kolektif, BUMDes penggerak ekonomi, UMKM pelaku usaha, spesialisasi dan kolaborasi","Pilih salah satu","Serahkan pusat"],a:1,e:"Spesialisasi fungsi dan kolaborasi value chain."},
+      {q:"Risiko fraud KSP dan mitigasinya?",o:["Tidak ada risiko","Penyalahgunaan dana, kredit fiktif, laporan palsu. Mitigasi: SPI, audit, pemisahan fungsi","Cukup percaya pengurus","Hanya asuransi"],a:1,e:"Risiko: penyalahgunaan, kredit fiktif, laporan palsu. Mitigasi: SPI, audit, pemisahan fungsi."},
+      {q:"Implikasi regulasi OJK terhadap KSP?",o:["OJK tidak berhubungan koperasi","Standar prudensial naik, pelaporan berkala, perlindungan konsumen, tantangan compliance koperasi kecil","Koperasi jadi bank","OJK hapus koperasi"],a:1,e:"Standar prudensial lebih tinggi, perlindungan konsumen, tantangan compliance."},
+      {q:"Evaluasi kritis dana bergulir koperasi pemerintah?",o:["Selalu berhasil","Potensi perkuat modal tapi terkendala pengembalian rendah, moral hazard, distorsi pasar","Tidak ada program ini","Selalu gagal"],a:1,e:"Potensi baik tapi terkendala pengembalian rendah dan moral hazard."},
+      {q:"Blockchain dalam transparansi keuangan desa dan koperasi?",o:["Tidak ada peran","Pencatatan immutable, smart contracts, audit trail otomatis. Tantangan: infrastruktur, literacy, biaya","Otomatis selesaikan masalah","Hanya untuk crypto"],a:1,e:"Potensi transparansi via immutability dan smart contracts, dengan tantangan implementasi."},
+      {q:"Analisis komparatif BUMDes Indonesia vs community enterprise negara lain?",o:["Tidak bisa dibandingkan","Indonesia unik dengan dukungan regulasi/fiskal kuat, bisa belajar dari Grameen, kibbutz, social enterprise UK","Model Indonesia terbaik","Semua model sama"],a:1,e:"BUMDes unik tapi bisa belajar best practices internasional."},
+      {q:"Problematika 'rent-seeking' dalam pengelolaan Dana Desa merujuk pada?",o:["Transparansi penuh","Perilaku oknum yang memanfaatkan posisi untuk mendapatkan keuntungan pribadi dari alokasi anggaran publik","Efisiensi pengelolaan","Akuntabilitas tinggi"],a:1,e:"Rent-seeking: pemanfaatan posisi untuk keuntungan pribadi dari anggaran publik desa."},
+      {q:"Konsep 'social capital' dalam pengembangan koperasi desa?",o:["Hanya modal finansial","Jaringan kepercayaan, norma sosial, dan hubungan timbal balik yang memperkuat kolektifitas koperasi","Bangunan fisik koperasi","Jumlah anggota saja"],a:1,e:"Social capital: kepercayaan, norma, dan hubungan timbal balik yang menguatkan koperasi."},
+      {q:"Analisis SWOT terhadap integrasi ekonomi digital di desa menunjukkan ancaman utama berupa?",o:["Terlalu banyak inovasi","Kesenjangan digital (digital divide) yang memperparah ketimpangan intra-desa","Kelebihan infrastruktur","Terlalu banyak dana"],a:1,e:"Ancaman utama: digital divide yang bisa memperlebar ketimpangan antara warga desa yang melek digital dan yang tidak."},
+      {q:"Model 'social enterprise' sebagai alternatif atau pelengkap BUMDes relevan karena?",o:["Tidak relevan","Menggabungkan orientasi sosial dan sustainability finansial tanpa ketergantungan pada anggaran desa","Menggantikan pemerintah desa","Hanya untuk kota"],a:1,e:"Social enterprise: orientasi sosial + financial sustainability, melengkapi model BUMDes yang sering tergantung anggaran."},
+      {q:"Implikasi UU Cipta Kerja terhadap regulasi koperasi di Indonesia?",o:["Tidak ada dampak","Penyederhanaan perizinan, kemudahan pendirian, tapi kekhawatiran terhadap perlindungan prinsip koperasi dan anggota","Menghapus semua koperasi","Koperasi harus jadi PT"],a:1,e:"UU Cipta Kerja: kemudahan perizinan tapi ada kekhawatiran soal perlindungan prinsip koperasi."},
+      {q:"Konsep 'inclusive growth' dalam konteks pembangunan desa berarti?",o:["Pertumbuhan tanpa pemerataan","Pertumbuhan ekonomi desa yang memberikan manfaat dan kesempatan bagi seluruh lapisan masyarakat, bukan hanya elit","Pertumbuhan hanya untuk warga mampu","Pertumbuhan yang dikendalikan pusat"],a:1,e:"Inclusive growth: pertumbuhan yang memberi manfaat bagi seluruh lapisan, termasuk kelompok marjinal."},
+      {q:"Strategi pengelolaan risiko kredit di koperasi simpan pinjam yang efektif meliputi?",o:["Berikan pinjaman tanpa syarat","Analisis kelayakan peminjam (5C), diversifikasi portofolio, pembentukan cadangan piutang, dan monitoring pasca-pencairan","Hanya andalkan jaminan","Tolak semua pengajuan berisiko"],a:1,e:"Manajemen risiko kredit: 5C analysis, diversifikasi, cadangan piutang, monitoring."},
+      {q:"Implikasi asas 'self-governing community' terhadap kedudukan desa dalam NKRI?",o:["Desa menjadi negara sendiri","Desa memiliki otonomi asli yang berbeda dari otonomi daerah, mengurus dan mengatur urusannya sendiri","Desa bagian dari kabupaten saja","Desa tidak memiliki kewenangan"],a:1,e:"Self-governing community: desa memiliki otonomi asli berbasis masyarakat hukum adat, berbeda dari otonomi daerah yang bersifat desentralisasi."},
+      {q:"Konsep 'smart village' sebagai evolusi pembangunan desa mencakup?",o:["Hanya internet di desa","Integrasi teknologi digital, data-driven governance, layanan publik digital, ekonomi digital lokal, dan partisipasi warga berbasis platform","Hanya e-government","Desa tanpa manusia"],a:1,e:"Smart village: integrasi teknologi untuk governance, layanan publik, ekonomi, dan partisipasi berbasis platform digital."},
+      {q:"Analisis kritis terhadap fenomena 'projectification' Dana Desa merujuk pada?",o:["Dana Desa sangat efektif","Kecenderungan menjadikan pembangunan desa sebagai kumpulan proyek-proyek fisik tanpa visi pembangunan jangka panjang dan pemberdayaan berkelanjutan","Desa terlalu banyak rencana","Tidak ada masalah"],a:1,e:"Projectification: pembangunan desa tereduksi menjadi proyek-proyek fisik tanpa visi pembangunan holistik dan pemberdayaan berkelanjutan."},
+      {q:"Implikasi UU PPMI (Perlindungan Pekerja Migran Indonesia) terhadap peran desa?",o:["Desa tidak terlibat","Desa memiliki kewenangan dalam perlindungan pekerja migran mulai dari pemberian informasi, pencatatan, hingga pemberdayaan purna migrasi","Hanya pemerintah pusat yang terlibat","Desa menghambat migrasi"],a:1,e:"UU PPMI memberi peran pada desa: informasi, pencatatan, perlindungan, dan pemberdayaan pekerja migran."},
+      {q:"Model 'village-owned social enterprise' yang menggabungkan BUMDes dengan misi sosial secara kritis?",o:["Tidak bisa menggabungkan","Potensial namun harus menyeimbangkan sustainability finansial dengan dampak sosial, dan membutuhkan pengukuran dampak sosial yang terukur, bukan sekadar klaim","Sosial enterprise gantikan BUMDes","Hanya untuk desa kaya"],a:1,e:"Village social enterprise: potensi besar tapi butuh keseimbangan financial sustainability dan impact measurement yang rigor."},
+      {q:"Problematika tumpang tindih kewenangan antara pemerintah desa dan supra-desa dalam konteks UU Desa?",o:["Tidak ada tumpang tindih","Kewenangan desa sering direduksi oleh peraturan teknis kabupaten/kementerian yang membatasi diskresi desa dalam penggunaan Dana Desa dan perencanaan pembangunan","Desa memiliki kewenangan absolut","Kabupaten selalu mendukung desa"],a:1,e:"Tumpang tindih: peraturan teknis supra-desa sering mereduksi otonomi desa yang dijamin UU Desa."},
+      {q:"Analisis terhadap 'tragedy of the commons' dalam pengelolaan sumber daya alam desa dan peran koperasi?",o:["Tidak relevan","Koperasi dapat berfungsi sebagai institusi pengelola kolektif yang mencegah tragedy of commons melalui aturan akses, monitoring, dan sanksi berbasis komunitas","Biarkan pasar mengatur","Privatisasi semua sumber daya"],a:1,e:"Koperasi sebagai institusi pengelola kolektif: aturan akses bersama, monitoring partisipatif, dan sanksi komunitas mencegah tragedy of commons."},
+      {q:"Dampak perubahan iklim terhadap model bisnis BUMDes berbasis pertanian dan adaptasinya?",o:["Tidak ada dampak","BUMDes pertanian menghadapi risiko gagal panen, perlu diversifikasi usaha, asuransi pertanian mikro, dan pengembangan komoditas tahan iklim","Hentikan semua BUMDes pertanian","Hanya sektor non-pertanian"],a:1,e:"Climate change: BUMDes pertanian perlu diversifikasi, asuransi mikro, dan komoditas climate-resilient."},
+      {q:"Konsep 'polycentric governance' dalam pengelolaan pembangunan desa berarti?",o:["Satu pusat kekuasaan","Multiple centers of decision-making yang saling berinteraksi: pemerintah desa, BPD, lembaga kemasyarakatan, BUMDes, dan koperasi memiliki peran governance masing-masing","Hanya pemerintah pusat yang memutuskan","Anarkisme tanpa aturan"],a:1,e:"Polycentric governance: multiple pusat keputusan (pemerintah desa, BPD, lembaga masyarakat, BUMDes, koperasi) berinteraksi dalam tata kelola desa."},
+      {q:"Evaluasi dampak jangka panjang program IDT (Inpres Desa Tertinggal) terhadap perkembangan kebijakan pembangunan desa di Indonesia?",o:["IDT selalu berhasil","IDT menjadi cikal bakal pendekatan berbasis transfer fiskal ke desa, namun menunjukkan bahwa transfer dana tanpa penguatan kelembagaan dan SDM menghasilkan dampak terbatas — lesson learned yang seharusnya diterapkan pada Dana Desa","IDT tidak relevan lagi","IDT dan Dana Desa tidak berhubungan"],a:1,e:"IDT sebagai lesson learned: transfer dana tanpa penguatan kelembagaan dan SDM menghasilkan dampak terbatas — relevan untuk evaluasi Dana Desa."},
+    ]
+  }
+};
+// =========================================================================
+// APP STATE
+// =========================================================================
+let state = {
+  screen: 'home',
+  section: null,
+  difficulty: null,
+  questions: [],
+  currentQ: 0,
+  answers: [],
+  isExamMode: false,
+  timer: null,
+  timeLeft: 3600,
+  totalCorrect: 0,
+};
+
+// =========================================================================
+// NAVIGATION
+// =========================================================================
+function showScreen(id) {
+  ['homeScreen','diffScreen','quizScreen','resultScreen'].forEach(s => {
+    document.getElementById(s).classList.add('hidden');
+  });
+  document.getElementById(id).classList.remove('hidden');
+  document.getElementById(id).classList.add('fade-in');
+}
+
+function goHome() {
+  clearInterval(state.timer);
+  state = { screen:'home',section:null,difficulty:null,questions:[],currentQ:0,answers:[],isExamMode:false,timer:null,timeLeft:3600,totalCorrect:0 };
+  showScreen('homeScreen');
+}
+
+function selectSection(sec) {
+  state.section = sec;
+  const names = {twk:'TWK — Wawasan Kebangsaan',tiu:'TIU — Intelegensia Umum',tkp:'TKP — Karakteristik Pribadi',kopdes:'Koperasi & Desa'};
+  document.getElementById('diffTitle').textContent = names[sec];
+  document.getElementById('diffSub').textContent = 'Pilih tingkat kesulitan untuk latihan';
+  showScreen('diffScreen');
+}
+
+function selectDifficulty(diff) {
+  state.difficulty = diff;
+  state.isExamMode = false;
+  loadQuestions();
+  startQuiz();
+}
+
+function startExamMode() {
+  state.isExamMode = true;
+  state.timeLeft = 3600;
+  loadExamQuestions();
+  startQuiz();
+  startTimer();
+}
+
+// =========================================================================
+// LOAD QUESTIONS
+// =========================================================================
+function loadQuestions() {
+  const bank = QUESTION_BANK[state.section][state.difficulty];
+  state.questions = shuffleArray([...bank]).slice(0, 150).map((q, i) => ({
+    ...q, idx: i, diff: state.difficulty, section: state.section
+  }));
+  state.answers = new Array(state.questions.length).fill(null);
+}
+
+function loadExamQuestions() {
+  let allQ = [];
+  const sections = ['twk','tiu','tkp','kopdes'];
+  const diffs = ['mudah','medium','hard'];
+
+  sections.forEach(sec => {
+    diffs.forEach(diff => {
+      const bank = QUESTION_BANK[sec][diff];
+      bank.forEach(q => {
+        allQ.push({ ...q, diff, section: sec });
+      });
+    });
+  });
+
+  state.questions = shuffleArray(allQ).slice(0, 150).map((q, i) => ({ ...q, idx: i }));
+  state.answers = new Array(150).fill(null);
+}
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// =========================================================================
+// QUIZ ENGINE
+// =========================================================================
+function startQuiz() {
+  state.currentQ = 0;
+  showScreen('quizScreen');
+  document.getElementById('timerDisplay').classList.toggle('hidden', !state.isExamMode);
+  renderQuestion();
+  renderNavigator();
+}
+
+function renderQuestion() {
+  const q = state.questions[state.currentQ];
+  const answered = state.answers[state.currentQ] !== null;
+  const secNames = {twk:'TWK',tiu:'TIU',tkp:'TKP',kopdes:'KOPDES'};
+  const diffLabels = {mudah:'Mudah',medium:'Medium',hard:'Hard'};
+  const letters = ['A','B','C','D'];
+
+  let html = `
+    <div class="q-number">
+      SOAL ${state.currentQ + 1} / ${state.questions.length}
+      <span class="q-diff-badge ${q.diff}">${diffLabels[q.diff]}</span>
+      ${state.isExamMode ? `<span class="meta-tag">${secNames[q.section]}</span>` : ''}
+    </div>
+    <div class="q-text">${q.q}</div>
+    <div class="options-list">
+  `;
+
+  q.o.forEach((opt, i) => {
+    let cls = 'option-btn';
+    if (answered) {
+      cls += ' disabled';
+      if (i === q.a) cls += ' correct';
+      else if (state.answers[state.currentQ] === i && i !== q.a) cls += ' wrong';
+    } else if (state.answers[state.currentQ] === i) {
+      cls += ' selected';
+    }
+    html += `<button class="${cls}" onclick="selectAnswer(${i})">
+      <span class="option-letter">${letters[i]}</span>
+      <span>${opt}</span>
+    </button>`;
+  });
+
+  html += '</div>';
+
+  if (!state.isExamMode) {
+    html += `<div class="explanation-box ${answered ? 'show' : ''}" id="explanation">
+      <strong>✓ Pembahasan:</strong> ${q.e}
+    </div>`;
+  }
+
+  document.getElementById('questionCard').innerHTML = html;
+
+  // Update progress
+  const pct = ((state.currentQ + 1) / state.questions.length * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `Soal ${state.currentQ + 1} / ${state.questions.length}`;
+
+  // Nav buttons
+  document.getElementById('prevBtn').disabled = state.currentQ === 0;
+  const isLast = state.currentQ === state.questions.length - 1;
+  document.getElementById('nextBtn').textContent = isLast ? 'Selesai ✓' : 'Selanjutnya →';
+  document.getElementById('nextBtn').classList.toggle('primary', true);
+
+  // Update navigator
+  updateNavigator();
+}
+
+function selectAnswer(idx) {
+  if (state.answers[state.currentQ] !== null && !state.isExamMode) return;
+  state.answers[state.currentQ] = idx;
+  renderQuestion();
+}
+
+function nextQuestion() {
+  if (state.currentQ < state.questions.length - 1) {
+    state.currentQ++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function prevQuestion() {
+  if (state.currentQ > 0) {
+    state.currentQ--;
+    renderQuestion();
+  }
+}
+
+function jumpToQuestion(idx) {
+  state.currentQ = idx;
+  renderQuestion();
+}
+
+function confirmQuit() {
+  if (confirm('Yakin ingin keluar? Progress akan hilang.')) {
+    goHome();
+  }
+}
+
+// =========================================================================
+// NAVIGATOR
+// =========================================================================
+function renderNavigator() {
+  const grid = document.getElementById('qNavGrid');
+  let html = '';
+  for (let i = 0; i < state.questions.length; i++) {
+    html += `<button class="q-nav-btn" data-idx="${i}" onclick="jumpToQuestion(${i})">${i+1}</button>`;
+  }
+  grid.innerHTML = html;
+}
+
+function updateNavigator() {
+  const btns = document.querySelectorAll('.q-nav-btn');
+  btns.forEach((btn, i) => {
+    btn.className = 'q-nav-btn';
+    if (i === state.currentQ) btn.classList.add('active');
+    else if (state.answers[i] !== null) {
+      if (state.answers[i] === state.questions[i].a) btn.classList.add('answered');
+      else btn.classList.add('wrong-ans');
+    }
+  });
+}
+
+// =========================================================================
+// TIMER
+// =========================================================================
+function startTimer() {
+  updateTimerDisplay();
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerDisplay();
+    if (state.timeLeft <= 300) {
+      document.getElementById('timerDisplay').classList.add('warning');
+    }
+    if (state.timeLeft <= 0) {
+      clearInterval(state.timer);
+      finishQuiz();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(state.timeLeft / 60);
+  const s = state.timeLeft % 60;
+  document.getElementById('timerDisplay').textContent = `⏱ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+// =========================================================================
+// RESULTS
+// =========================================================================
+function finishQuiz() {
+  clearInterval(state.timer);
+
+  let correct = 0, wrong = 0, unanswered = 0;
+  state.questions.forEach((q, i) => {
+    if (state.answers[i] === null) unanswered++;
+    else if (state.answers[i] === q.a) correct++;
+    else wrong++;
+  });
+
+  const total = state.questions.length;
+  const pct = Math.round((correct / total) * 100);
+  let grade = '', gradeColor = '';
+  if (pct >= 80) { grade = 'LULUS! Excellent! 🎉'; gradeColor = 'var(--green)'; }
+  else if (pct >= 60) { grade = 'Cukup Baik 👍'; gradeColor = 'var(--orange)'; }
+  else { grade = 'Perlu Belajar Lagi 💪'; gradeColor = 'var(--red)'; }
+
+  const timeUsed = state.isExamMode ? (3600 - state.timeLeft) : 0;
+  const mUsed = Math.floor(timeUsed / 60);
+  const sUsed = timeUsed % 60;
+
+  const secNames = {twk:'TWK',tiu:'TIU',tkp:'TKP',kopdes:'Koperasi & Desa'};
+  const diffLabels = {mudah:'Mudah',medium:'Medium',hard:'Hard'};
+  const modeLabel = state.isExamMode ? 'MODE UJIAN (Gacha)' : `${secNames[state.section]} — ${diffLabels[state.difficulty]}`;
+
+  let html = `
+    <div class="result-screen fade-in">
+      <div style="font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:24px">${modeLabel}</div>
+
+      <div class="result-circle" style="--pct:${pct}%">
+        <div class="result-score" style="color:${gradeColor}">${pct}%</div>
+        <div class="result-total">${correct} / ${total}</div>
+      </div>
+
+      <div class="result-title" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">${state.isExamMode ? `Waktu: ${mUsed} menit ${sUsed} detik` : 'Terus berlatih untuk hasil lebih baik!'}</div>
+
+      <div class="result-stats">
+        <div class="result-stat">
+          <div class="result-stat-val" style="color:var(--green)">${correct}</div>
+          <div class="result-stat-label">Benar</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-val" style="color:var(--red)">${wrong}</div>
+          <div class="result-stat-label">Salah</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-val" style="color:var(--text2)">${unanswered}</div>
+          <div class="result-stat-label">Kosong</div>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        ${!state.isExamMode ? `<button class="nav-btn" onclick="reviewAnswers()">📋 Review Jawaban</button>` : ''}
+        <button class="nav-btn" onclick="retryQuiz()">🔄 Ulangi</button>
+        <button class="nav-btn primary" onclick="goHome()">🏠 Menu Utama</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('resultScreen').innerHTML = html;
+  showScreen('resultScreen');
+}
+
+function retryQuiz() {
+  if (state.isExamMode) {
+    startExamMode();
+  } else {
+    loadQuestions();
+    startQuiz();
+  }
+}
+
+function reviewAnswers() {
+  state.currentQ = 0;
+  // Mark all as answered for review mode
+  showScreen('quizScreen');
+  document.getElementById('timerDisplay').classList.add('hidden');
+  renderQuestion();
+  renderNavigator();
+}
+</script>
+</body>
+</html>
