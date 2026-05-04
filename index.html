@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tes CAT Seleksi Kompetensi KDKMP/KNMP 2026</title>
+<title>Tes CAT Seleksi Kompetensi KDKMP/KNMP 2026 — v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -21,230 +22,184 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
-  body{
-    background-image:
-      radial-gradient(circle at 20% 10%, rgba(29,63,166,0.04) 0%, transparent 40%),
-      radial-gradient(circle at 80% 90%, rgba(200,52,31,0.04) 0%, transparent 40%);
-    min-height:100vh;
-  }
+  body{background-image:radial-gradient(circle at 20% 10%,rgba(29,63,166,0.04) 0%,transparent 40%),radial-gradient(circle at 80% 90%,rgba(200,52,31,0.04) 0%,transparent 40%);min-height:100vh}
   .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 80px}
-  
-  /* ========== START SCREEN ========== */
-  .hero{
-    border:2px solid var(--border);
-    background:var(--paper);
-    padding:48px 40px;
-    margin-bottom:24px;
-    position:relative;
-  }
-  .hero::before{
-    content:"";position:absolute;inset:6px;border:1px solid var(--border);pointer-events:none;
-  }
-  .stamp{
-    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;
-    letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-2);
-    border:1px solid var(--accent-2);padding:4px 10px;margin-bottom:20px;
-  }
-  h1{
-    font-family:'Fraunces',serif;font-weight:900;font-size:clamp(32px,5vw,56px);
-    line-height:1.02;letter-spacing:-0.02em;margin-bottom:12px;
-  }
-  h1 em{font-style:italic;font-weight:400;color:var(--accent)}
-  .lede{font-family:'Fraunces',serif;font-size:18px;color:var(--muted);max-width:680px;margin-bottom:32px;font-style:italic}
-  
-  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;margin:32px 0;border-top:1px solid var(--border);border-left:1px solid var(--border)}
-  .info-cell{padding:18px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
-  .info-cell .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-  .info-cell .value{font-family:'Fraunces',serif;font-size:28px;font-weight:700;color:var(--ink)}
-  
-  .subtest-list{margin:32px 0}
-  .subtest-list h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;margin-bottom:14px}
-  .subtest-row{display:grid;grid-template-columns:50px 1fr 80px 80px;gap:12px;padding:10px 0;border-bottom:1px dashed rgba(10,17,48,0.2);align-items:center;font-size:14px}
-  .subtest-row .num{font-family:'JetBrains Mono',monospace;color:var(--accent-2);font-weight:700}
-  .subtest-row .name{font-family:'Fraunces',serif;font-size:16px;font-weight:500}
-  .subtest-row .qty{font-family:'JetBrains Mono',monospace;text-align:right;font-size:12px;color:var(--muted)}
-  
-  .btn{
-    display:inline-block;background:var(--ink);color:var(--paper);padding:16px 36px;
-    font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.1em;
-    text-transform:uppercase;font-size:13px;border:none;cursor:pointer;
-    transition:all 0.15s ease;
-  }
-  .btn:hover{background:var(--accent);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
-  .btn-secondary{background:transparent;color:var(--ink);border:2px solid var(--ink)}
-  .btn-secondary:hover{background:var(--ink);color:var(--paper)}
-  .btn-danger{background:var(--accent-2)}
-  .btn-danger:hover{background:#9a2918}
-  
-  .warning{
-    background:#fff7e6;border:1px solid var(--gold);padding:16px 20px;margin:20px 0;font-size:14px;line-height:1.6;
-  }
-  .warning strong{font-family:'Fraunces',serif;display:block;margin-bottom:4px;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;font-size:12px}
-  
-  /* ========== EXAM SCREEN ========== */
-  .exam-header{
-    position:sticky;top:0;background:var(--ink);color:var(--paper);
-    padding:16px 24px;display:flex;justify-content:space-between;align-items:center;
-    z-index:100;border-bottom:3px solid var(--accent-2);
-  }
-  .exam-title{font-family:'Fraunces',serif;font-size:18px;font-weight:700}
-  .exam-title small{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:400;color:rgba(244,241,234,0.6);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px}
-  .timer{
-    font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;
-    padding:8px 16px;background:var(--paper);color:var(--ink);
-    min-width:130px;text-align:center;letter-spacing:0.05em;
-  }
-  .timer.warn{background:var(--gold);color:#fff}
-  .timer.danger{background:var(--accent-2);color:#fff;animation:pulse 1s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
-  
-  .progress-bar{height:4px;background:rgba(244,241,234,0.2);position:relative;overflow:hidden}
-  .progress-fill{height:100%;background:var(--accent-2);transition:width 0.3s ease}
-  
-  .question-card{
-    background:var(--paper);border:2px solid var(--border);
-    padding:36px 40px;margin:24px 0;position:relative;
-  }
-  .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(10,17,48,0.15)}
-  .q-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
-  .q-num strong{color:var(--accent-2);font-size:14px}
-  .q-text{font-family:'Fraunces',serif;font-size:20px;line-height:1.5;font-weight:500;margin-bottom:24px}
-  .q-image{margin:16px 0;font-family:'JetBrains Mono',monospace;font-size:18px;background:#fff;padding:20px;border:1px dashed var(--border);text-align:center;letter-spacing:0.1em;line-height:1.8}
-  
-  .options{display:flex;flex-direction:column;gap:10px}
-  .option{
-    display:flex;align-items:flex-start;gap:14px;padding:14px 18px;
-    border:1.5px solid rgba(10,17,48,0.25);background:#fff;cursor:pointer;
-    transition:all 0.15s ease;font-size:16px;line-height:1.5;
-  }
-  .option:hover{border-color:var(--accent);background:#fafaf3}
-  .option.selected{border-color:var(--accent);background:rgba(29,63,166,0.08);border-width:2px;padding:13.5px 17.5px}
-  .option-letter{
-    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;
-    width:28px;height:28px;border:1.5px solid var(--ink);border-radius:50%;
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  }
-  .option.selected .option-letter{background:var(--accent);color:var(--paper);border-color:var(--accent)}
-  
-  .nav-controls{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}
-  .question-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px;
-    background:#fff;padding:16px;border:1px solid var(--border);margin-top:20px;
-  }
-  .grid-btn{
-    aspect-ratio:1;border:1px solid rgba(10,17,48,0.3);background:#fff;
-    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;cursor:pointer;
-    transition:all 0.1s;
-  }
-  .grid-btn:hover{background:var(--paper-2)}
-  .grid-btn.answered{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .grid-btn.current{outline:2px solid var(--accent-2);outline-offset:2px}
-  
-  /* ========== REVIEW SCREEN ========== */
-  .review-header{
-    text-align:center;padding:40px 20px;border-bottom:2px solid var(--border);margin-bottom:32px;
-  }
-  .score-display{font-family:'Fraunces',serif;font-size:72px;font-weight:900;color:var(--accent);line-height:1}
-  .score-display .total{color:var(--muted);font-size:32px}
-  .score-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-top:8px}
-  .verdict{font-family:'Fraunces',serif;font-size:24px;font-style:italic;margin-top:16px}
-  
-  .review-q{
-    background:#fff;border-left:4px solid var(--green);padding:20px 24px;margin-bottom:14px;
-  }
-  .review-q.wrong{border-left-color:var(--accent-2)}
-  .review-q.skipped{border-left-color:var(--muted)}
-  .review-q-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase}
-  .review-q-head .status{padding:3px 10px;border-radius:2px;font-weight:700}
-  .status.correct{background:var(--green);color:#fff}
-  .status.incorrect{background:var(--accent-2);color:#fff}
-  .status.skip{background:var(--muted);color:#fff}
-  .review-q-text{font-family:'Fraunces',serif;font-size:17px;line-height:1.5;margin-bottom:12px}
-  .answer-line{font-size:14px;margin:4px 0}
-  .answer-line .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:inline-block;width:100px}
-  .explanation{
-    margin-top:12px;padding:12px 16px;background:#fff7e6;border-left:3px solid var(--gold);
-    font-size:14px;line-height:1.6;font-family:'Fraunces',serif;
-  }
-  .explanation::before{
-    content:"PEMBAHASAN";display:block;font-family:'JetBrains Mono',monospace;font-size:10px;
-    letter-spacing:0.15em;color:var(--gold);font-weight:700;margin-bottom:6px;font-style:normal;
-  }
-  
-  .summary-grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:0;border-left:1px solid var(--border);border-top:1px solid var(--border);margin:32px 0;
-  }
-  .sum-cell{padding:20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);background:#fff}
-  .sum-cell .num{font-family:'Fraunces',serif;font-size:36px;font-weight:900;line-height:1}
-  .sum-cell .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:6px}
-  
-  .filter-tabs{display:flex;gap:0;margin-bottom:20px;flex-wrap:wrap;border-bottom:2px solid var(--border)}
-  .filter-tab{
-    padding:10px 18px;background:transparent;border:none;cursor:pointer;
-    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
-    border-bottom:3px solid transparent;margin-bottom:-2px;
-  }
-  .filter-tab.active{border-bottom-color:var(--accent-2);color:var(--accent-2)}
-  
-  .hidden{display:none !important}
-  
-  /* TRANSITION SCREEN between subtests */
-  .transition{
-    text-align:center;padding:60px 20px;background:var(--paper);
-    border:2px solid var(--border);margin:24px 0;
-  }
-  .transition .stamp{margin-bottom:30px}
-  .transition h2{font-family:'Fraunces',serif;font-size:42px;font-weight:900;line-height:1.1;margin-bottom:16px}
-  .transition .desc{font-family:'Fraunces',serif;font-size:18px;font-style:italic;color:var(--muted);max-width:540px;margin:0 auto 32px}
-  
-  @media (max-width:640px){
-    .hero{padding:32px 24px}
-    .question-card{padding:24px 20px}
-    .timer{font-size:20px;min-width:100px;padding:6px 12px}
-    .exam-title{font-size:14px}
-    .q-text{font-size:18px}
-  }
+
+.hero{border:2px solid var(–border);background:var(–paper);padding:48px 40px;margin-bottom:24px;position:relative}
+.hero::before{content:””;position:absolute;inset:6px;border:1px solid var(–border);pointer-events:none}
+.stamp{display:inline-block;font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(–accent-2);border:1px solid var(–accent-2);padding:4px 10px;margin-bottom:20px}
+h1{font-family:‘Fraunces’,serif;font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1.02;letter-spacing:-0.02em;margin-bottom:12px}
+h1 em{font-style:italic;font-weight:400;color:var(–accent)}
+.lede{font-family:‘Fraunces’,serif;font-size:18px;color:var(–muted);max-width:680px;margin-bottom:32px;font-style:italic}
+
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;margin:32px 0;border-top:1px solid var(–border);border-left:1px solid var(–border)}
+.info-cell{padding:18px;border-right:1px solid var(–border);border-bottom:1px solid var(–border)}
+.info-cell .label{font-family:‘JetBrains Mono’,monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(–muted);margin-bottom:6px}
+.info-cell .value{font-family:‘Fraunces’,serif;font-size:28px;font-weight:700;color:var(–ink)}
+
+.subtest-list{margin:32px 0}
+.subtest-list h3{font-family:‘Fraunces’,serif;font-size:20px;font-weight:700;margin-bottom:14px}
+.subtest-row{display:grid;grid-template-columns:50px 1fr 80px 80px;gap:12px;padding:10px 0;border-bottom:1px dashed rgba(10,17,48,0.2);align-items:center;font-size:14px}
+.subtest-row .num{font-family:‘JetBrains Mono’,monospace;color:var(–accent-2);font-weight:700}
+.subtest-row .name{font-family:‘Fraunces’,serif;font-size:16px;font-weight:500}
+.subtest-row .qty{font-family:‘JetBrains Mono’,monospace;text-align:right;font-size:12px;color:var(–muted)}
+
+.scoring-card{background:#fff7e6;border:1px solid var(–gold);padding:20px 24px;margin:24px 0}
+.scoring-card h4{font-family:‘Fraunces’,serif;font-weight:700;color:var(–gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;font-size:13px}
+.scoring-card ul{list-style:none;padding:0}
+.scoring-card li{padding:8px 0;font-size:14px;line-height:1.6;border-bottom:1px dashed rgba(160,124,44,0.3)}
+.scoring-card li:last-child{border-bottom:none}
+.scoring-card li strong{font-family:‘JetBrains Mono’,monospace;color:var(–ink);font-size:13px}
+
+.btn{display:inline-block;background:var(–ink);color:var(–paper);padding:16px 36px;font-family:‘JetBrains Mono’,monospace;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:13px;border:none;cursor:pointer;transition:all 0.15s ease}
+.btn:hover{background:var(–accent);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(–ink)}
+.btn-secondary{background:transparent;color:var(–ink);border:2px solid var(–ink)}
+.btn-secondary:hover{background:var(–ink);color:var(–paper)}
+.btn-danger{background:var(–accent-2)}
+.btn-danger:hover{background:#9a2918}
+
+.warning{background:#fff7e6;border:1px solid var(–gold);padding:16px 20px;margin:20px 0;font-size:14px;line-height:1.6}
+.warning strong{font-family:‘Fraunces’,serif;display:block;margin-bottom:4px;color:var(–gold);text-transform:uppercase;letter-spacing:0.05em;font-size:12px}
+
+.exam-header{position:sticky;top:0;background:var(–ink);color:var(–paper);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;z-index:100;border-bottom:3px solid var(–accent-2)}
+.exam-title{font-family:‘Fraunces’,serif;font-size:18px;font-weight:700}
+.exam-title small{display:block;font-family:‘JetBrains Mono’,monospace;font-size:10px;font-weight:400;color:rgba(244,241,234,0.6);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px}
+.timer{font-family:‘JetBrains Mono’,monospace;font-size:28px;font-weight:700;padding:8px 16px;background:var(–paper);color:var(–ink);min-width:130px;text-align:center;letter-spacing:0.05em}
+.timer.warn{background:var(–gold);color:#fff}
+.timer.danger{background:var(–accent-2);color:#fff;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
+
+.progress-bar{height:4px;background:rgba(244,241,234,0.2);position:relative;overflow:hidden}
+.progress-fill{height:100%;background:var(–accent-2);transition:width 0.3s ease}
+
+.question-card{background:var(–paper);border:2px solid var(–border);padding:36px 40px;margin:24px 0;position:relative}
+.q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(10,17,48,0.15)}
+.q-num{font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(–muted)}
+.q-num strong{color:var(–accent-2);font-size:14px}
+.q-text{font-family:‘Fraunces’,serif;font-size:20px;line-height:1.5;font-weight:500;margin-bottom:24px}
+
+.options{display:flex;flex-direction:column;gap:10px}
+.option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:1.5px solid rgba(10,17,48,0.25);background:#fff;cursor:pointer;transition:all 0.15s ease;font-size:16px;line-height:1.5}
+.option:hover{border-color:var(–accent);background:#fafaf3}
+.option.selected{border-color:var(–accent);background:rgba(29,63,166,0.08);border-width:2px;padding:13.5px 17.5px}
+.option-letter{font-family:‘JetBrains Mono’,monospace;font-weight:700;font-size:13px;width:28px;height:28px;border:1.5px solid var(–ink);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.option.selected .option-letter{background:var(–accent);color:var(–paper);border-color:var(–accent)}
+
+.nav-controls{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}
+.question-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px;background:#fff;padding:16px;border:1px solid var(–border);margin-top:20px}
+.grid-btn{aspect-ratio:1;border:1px solid rgba(10,17,48,0.3);background:#fff;font-family:‘JetBrains Mono’,monospace;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.1s}
+.grid-btn:hover{background:var(–paper-2)}
+.grid-btn.answered{background:var(–accent);color:#fff;border-color:var(–accent)}
+.grid-btn.current{outline:2px solid var(–accent-2);outline-offset:2px}
+
+.review-header{text-align:center;padding:40px 20px;border-bottom:2px solid var(–border);margin-bottom:32px}
+.verdict-stamp{display:inline-block;padding:14px 32px;font-family:‘Fraunces’,serif;font-weight:900;font-size:32px;letter-spacing:0.05em;text-transform:uppercase;border:3px solid;margin-bottom:24px}
+.verdict-stamp.lulus{color:var(–green);border-color:var(–green);background:rgba(30,107,58,0.05)}
+.verdict-stamp.gagal{color:var(–accent-2);border-color:var(–accent-2);background:rgba(200,52,31,0.05)}
+.verdict-reason{font-family:‘Fraunces’,serif;font-size:18px;font-style:italic;color:var(–muted);max-width:600px;margin:0 auto 20px}
+
+.score-card{background:#fff;border:2px solid var(–border);padding:28px;margin-bottom:20px}
+.score-card-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(10,17,48,0.15);gap:10px;flex-wrap:wrap}
+.score-card-title{font-family:‘Fraunces’,serif;font-size:22px;font-weight:700}
+.score-card-status{font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.15em;padding:4px 12px;font-weight:700}
+.score-card-status.pass{background:var(–green);color:#fff}
+.score-card-status.fail{background:var(–accent-2);color:#fff}
+.score-card-status.neutral{background:var(–gold);color:#fff}
+
+.score-row{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:8px 0;border-bottom:1px dashed rgba(10,17,48,0.15);font-size:14px;align-items:center}
+.score-row .lbl{font-family:‘Fraunces’,serif;font-weight:500}
+.score-row .val{font-family:‘JetBrains Mono’,monospace;font-weight:700;text-align:right}
+
+.score-final{display:flex;justify-content:space-between;align-items:center;padding-top:16px;margin-top:12px;border-top:2px solid var(–border);gap:12px;flex-wrap:wrap}
+.score-final-lbl{font-family:‘Fraunces’,serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em}
+.score-final-val{font-family:‘Fraunces’,serif;font-size:42px;font-weight:900;line-height:1}
+.score-threshold{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:var(–muted);margin-top:4px;letter-spacing:0.05em}
+
+.review-q{background:#fff;border-left:4px solid var(–green);padding:20px 24px;margin-bottom:14px}
+.review-q.wrong{border-left-color:var(–accent-2)}
+.review-q.skipped{border-left-color:var(–muted)}
+.review-q-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;gap:10px;flex-wrap:wrap}
+.review-q-head .status{padding:3px 10px;font-weight:700}
+.status.correct{background:var(–green);color:#fff}
+.status.incorrect{background:var(–accent-2);color:#fff}
+.status.skip{background:var(–muted);color:#fff}
+.review-q-text{font-family:‘Fraunces’,serif;font-size:17px;line-height:1.5;margin-bottom:12px}
+.answer-line{font-size:14px;margin:4px 0}
+.answer-line .lbl{font-family:‘JetBrains Mono’,monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(–muted);display:inline-block;width:100px}
+.explanation{margin-top:12px;padding:12px 16px;background:#fff7e6;border-left:3px solid var(–gold);font-size:14px;line-height:1.6;font-family:‘Fraunces’,serif}
+.explanation::before{content:“PEMBAHASAN”;display:block;font-family:‘JetBrains Mono’,monospace;font-size:10px;letter-spacing:0.15em;color:var(–gold);font-weight:700;margin-bottom:6px;font-style:normal}
+
+.filter-tabs{display:flex;gap:0;margin-bottom:20px;flex-wrap:wrap;border-bottom:2px solid var(–border)}
+.filter-tab{padding:10px 18px;background:transparent;border:none;cursor:pointer;font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;border-bottom:3px solid transparent;margin-bottom:-2px}
+.filter-tab.active{border-bottom-color:var(–accent-2);color:var(–accent-2)}
+
+.hidden{display:none !important}
+
+.transition{text-align:center;padding:60px 20px;background:var(–paper);border:2px solid var(–border);margin:24px 0}
+.transition .stamp{margin-bottom:30px}
+.transition h2{font-family:‘Fraunces’,serif;font-size:42px;font-weight:900;line-height:1.1;margin-bottom:16px}
+.transition .desc{font-family:‘Fraunces’,serif;font-size:18px;font-style:italic;color:var(–muted);max-width:540px;margin:0 auto 32px}
+
+@media (max-width:640px){
+.hero{padding:32px 24px}
+.question-card{padding:24px 20px}
+.timer{font-size:20px;min-width:100px;padding:6px 12px}
+.exam-title{font-size:14px}
+.q-text{font-size:18px}
+.verdict-stamp{font-size:24px;padding:10px 20px}
+.score-final-val{font-size:32px}
+}
 </style>
+
 </head>
 <body>
 <div class="wrap">
 
-<!-- ========== START SCREEN ========== -->
 <section id="screen-start">
   <div class="hero">
-    <span class="stamp">◆ Resmi · Simulasi Mandiri</span>
+    <span class="stamp">◆ Resmi · Simulasi Mandiri · v2</span>
     <h1>Tes CAT<br>Seleksi <em>Kompetensi</em><br>KDKMP/KNMP <em>2026</em></h1>
-    <p class="lede">Simulasi penuh 248 soal — sesuai struktur resmi PHTC Kopdes Merah Putih. Kerjakan dengan jujur, anggap ini hari‑H.</p>
-    
-    <div class="info-grid">
-      <div class="info-cell"><div class="label">Total Soal</div><div class="value">248</div></div>
-      <div class="info-cell"><div class="label">Total Waktu</div><div class="value">62 menit</div></div>
-      <div class="info-cell"><div class="label">Subtes Kognitif</div><div class="value">6 × 7'</div></div>
-      <div class="info-cell"><div class="label">Manajemen Bidang</div><div class="value">20'</div></div>
-    </div>
-    
-    <div class="subtest-list">
-      <h3>Struktur Tes</h3>
-      <div class="subtest-row"><div class="num">01</div><div class="name">Bahasa</div><div class="qty">50 soal</div><div class="qty">7 menit</div></div>
-      <div class="subtest-row"><div class="num">02</div><div class="name">Hitungan</div><div class="qty">31 soal</div><div class="qty">7 menit</div></div>
-      <div class="subtest-row"><div class="num">03</div><div class="name">Pengetahuan Umum</div><div class="qty">40 soal</div><div class="qty">7 menit</div></div>
-      <div class="subtest-row"><div class="num">04</div><div class="name">Pola Gambar</div><div class="qty">55 soal</div><div class="qty">7 menit</div></div>
-      <div class="subtest-row"><div class="num">05</div><div class="name">Abstraksi Ruang</div><div class="qty">27 soal</div><div class="qty">7 menit</div></div>
-      <div class="subtest-row"><div class="num">06</div><div class="name">Bentuk</div><div class="qty">25 soal</div><div class="qty">7 menit</div></div>
-      <div class="subtest-row"><div class="num">07</div><div class="name">Manajemen Bidang (KDKMP/KNMP)</div><div class="qty">20 soal</div><div class="qty">20 menit</div></div>
-    </div>
-    
-    <div class="warning">
-      <strong>⚠ Aturan Main</strong>
-      Timer berjalan otomatis per subtes. Jika waktu habis, sistem otomatis lanjut ke subtes berikutnya — soal yang belum dijawab dianggap kosong. Jangan refresh browser. Pembahasan jawaban muncul di akhir setelah seluruh subtes selesai.
-    </div>
-    
-    <button class="btn btn-danger" onclick="startExam()">Mulai Ujian →</button>
+    <p class="lede">Simulasi penuh 248 soal dengan sistem skor & ambang batas resmi. Kerjakan dengan jujur, anggap ini hari‑H.</p>
+
+```
+<div class="info-grid">
+  <div class="info-cell"><div class="label">Total Soal</div><div class="value">248</div></div>
+  <div class="info-cell"><div class="label">Total Waktu</div><div class="value">62 menit</div></div>
+  <div class="info-cell"><div class="label">Ambang TPK</div><div class="value">110</div></div>
+  <div class="info-cell"><div class="label">Bobot Manajemen</div><div class="value">5 / benar</div></div>
+</div>
+
+<div class="subtest-list">
+  <h3>Struktur Tes</h3>
+  <div class="subtest-row"><div class="num">01</div><div class="name">Bahasa</div><div class="qty">50 soal</div><div class="qty">7 menit</div></div>
+  <div class="subtest-row"><div class="num">02</div><div class="name">Hitungan</div><div class="qty">31 soal</div><div class="qty">7 menit</div></div>
+  <div class="subtest-row"><div class="num">03</div><div class="name">Pengetahuan Umum</div><div class="qty">40 soal</div><div class="qty">7 menit</div></div>
+  <div class="subtest-row"><div class="num">04</div><div class="name">Pola Gambar</div><div class="qty">55 soal</div><div class="qty">7 menit</div></div>
+  <div class="subtest-row"><div class="num">05</div><div class="name">Abstraksi Ruang</div><div class="qty">27 soal</div><div class="qty">7 menit</div></div>
+  <div class="subtest-row"><div class="num">06</div><div class="name">Bentuk</div><div class="qty">25 soal</div><div class="qty">7 menit</div></div>
+  <div class="subtest-row"><div class="num">07</div><div class="name">Manajemen Bidang (KDKMP/KNMP)</div><div class="qty">20 soal</div><div class="qty">20 menit</div></div>
+</div>
+
+<div class="scoring-card">
+  <h4>📐 Sistem Penilaian Resmi</h4>
+  <ul>
+    <li><strong>TES POTENSI KOGNITIF (TPK)</strong> — 6 subtes pertama. Setiap jawaban benar bernilai <strong>1 poin</strong>. Skor maksimum = <strong>228</strong>. Ambang batas kelulusan TPK: <strong>110</strong>.</li>
+    <li><strong>TES MANAJEMEN BIDANG</strong> — 20 soal. Jawaban benar = <strong>5 poin</strong>, salah/tidak menjawab = <strong>0 poin</strong>. Skor maksimum = <strong>100</strong>.</li>
+    <li><strong>KELULUSAN</strong> — Skor TPK harus mencapai ambang batas 110. Skor Manajemen Bidang menjadi nilai pendukung untuk perangkingan.</li>
+  </ul>
+</div>
+
+<div class="warning">
+  <strong>⚠ Aturan Main</strong>
+  Timer berjalan otomatis per subtes. Jika waktu habis, sistem otomatis lanjut ke subtes berikutnya — soal yang belum dijawab dianggap kosong (skor 0). Jangan refresh browser. Pembahasan jawaban + skor + status kelulusan muncul di akhir.
+</div>
+
+<button class="btn btn-danger" onclick="startExam()">Mulai Ujian →</button>
+```
+
   </div>
 </section>
 
-<!-- ========== EXAM SCREEN ========== -->
 <section id="screen-exam" class="hidden">
   <div class="exam-header">
     <div class="exam-title">
@@ -254,22 +209,21 @@
     <div class="timer" id="timer">07:00</div>
   </div>
   <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
-  
+
   <div id="question-area"></div>
-  
+
   <div class="nav-controls">
     <button class="btn btn-secondary" id="btn-prev" onclick="prevQuestion()">← Sebelumnya</button>
     <button class="btn" id="btn-next" onclick="nextQuestion()">Selanjutnya →</button>
   </div>
-  
+
   <div class="question-grid" id="question-grid"></div>
-  
+
   <div style="margin-top:20px;text-align:right">
     <button class="btn btn-danger" onclick="confirmFinishSubtest()">Selesaikan Subtes Ini</button>
   </div>
 </section>
 
-<!-- ========== TRANSITION SCREEN ========== -->
 <section id="screen-transition" class="hidden">
   <div class="transition">
     <span class="stamp">◆ Subtes Berikutnya</span>
@@ -279,28 +233,25 @@
   </div>
 </section>
 
-<!-- ========== REVIEW SCREEN ========== -->
 <section id="screen-review" class="hidden">
   <div class="review-header">
     <span class="stamp">◆ Hasil Akhir</span>
-    <div class="score-display"><span id="score-num">0</span><span class="total">/248</span></div>
-    <div class="score-label">Skor Akhir Anda</div>
-    <div class="verdict" id="verdict"></div>
+    <div id="verdict-area"></div>
   </div>
-  
-  <div class="summary-grid" id="summary-grid"></div>
-  
+
+  <div id="score-cards"></div>
+
   <h3 style="font-family:'Fraunces',serif;font-size:28px;font-weight:900;margin:32px 0 20px">Pembahasan Jawaban</h3>
-  
+
   <div class="filter-tabs">
     <button class="filter-tab active" onclick="filterReview('all', this)">Semua</button>
     <button class="filter-tab" onclick="filterReview('wrong', this)">Salah</button>
     <button class="filter-tab" onclick="filterReview('skipped', this)">Tidak Dijawab</button>
     <button class="filter-tab" onclick="filterReview('correct', this)">Benar</button>
   </div>
-  
+
   <div id="review-list"></div>
-  
+
   <div style="text-align:center;margin-top:40px">
     <button class="btn" onclick="location.reload()">Ulangi Tes</button>
   </div>
@@ -309,332 +260,306 @@
 </div>
 
 <script>
-// =============================================
-// SOAL — 248 total
-// Struktur: { q: pertanyaan, opts: [4-5 opsi], a: index jawaban benar (0-based), exp: pembahasan }
-// =============================================
-
 const SUBTESTS = [
   {
     name: "Bahasa",
     duration: 7 * 60,
     questions: [
-      {q:"Sinonim dari kata 'PROGRESIF' adalah...", opts:["Maju","Mundur","Stagnan","Konservatif"], a:0, exp:"Progresif berarti ke arah kemajuan, bertingkat-tingkat naik, atau berhaluan ke arah perbaikan."},
-      {q:"Antonim dari 'GERSANG' adalah...", opts:["Tandus","Subur","Kering","Panas"], a:1, exp:"Gersang artinya kering tidak subur. Lawan katanya adalah subur."},
-      {q:"Sinonim 'EFEKTIF' adalah...", opts:["Hemat","Berhasil guna","Cepat","Mudah"], a:1, exp:"Efektif berarti ada efeknya, manjur, mujarab — sehingga 'berhasil guna' paling tepat. Hemat = efisien."},
-      {q:"Antonim 'LANTANG' adalah...", opts:["Keras","Nyaring","Pelan","Jelas"], a:2, exp:"Lantang = nyaring/keras dan jelas. Lawannya adalah pelan/lirih."},
-      {q:"PADI : SAWAH = ... : ...", opts:["Mobil : Garasi","Ikan : Laut","Buku : Tas","Pohon : Hutan"], a:1, exp:"Padi tumbuh/hidup di sawah, ikan hidup di laut. Hubungan: makhluk hidup → habitat alaminya."},
-      {q:"DOKTER : PASIEN = GURU : ...", opts:["Sekolah","Buku","Murid","Pelajaran"], a:2, exp:"Dokter melayani pasien, guru melayani/mendidik murid."},
-      {q:"Manakah penulisan kata baku yang benar?", opts:["Aktiv","Aktive","Aktif","Active"], a:2, exp:"Bentuk baku dalam KBBI adalah 'aktif'."},
-      {q:"Penulisan yang sesuai EYD adalah...", opts:["Apotik","Apotek","Apotic","Apotique"], a:1, exp:"Bentuk baku adalah 'apotek' (dari bahasa Belanda 'apotheek')."},
-      {q:"Kata baku yang benar adalah...", opts:["Praktek","Praktik","Practik","Practek"], a:1, exp:"Bentuk baku adalah 'praktik' (KBBI). 'Praktek' adalah bentuk tidak baku."},
-      {q:"Manakah kalimat efektif?", opts:["Para hadirin sekalian dimohon berdiri","Hadirin sekalian dimohon berdiri","Para hadirin dimohon berdiri","Hadirin dimohon berdiri"], a:3, exp:"'Hadirin' sudah jamak, jadi tidak perlu 'para' atau 'sekalian' yang membuat pleonastis."},
-      {q:"Kalimat di bawah ini yang efektif adalah...", opts:["Saya naik ke atas tangga","Saya naik tangga","Saya naik ke tangga atas","Saya naik atas tangga"], a:1, exp:"'Naik' sudah berarti ke atas, jadi 'ke atas' redundan."},
-      {q:"Sinonim 'KONTRADIKSI' adalah...", opts:["Persamaan","Pertentangan","Kesepakatan","Keselarasan"], a:1, exp:"Kontradiksi = pertentangan antara dua hal yang berlawanan."},
-      {q:"Antonim 'STABIL' adalah...", opts:["Tetap","Goyah","Kuat","Kokoh"], a:1, exp:"Stabil = mantap, tidak berubah-ubah. Lawannya adalah goyah/labil."},
-      {q:"GIGI : KUNYAH = MATA : ...", opts:["Lihat","Tutup","Buka","Kedip"], a:0, exp:"Fungsi utama gigi adalah mengunyah, fungsi utama mata adalah melihat."},
-      {q:"Sinonim 'INTRODUKSI' adalah...", opts:["Penutup","Pendahuluan","Isi","Kesimpulan"], a:1, exp:"Introduksi berarti pengantar/pendahuluan."},
-      {q:"Penulisan kata serapan yang benar adalah...", opts:["Sistim","Sistem","System","Systeem"], a:1, exp:"Bentuk baku adalah 'sistem'."},
-      {q:"Kata baku yang tepat adalah...", opts:["Jadwal","Jadual","Jadwl","Jadwa"], a:0, exp:"Bentuk baku KBBI adalah 'jadwal'."},
-      {q:"Antonim 'OPTIMIS' adalah...", opts:["Realistis","Pesimis","Idealis","Egois"], a:1, exp:"Optimis = berpandangan positif. Lawannya adalah pesimis."},
-      {q:"BURUNG : TERBANG = IKAN : ...", opts:["Air","Renang","Sirip","Insang"], a:1, exp:"Burung berlokomosi dengan terbang, ikan dengan berenang. Hubungan: hewan → cara bergeraknya."},
-      {q:"Sinonim 'AKURAT' adalah...", opts:["Cepat","Tepat","Lambat","Mudah"], a:1, exp:"Akurat = teliti, saksama, cermat, tepat."},
-      {q:"Manakah yang termasuk kalimat majemuk setara?", opts:["Saya membaca buku ketika hujan","Saya makan dan dia minum","Karena lapar, saya makan","Saya akan datang jika diundang"], a:1, exp:"Kalimat majemuk setara dihubungkan konjungsi setara: dan, atau, tetapi. Pilihan lain adalah majemuk bertingkat."},
-      {q:"Antonim 'KONKRET' adalah...", opts:["Nyata","Padat","Abstrak","Jelas"], a:2, exp:"Konkret = nyata, dapat ditangkap indera. Lawannya adalah abstrak."},
-      {q:"PELUKIS : KUAS = PENULIS : ...", opts:["Kertas","Pena","Buku","Meja"], a:1, exp:"Alat utama pelukis untuk menghasilkan karya adalah kuas, alat utama penulis adalah pena."},
-      {q:"Sinonim 'RELEVAN' adalah...", opts:["Sesuai","Berbeda","Bertentangan","Acuh"], a:0, exp:"Relevan = bersangkut-paut, ada hubungannya, sesuai dengan hal yang dibicarakan."},
-      {q:"Bentuk baku yang benar adalah...", opts:["Nasihat","Nasehat","Nasihad","Nasehad"], a:0, exp:"KBBI mencatat bentuk bakunya adalah 'nasihat'."},
-      {q:"Antonim 'ELASTIS' adalah...", opts:["Lentur","Kaku","Lunak","Kenyal"], a:1, exp:"Elastis = lentur, mudah berubah dan kembali. Lawannya kaku."},
-      {q:"Sinonim 'MITRA' adalah...", opts:["Lawan","Musuh","Rekan","Pesaing"], a:2, exp:"Mitra = teman, kawan kerja, partner, rekan."},
-      {q:"DOKTER : RUMAH SAKIT = HAKIM : ...", opts:["Kantor","Penjara","Pengadilan","Polisi"], a:2, exp:"Dokter bekerja di rumah sakit, hakim bekerja di pengadilan."},
-      {q:"Penulisan baku yang benar adalah...", opts:["Komplek","Kompleks","Komplex","Kompleks-"], a:1, exp:"Bentuk baku KBBI adalah 'kompleks'."},
-      {q:"Sinonim 'INTERVENSI' adalah...", opts:["Pengamatan","Campur tangan","Penghindaran","Pemikiran"], a:1, exp:"Intervensi = campur tangan dalam perselisihan/urusan pihak lain."},
-      {q:"Antonim 'EKSPLISIT' adalah...", opts:["Tegas","Jelas","Implisit","Terbuka"], a:2, exp:"Eksplisit = gamblang/tegas, lawannya implisit (tersirat)."},
-      {q:"Manakah ejaan yang benar?", opts:["Di rumah","Dirumah","Di-rumah","Di.rumah"], a:0, exp:"'Di' sebagai kata depan (menunjukkan tempat) dipisah dari kata yang mengikutinya."},
-      {q:"Penulisan tanggal yang benar adalah...", opts:["17 agustus 1945","17 Agustus 1945","17-agustus-1945","17/Agustus/1945"], a:1, exp:"Nama bulan ditulis dengan huruf kapital di awal kata."},
-      {q:"Sinonim 'AMBIGU' adalah...", opts:["Pasti","Bermakna ganda","Jelas","Tegas"], a:1, exp:"Ambigu = bermakna lebih dari satu, dapat diartikan ganda."},
-      {q:"GURU : SEKOLAH = PETANI : ...", opts:["Cangkul","Sawah","Padi","Hujan"], a:1, exp:"Guru bekerja di sekolah (tempat kerja), petani bekerja di sawah."},
-      {q:"Antonim 'LABIL' adalah...", opts:["Goyah","Stabil","Lemah","Rapuh"], a:1, exp:"Labil = mudah goyah/berubah. Lawannya stabil."},
-      {q:"Kalimat baku yang benar adalah...", opts:["Mereka saling pukul-memukul","Mereka pukul-memukul","Mereka saling memukul","Mereka memukul satu sama lain"], a:2, exp:"'Saling pukul-memukul' pleonastis. Yang efektif: 'saling memukul'."},
-      {q:"Sinonim 'ANTUSIAS' adalah...", opts:["Bersemangat","Bosan","Lelah","Acuh"], a:0, exp:"Antusias = bergairah, bersemangat, bergelora hatinya."},
-      {q:"Antonim 'RAJIN' adalah...", opts:["Giat","Tekun","Malas","Cepat"], a:2, exp:"Rajin = suka bekerja keras. Lawannya malas."},
-      {q:"PILOT : PESAWAT = NAKHODA : ...", opts:["Laut","Pelabuhan","Kapal","Jangkar"], a:2, exp:"Pilot mengemudikan pesawat, nakhoda mengemudikan kapal."},
-      {q:"Manakah penulisan yang benar?", opts:["Pasca panen","Pascapanen","Pasca-panen","Pasca.panen"], a:1, exp:"Bentuk terikat seperti 'pasca-' ditulis serangkai dengan kata yang mengikutinya."},
-      {q:"Sinonim 'INDIKASI' adalah...", opts:["Petunjuk","Hasil","Akibat","Sebab"], a:0, exp:"Indikasi = tanda yang menarik perhatian, petunjuk."},
-      {q:"Antonim 'GAGAL' adalah...", opts:["Kalah","Berhasil","Mundur","Diam"], a:1, exp:"Gagal = tidak berhasil. Lawannya berhasil/sukses."},
-      {q:"DOKTER : STETOSKOP = TUKANG KAYU : ...", opts:["Paku","Gergaji","Kayu","Lemari"], a:1, exp:"Stetoskop adalah alat utama dokter, gergaji adalah alat utama tukang kayu."},
-      {q:"Sinonim 'KOLABORASI' adalah...", opts:["Persaingan","Kerja sama","Pertentangan","Pemisahan"], a:1, exp:"Kolaborasi = perbuatan kerja sama (dengan musuh, mitra, dsb)."},
-      {q:"Manakah kalimat efektif?", opts:["Para tamu undangan dipersilakan duduk","Para tamu dipersilakan duduk","Tamu undangan sekalian duduk","Para tamu sekalian dipersilakan untuk duduk"], a:1, exp:"'Tamu undangan' redundan dan 'sekalian' juga tidak perlu. Yang efektif: 'Para tamu dipersilakan duduk'."},
-      {q:"Penulisan baku yang benar adalah...", opts:["Atlit","Atlet","Athlete","Atletis"], a:1, exp:"Bentuk baku KBBI adalah 'atlet'."},
-      {q:"Antonim 'SEKULER' adalah...", opts:["Duniawi","Religius","Modern","Kuno"], a:1, exp:"Sekuler = bersifat duniawi, bukan keagamaan. Lawannya religius."},
-      {q:"Sinonim 'VERIFIKASI' adalah...", opts:["Penolakan","Pemeriksaan","Pengabaian","Pernyataan"], a:1, exp:"Verifikasi = pemeriksaan tentang kebenaran laporan, pernyataan, perhitungan, dsb."},
-      {q:"BUKU : PERPUSTAKAAN = LUKISAN : ...", opts:["Galeri","Pelukis","Cat","Kuas"], a:0, exp:"Buku tersimpan/dipajang di perpustakaan, lukisan tersimpan/dipajang di galeri."}
+      {q:"Sinonim dari kata 'KOLOSAL' adalah...", opts:["Kecil","Sedang","Besar","Mungil"], a:2, exp:"Kolosal berarti hebat, besar, dahsyat, megah."},
+      {q:"Antonim 'OTORITER' adalah...", opts:["Diktator","Demokratis","Tegas","Keras"], a:1, exp:"Otoriter = sewenang-wenang. Lawannya demokratis."},
+      {q:"Sinonim 'KONVENSIONAL' adalah...", opts:["Modern","Tradisional","Inovatif","Aneh"], a:1, exp:"Konvensional berarti berdasarkan kesepakatan/tradisi umum."},
+      {q:"Antonim 'EKSPANSI' adalah...", opts:["Perluasan","Penyusutan","Perkembangan","Pertumbuhan"], a:1, exp:"Ekspansi = perluasan. Lawannya penyusutan/kontraksi."},
+      {q:"Sinonim 'ASUMSI' adalah...", opts:["Fakta","Bukti","Anggapan","Kepastian"], a:2, exp:"Asumsi = dugaan, anggapan tanpa pembuktian."},
+      {q:"BENGKEL : MEKANIK = SALON : ...", opts:["Sisir","Cermin","Penata rambut","Gunting"], a:2, exp:"Mekanik bekerja di bengkel, penata rambut di salon. Hubungan: tempat → profesinya."},
+      {q:"DOKTER : DIAGNOSIS = HAKIM : ...", opts:["Pengadilan","Vonis","Polisi","Saksi"], a:1, exp:"Dokter mengeluarkan diagnosis sebagai hasil pemeriksaan, hakim mengeluarkan vonis."},
+      {q:"PETANI : SAWAH = NELAYAN : ...", opts:["Jaring","Perahu","Laut","Ikan"], a:2, exp:"Petani bekerja di sawah, nelayan di laut. Hubungan: profesi → tempat kerja."},
+      {q:"Penulisan kata baku yang benar adalah...", opts:["Risiko","Resiko","Risico","Ressiko"], a:0, exp:"KBBI mencatat bentuk baku adalah 'risiko'."},
+      {q:"Manakah yang baku menurut KBBI?", opts:["Negoisasi","Negosiasi","Negoisiasi","Negotiation"], a:1, exp:"Bentuk baku adalah 'negosiasi'."},
+      {q:"Penulisan baku yang benar adalah...", opts:["Hipotesa","Hipotesis","Hypothesis","Hipothesa"], a:1, exp:"KBBI: 'hipotesis', bukan 'hipotesa'."},
+      {q:"Bentuk baku yang tepat adalah...", opts:["Analisa","Analisis","Analyse","Analiseis"], a:1, exp:"Bentuk baku KBBI: 'analisis', bukan 'analisa'."},
+      {q:"Kata baku yang benar adalah...", opts:["Februari","Pebruari","Februery","February"], a:0, exp:"Bentuk baku KBBI: 'Februari'."},
+      {q:"Manakah ejaan yang benar?", opts:["Ke pasar","Kepasar","Ke-pasar","K' pasar"], a:0, exp:"'Ke' sebagai kata depan dipisah dari kata yang mengikutinya."},
+      {q:"Penulisan kalimat langsung yang benar adalah...", opts:["Ibu berkata: \"saya akan pergi\".","Ibu berkata, \"Saya akan pergi.\"","Ibu berkata \"Saya akan pergi\"","Ibu berkata; saya akan pergi."], a:1, exp:"Sebelum kutipan langsung pakai koma, kutipan diawali huruf kapital, tanda akhir di dalam tanda kutip."},
+      {q:"Manakah kalimat efektif?", opts:["Daripada saya, lebih senang dia","Dia lebih senang daripada saya","Dia daripada lebih senang saya","Lebih dia senang daripada saya"], a:1, exp:"Struktur SPOK harus jelas. 'Dia (S) lebih senang (P) daripada saya (Pel)'."},
+      {q:"Kalimat baku yang benar adalah...", opts:["Saya bertemu dengan dia di mall","Saya bertemu dia di mal","Saya ketemu dia di mall","Saya ketemu dengan dia di mall"], a:1, exp:"'Bertemu' tidak perlu 'dengan' (transitif langsung), bentuk baku 'mal' bukan 'mall'."},
+      {q:"Sinonim 'KREDIBEL' adalah...", opts:["Tidak dipercaya","Dapat dipercaya","Dilarang","Diragukan"], a:1, exp:"Kredibel = dapat dipercaya, memiliki kredibilitas."},
+      {q:"Antonim 'AKURAT' adalah...", opts:["Tepat","Cermat","Meleset","Pasti"], a:2, exp:"Akurat = tepat. Lawannya meleset/tidak tepat."},
+      {q:"Sinonim 'IMPLEMENTASI' adalah...", opts:["Perencanaan","Penerapan","Pemikiran","Penolakan"], a:1, exp:"Implementasi = pelaksanaan, penerapan."},
+      {q:"Sinonim 'KONSISTEN' adalah...", opts:["Berubah-ubah","Tetap","Goyah","Plin-plan"], a:1, exp:"Konsisten = tetap, taat asas."},
+      {q:"Antonim 'TRANSPARAN' adalah...", opts:["Jelas","Terbuka","Tertutup","Bening"], a:2, exp:"Transparan = terbuka, jelas. Lawannya tertutup."},
+      {q:"Manakah penggunaan tanda baca yang benar?", opts:["Saya makan, dan dia minum.","Saya makan dan, dia minum.","Saya makan dan dia minum.","Saya makan; dan dia minum."], a:2, exp:"Konjungsi 'dan' yang menghubungkan dua klausa setara pendek tidak perlu koma."},
+      {q:"GADING : GAJAH = BELALAI : ...", opts:["Domba","Gajah","Ayam","Burung"], a:1, exp:"Gading dan belalai sama-sama bagian khas/milik gajah."},
+      {q:"PERAWAT : PASIEN = GURU : ...", opts:["Sekolah","Buku","Murid","Pelajaran"], a:2, exp:"Perawat melayani pasien, guru mendidik murid."},
+      {q:"Sinonim 'EVAKUASI' adalah...", opts:["Pengungsian","Penyerangan","Pelarian","Pengejaran"], a:0, exp:"Evakuasi = pengungsian/pemindahan dari tempat berbahaya ke aman."},
+      {q:"Antonim 'SURPLUS' adalah...", opts:["Lebih","Defisit","Cukup","Banyak"], a:1, exp:"Surplus = jumlah yang melebihi kebutuhan. Lawannya defisit."},
+      {q:"Penulisan baku yang benar adalah...", opts:["Karir","Karier","Carier","Career"], a:1, exp:"Bentuk baku KBBI: 'karier'."},
+      {q:"Sinonim 'KONFIRMASI' adalah...", opts:["Penolakan","Penegasan","Penyangkalan","Pengabaian"], a:1, exp:"Konfirmasi = penegasan, pembenaran."},
+      {q:"Antonim 'EFISIEN' adalah...", opts:["Hemat","Boros","Cepat","Tepat"], a:1, exp:"Efisien = tepat guna, hemat. Lawannya boros."},
+      {q:"PENULIS : NOVEL = KOMPOSER : ...", opts:["Piano","Lagu","Konser","Penyanyi"], a:1, exp:"Penulis menghasilkan novel, komposer menghasilkan lagu/komposisi."},
+      {q:"Sinonim 'DEPRESI' adalah...", opts:["Senang","Bingung","Murung","Marah"], a:2, exp:"Depresi = kemurungan, gangguan jiwa berupa rasa sedih berkepanjangan."},
+      {q:"Antonim 'BERGAIRAH' adalah...", opts:["Lesu","Aktif","Hidup","Senang"], a:0, exp:"Bergairah = penuh semangat. Lawannya lesu."},
+      {q:"Manakah penulisan unsur serapan yang benar?", opts:["Detil","Detail","Detal","Datail"], a:1, exp:"KBBI: 'detail' adalah bentuk baku."},
+      {q:"Sinonim 'DETERMINASI' adalah...", opts:["Keraguan","Ketegasan","Kelemahan","Kemarahan"], a:1, exp:"Determinasi = ketegasan, kebulatan tekad."},
+      {q:"GIGI : KUNYAH = TELINGA : ...", opts:["Lihat","Bicara","Dengar","Cium"], a:2, exp:"Fungsi gigi: mengunyah; fungsi telinga: mendengar."},
+      {q:"Antonim 'DOMESTIK' adalah...", opts:["Lokal","Rumahan","Internasional","Nasional"], a:2, exp:"Domestik = dalam negeri. Lawannya internasional."},
+      {q:"Sinonim 'DESTINASI' adalah...", opts:["Asal","Tujuan","Jalan","Pemberhentian"], a:1, exp:"Destinasi = tempat tujuan."},
+      {q:"Penulisan baku yang benar adalah...", opts:["Anggaran","Anggran","Aggaran","Angaran"], a:0, exp:"Bentuk baku KBBI: 'anggaran'."},
+      {q:"Sinonim 'EKUIVALEN' adalah...", opts:["Berbeda","Setara","Berlawanan","Bertentangan"], a:1, exp:"Ekuivalen = setara, sebanding."},
+      {q:"Antonim 'GENERIK' adalah...", opts:["Umum","Khusus","Sederhana","Mahal"], a:1, exp:"Generik = bersifat umum/tanpa merek. Lawannya khusus/spesifik."},
+      {q:"DETIK : MENIT = MENIT : ...", opts:["Hari","Jam","Minggu","Tahun"], a:1, exp:"60 detik = 1 menit, 60 menit = 1 jam. Hubungan: satuan kecil → satuan lebih besar."},
+      {q:"Sinonim 'INTUISI' adalah...", opts:["Logika","Bisikan hati","Akal","Bukti"], a:1, exp:"Intuisi = daya memahami sesuatu tanpa pemikiran logis."},
+      {q:"Manakah kalimat baku?", opts:["Mereka membicarakan tentang masalah itu","Mereka membicarakan masalah itu","Mereka berbicara masalah itu","Mereka membicara masalah itu"], a:1, exp:"'Membicarakan' sudah berarti 'berbicara tentang', jadi 'tentang' redundan."},
+      {q:"Sinonim 'KAMUFLASE' adalah...", opts:["Penyerangan","Penyamaran","Pengintaian","Penghindaran"], a:1, exp:"Kamuflase = penyamaran agar tidak dikenali."},
+      {q:"Antonim 'SIMETRIS' adalah...", opts:["Seimbang","Selaras","Asimetris","Sebanding"], a:2, exp:"Simetris = seimbang. Lawannya asimetris."},
+      {q:"PILOT : KOKPIT = NAKHODA : ...", opts:["Dek","Anjungan","Buritan","Haluan"], a:1, exp:"Pilot mengendalikan dari kokpit, nakhoda dari anjungan."},
+      {q:"Sinonim 'EKSPLISIT' adalah...", opts:["Tersirat","Tersembunyi","Tegas/jelas","Rahasia"], a:2, exp:"Eksplisit = gamblang, tegas, terus terang."},
+      {q:"Antonim 'PROAKTIF' adalah...", opts:["Aktif","Reaktif/pasif","Cepat","Bersemangat"], a:1, exp:"Proaktif = mengambil inisiatif. Lawannya reaktif/pasif."},
+      {q:"Manakah penulisan judul yang benar?", opts:["Cara Membuat Kue di Rumah","Cara membuat kue di rumah","CARA MEMBUAT KUE DI RUMAH","cara membuat Kue di Rumah"], a:0, exp:"Pada judul, semua kata kapital di awal kecuali kata tugas (di, ke, dari, dan, atau)."}
     ]
   },
-  
-  // ============== SUBTES 2 — HITUNGAN (31 soal) ==============
   {
     name: "Hitungan",
     duration: 7 * 60,
     questions: [
-      {q:"Hasil dari 25% × 80 + 15 adalah...", opts:["25","30","35","40"], a:2, exp:"25% × 80 = 20. Kemudian 20 + 15 = 35."},
-      {q:"Jika 3x + 7 = 22, maka nilai x adalah...", opts:["3","4","5","6"], a:2, exp:"3x = 22 − 7 = 15. Maka x = 15 ÷ 3 = 5."},
-      {q:"Harga sebuah baju Rp200.000. Diskon 30%. Harga setelah diskon?", opts:["Rp140.000","Rp150.000","Rp160.000","Rp170.000"], a:0, exp:"Diskon = 30% × 200.000 = 60.000. Harga akhir = 200.000 − 60.000 = Rp140.000."},
-      {q:"Rata-rata 5, 7, 9, 11, 13 adalah...", opts:["7","8","9","10"], a:2, exp:"Jumlah = 45, dibagi 5 angka = 9."},
-      {q:"24 : 6 × 2 + 5 = ...", opts:["7","9","13","15"], a:2, exp:"Urutan operasi: 24:6 = 4, lalu 4×2 = 8, lalu 8+5 = 13."},
-      {q:"Kelipatan persekutuan terkecil (KPK) dari 12 dan 18 adalah...", opts:["24","36","54","72"], a:1, exp:"12 = 2²×3, 18 = 2×3². KPK = 2²×3² = 36."},
-      {q:"Faktor persekutuan terbesar (FPB) dari 24 dan 36 adalah...", opts:["6","8","12","18"], a:2, exp:"24 = 2³×3, 36 = 2²×3². FPB = 2²×3 = 12."},
-      {q:"Sebuah mobil melaju dengan kecepatan 60 km/jam selama 2,5 jam. Jarak tempuh?", opts:["120 km","135 km","150 km","165 km"], a:2, exp:"Jarak = kecepatan × waktu = 60 × 2,5 = 150 km."},
-      {q:"Jika 2/5 dari suatu bilangan adalah 60, maka bilangan tersebut adalah...", opts:["120","150","180","200"], a:1, exp:"Bilangan × 2/5 = 60. Maka bilangan = 60 × 5/2 = 150."},
-      {q:"Akar kuadrat dari 144 adalah...", opts:["10","11","12","13"], a:2, exp:"12 × 12 = 144, jadi √144 = 12."},
-      {q:"15% dari 240 adalah...", opts:["32","36","40","48"], a:1, exp:"15/100 × 240 = 3600/100 = 36."},
-      {q:"Sebuah kotak berisi 5 bola merah dan 3 bola putih. Peluang terambil bola merah adalah...", opts:["3/8","5/8","3/5","5/3"], a:1, exp:"Total bola = 8. Peluang merah = 5/8."},
-      {q:"Jika 2x − 3 = 9, maka x = ...", opts:["4","5","6","7"], a:2, exp:"2x = 12, jadi x = 6."},
-      {q:"Hasil dari (−4) × (−3) + 5 adalah...", opts:["7","12","17","−7"], a:2, exp:"(−4)×(−3) = 12 (positif × positif). Kemudian 12 + 5 = 17."},
-      {q:"Diskon ganda 20% lalu 10% pada barang Rp500.000 menjadi...", opts:["Rp350.000","Rp360.000","Rp375.000","Rp400.000"], a:1, exp:"Setelah diskon 20%: 500.000 × 0,8 = 400.000. Setelah diskon 10%: 400.000 × 0,9 = Rp360.000."},
-      {q:"7² − 5² = ...", opts:["12","14","24","49"], a:2, exp:"49 − 25 = 24."},
-      {q:"Suatu deret: 2, 5, 8, 11, ... Suku ke-10 adalah...", opts:["26","27","29","31"], a:2, exp:"Beda = 3. Rumus Un = 2 + (n−1)×3. Untuk n=10: 2 + 27 = 29."},
-      {q:"Bunga tunggal Rp2.000.000 selama 6 bulan dengan suku bunga 12%/tahun adalah...", opts:["Rp100.000","Rp120.000","Rp150.000","Rp200.000"], a:1, exp:"Bunga = 2.000.000 × 12% × 6/12 = 2.000.000 × 0,06 = Rp120.000."},
-      {q:"Luas persegi panjang dengan p = 12 cm dan l = 8 cm adalah...", opts:["20 cm²","40 cm²","96 cm²","160 cm²"], a:2, exp:"Luas = panjang × lebar = 12 × 8 = 96 cm²."},
-      {q:"Keliling lingkaran dengan jari-jari 7 cm (π = 22/7) adalah...", opts:["22 cm","36 cm","44 cm","49 cm"], a:2, exp:"K = 2πr = 2 × 22/7 × 7 = 44 cm."},
-      {q:"Jika harga 5 buku = Rp75.000, maka harga 8 buku adalah...", opts:["Rp100.000","Rp110.000","Rp120.000","Rp125.000"], a:2, exp:"Harga 1 buku = 75.000/5 = 15.000. Harga 8 buku = 8 × 15.000 = Rp120.000."},
-      {q:"Sebuah pekerjaan diselesaikan 6 orang dalam 12 hari. Jika dikerjakan 8 orang, butuh waktu...", opts:["8 hari","9 hari","10 hari","16 hari"], a:1, exp:"Total man-days = 6 × 12 = 72. Untuk 8 orang: 72/8 = 9 hari."},
-      {q:"3⁴ = ...", opts:["12","27","64","81"], a:3, exp:"3 × 3 × 3 × 3 = 81."},
-      {q:"Pecahan 3/4 dalam desimal adalah...", opts:["0,25","0,50","0,75","0,80"], a:2, exp:"3 ÷ 4 = 0,75."},
-      {q:"Jika rasio uang A:B = 3:5 dan total uang Rp80.000, maka uang A adalah...", opts:["Rp24.000","Rp30.000","Rp32.000","Rp48.000"], a:1, exp:"Bagian A = 3/(3+5) × 80.000 = 3/8 × 80.000 = Rp30.000."},
-      {q:"Volume kubus dengan sisi 5 cm adalah...", opts:["25 cm³","75 cm³","100 cm³","125 cm³"], a:3, exp:"V = s³ = 5³ = 125 cm³."},
-      {q:"Hasil dari 0,5 + 0,25 × 4 adalah...", opts:["1,5","2,0","2,5","3,0"], a:0, exp:"Operasi perkalian dulu: 0,25 × 4 = 1. Lalu 0,5 + 1 = 1,5."},
-      {q:"Jika 60% siswa lulus dan ada 40 siswa, jumlah yang lulus adalah...", opts:["20","24","26","30"], a:1, exp:"60% × 40 = 24 siswa."},
-      {q:"Pak Adi menabung Rp5.000.000 dengan bunga 8%/tahun. Bunga 1 tahun adalah...", opts:["Rp300.000","Rp350.000","Rp400.000","Rp450.000"], a:2, exp:"Bunga = 8% × 5.000.000 = Rp400.000."},
-      {q:"Suatu segitiga memiliki alas 10 cm dan tinggi 6 cm. Luasnya adalah...", opts:["16 cm²","30 cm²","48 cm²","60 cm²"], a:1, exp:"Luas segitiga = ½ × alas × tinggi = ½ × 10 × 6 = 30 cm²."},
-      {q:"Median dari data 4, 6, 8, 10, 12 adalah...", opts:["6","7","8","9"], a:2, exp:"Data sudah urut, jumlah ganjil (5 data). Median = data ke-3 = 8."}
+      {q:"Hasil dari 35% × 200 − 20 adalah...", opts:["40","50","60","70"], a:1, exp:"35% × 200 = 70. Lalu 70 − 20 = 50."},
+      {q:"Jika 4x − 9 = 23, maka x = ...", opts:["6","7","8","9"], a:2, exp:"4x = 32. x = 8."},
+      {q:"Harga laptop Rp8.000.000 diskon 25%, harga setelah diskon?", opts:["Rp5.000.000","Rp6.000.000","Rp6.500.000","Rp7.000.000"], a:1, exp:"Diskon = 2.000.000. Harga = 6.000.000."},
+      {q:"Rata-rata dari 12, 15, 18, 21, 24 adalah...", opts:["16","18","19","20"], a:1, exp:"Jumlah 90 ÷ 5 = 18. (Atau suku tengah deret aritmetika.)"},
+      {q:"36 ÷ 4 × 3 + 7 = ...", opts:["27","30","34","37"], a:2, exp:"36÷4=9, 9×3=27, 27+7=34."},
+      {q:"KPK dari 8 dan 12 adalah...", opts:["16","20","24","48"], a:2, exp:"8 = 2³, 12 = 2²×3. KPK = 2³×3 = 24."},
+      {q:"FPB dari 30 dan 45 adalah...", opts:["5","10","15","30"], a:2, exp:"30 = 2×3×5, 45 = 3²×5. FPB = 3×5 = 15."},
+      {q:"Kereta melaju 80 km/jam selama 3 jam 30 menit. Jarak yang ditempuh adalah...", opts:["240 km","260 km","280 km","300 km"], a:2, exp:"3,5 jam × 80 = 280 km."},
+      {q:"Jika 3/7 dari suatu bilangan = 36, bilangan itu adalah...", opts:["63","70","77","84"], a:3, exp:"Bilangan = 36 × 7/3 = 84."},
+      {q:"Akar pangkat tiga dari 343 adalah...", opts:["6","7","8","9"], a:1, exp:"7³ = 343."},
+      {q:"45% dari 320 adalah...", opts:["120","132","144","156"], a:2, exp:"45/100 × 320 = 144."},
+      {q:"Kotak: 4 merah, 6 biru, 5 hijau. Peluang terambil bola biru?", opts:["4/15","6/15","5/15","2/5"], a:3, exp:"6/15 = 2/5."},
+      {q:"Jika 5x + 3 = 28, maka x = ...", opts:["3","4","5","6"], a:2, exp:"5x = 25. x = 5."},
+      {q:"Hasil dari (−6) × 4 + 30 ÷ (−5) adalah...", opts:["−30","−24","−18","−6"], a:0, exp:"(−6)×4 = −24; 30÷(−5) = −6; total −30."},
+      {q:"Diskon ganda 30% lalu 20% pada Rp1.000.000 menjadi...", opts:["Rp500.000","Rp560.000","Rp600.000","Rp640.000"], a:1, exp:"1.000.000 × 0,7 × 0,8 = 560.000."},
+      {q:"8² − 6² = ...", opts:["14","20","24","28"], a:3, exp:"64 − 36 = 28."},
+      {q:"Deret 4, 9, 14, 19, ... Suku ke-12 adalah...", opts:["54","59","64","69"], a:1, exp:"Beda = 5. U₁₂ = 4 + 11×5 = 59."},
+      {q:"Bunga tunggal Rp4.000.000 dengan 9%/tahun selama 8 bulan adalah...", opts:["Rp200.000","Rp240.000","Rp280.000","Rp320.000"], a:1, exp:"4.000.000 × 9% × 8/12 = 240.000."},
+      {q:"Luas trapesium dengan sisi sejajar 8 cm dan 12 cm, tinggi 6 cm adalah...", opts:["48 cm²","54 cm²","60 cm²","72 cm²"], a:2, exp:"L = ½ × (8+12) × 6 = 60 cm²."},
+      {q:"Luas lingkaran dengan diameter 14 cm (π=22/7)?", opts:["44","88","154","308"], a:2, exp:"r=7. L = πr² = 22/7 × 49 = 154 cm²."},
+      {q:"12 pekerja menyelesaikan dalam 20 hari, berapa hari untuk 15 pekerja?", opts:["12","14","16","18"], a:2, exp:"Total man-days = 240. 240/15 = 16 hari."},
+      {q:"4³ = ...", opts:["12","32","48","64"], a:3, exp:"4 × 4 × 4 = 64."},
+      {q:"Pecahan 5/8 dalam desimal adalah...", opts:["0,425","0,500","0,625","0,750"], a:2, exp:"5 ÷ 8 = 0,625."},
+      {q:"Rasio uang A:B:C = 2:3:5 dengan total Rp200.000. Uang B adalah...", opts:["Rp40.000","Rp60.000","Rp80.000","Rp100.000"], a:1, exp:"B = 3/10 × 200.000 = 60.000."},
+      {q:"Volume balok dengan p=8, l=5, t=4 adalah...", opts:["80","120","160","200"], a:2, exp:"V = 8×5×4 = 160."},
+      {q:"Hasil dari 0,75 × 8 + 1,5 = ...", opts:["6,0","7,5","8,5","9,0"], a:1, exp:"0,75×8=6. 6+1,5=7,5."},
+      {q:"75% dari 32 siswa lulus, berapa yang lulus?", opts:["18","20","22","24"], a:3, exp:"75% × 32 = 24."},
+      {q:"Pak Budi menabung Rp10.000.000 dengan bunga tunggal 7%/tahun. Bunga 2 tahun?", opts:["Rp1.000.000","Rp1.200.000","Rp1.400.000","Rp1.600.000"], a:2, exp:"10.000.000 × 7% × 2 = 1.400.000."},
+      {q:"Luas belah ketupat dengan diagonal 12 cm dan 16 cm adalah...", opts:["48","72","96","192"], a:2, exp:"L = ½ × 12 × 16 = 96 cm²."},
+      {q:"Modus dari data: 5,6,7,7,8,9,7,6,7?", opts:["5","6","7","8"], a:2, exp:"Angka 7 muncul 4 kali (terbanyak)."},
+      {q:"Barang dijual Rp150.000 dengan untung 25% dari harga beli. Harga belinya?", opts:["Rp100.000","Rp112.500","Rp120.000","Rp125.000"], a:2, exp:"HJ = HB × 1,25. HB = 150.000 / 1,25 = 120.000."}
     ]
   },
-  
-  // ============== SUBTES 3 — PENGETAHUAN UMUM (40 soal) ==============
   {
     name: "Pengetahuan Umum",
     duration: 7 * 60,
     questions: [
-      {q:"Ibu kota Indonesia secara resmi adalah...", opts:["Jakarta","IKN Nusantara","Yogyakarta","Bandung"], a:1, exp:"Berdasarkan UU No. 21 Tahun 2023 tentang IKN, ibu kota Indonesia adalah Ibu Kota Nusantara (IKN) di Kalimantan Timur."},
-      {q:"Kopdes Merah Putih merupakan singkatan dari...", opts:["Koperasi Daerah Merah Putih","Koperasi Desa Merah Putih","Komunitas Desa Merah Putih","Konsorsium Desa Merah Putih"], a:1, exp:"Kopdes = Koperasi Desa Merah Putih, program nasional koperasi tingkat desa/kelurahan."},
-      {q:"Hari Koperasi Indonesia diperingati setiap tanggal...", opts:["12 Juli","17 Juli","12 Agustus","17 Agustus"], a:0, exp:"Hari Koperasi Indonesia diperingati setiap 12 Juli, mengacu pada Kongres Koperasi Pertama di Tasikmalaya tahun 1947."},
-      {q:"Bapak Koperasi Indonesia adalah...", opts:["Soekarno","Mohammad Hatta","Soeharto","Tan Malaka"], a:1, exp:"Mohammad Hatta dijuluki Bapak Koperasi Indonesia atas perannya dalam pengembangan koperasi sebagai sokoguru ekonomi nasional."},
-      {q:"Pancasila ditetapkan sebagai dasar negara pada tanggal...", opts:["1 Juni 1945","17 Agustus 1945","18 Agustus 1945","22 Juni 1945"], a:2, exp:"Pancasila ditetapkan sebagai dasar negara pada sidang PPKI 18 Agustus 1945 bersama pengesahan UUD 1945."},
-      {q:"UUD 1945 mengatur koperasi pada pasal...", opts:["Pasal 27","Pasal 31","Pasal 33","Pasal 34"], a:2, exp:"Pasal 33 ayat (1) UUD 1945: 'Perekonomian disusun sebagai usaha bersama berdasar atas asas kekeluargaan' — landasan konstitusional koperasi."},
-      {q:"Lambang koperasi Indonesia yang terbaru menampilkan...", opts:["Pohon beringin","Bunga teratai dengan empat sudut","Padi dan kapas","Roda gigi"], a:1, exp:"Lambang koperasi Indonesia terbaru (sejak 2012) berupa bunga teratai dengan tulisan 'Koperasi Indonesia'."},
-      {q:"Asas koperasi Indonesia adalah...", opts:["Kapitalisme","Sosialisme","Kekeluargaan","Liberalisme"], a:2, exp:"Berdasarkan UU Perkoperasian, asas koperasi adalah kekeluargaan (sesuai Pasal 33 UUD 1945)."},
-      {q:"Modal koperasi yang berasal dari anggota saat masuk koperasi disebut...", opts:["Simpanan wajib","Simpanan pokok","Simpanan sukarela","Hibah"], a:1, exp:"Simpanan pokok dibayar sekali saat masuk anggota; simpanan wajib dibayar berkala."},
-      {q:"Sisa Hasil Usaha (SHU) koperasi dibagikan berdasarkan...", opts:["Besar simpanan saja","Jasa anggota dan modal","Lama keanggotaan","Sama rata"], a:1, exp:"SHU dibagi berdasarkan jasa usaha (transaksi) anggota dan jasa modal (simpanan), bukan sama rata."},
-      {q:"Lembaga negara yang mengawasi pemilu di Indonesia adalah...", opts:["KPK","KPU","MK","Bawaslu"], a:3, exp:"KPU menyelenggarakan, Bawaslu mengawasi pemilu. MK menyelesaikan sengketa hasilnya."},
-      {q:"Mata uang Vietnam adalah...", opts:["Baht","Dong","Ringgit","Peso"], a:1, exp:"Mata uang Vietnam adalah Dong (VND). Baht=Thailand, Ringgit=Malaysia, Peso=Filipina."},
-      {q:"Negara di Asia Tenggara yang tidak pernah dijajah adalah...", opts:["Indonesia","Filipina","Thailand","Malaysia"], a:2, exp:"Thailand (dahulu Siam) adalah satu-satunya negara di Asia Tenggara yang tidak pernah dijajah bangsa Eropa."},
-      {q:"ASEAN didirikan pada tanggal...", opts:["8 Agustus 1967","17 Agustus 1945","8 Mei 1967","17 Agustus 1967"], a:0, exp:"ASEAN didirikan 8 Agustus 1967 di Bangkok melalui Deklarasi Bangkok oleh 5 negara pendiri."},
-      {q:"Presiden RI yang menjabat sejak Oktober 2024 adalah...", opts:["Joko Widodo","Prabowo Subianto","Ma'ruf Amin","Anies Baswedan"], a:1, exp:"Prabowo Subianto dilantik sebagai Presiden RI ke-8 pada 20 Oktober 2024."},
-      {q:"Jenis koperasi berdasarkan jenis usaha meliputi, kecuali...", opts:["Koperasi konsumen","Koperasi produsen","Koperasi simpan pinjam","Koperasi politik"], a:3, exp:"Jenis koperasi: konsumen, produsen, simpan pinjam, jasa, dan pemasaran. Tidak ada koperasi politik."},
-      {q:"BUMN yang mengelola listrik di Indonesia adalah...", opts:["PLN","PGN","Pertamina","Telkom"], a:0, exp:"PT PLN (Persero) mengelola kelistrikan, PGN gas, Pertamina migas, Telkom telekomunikasi."},
-      {q:"Pulau terbesar di Indonesia adalah...", opts:["Jawa","Sumatera","Kalimantan","Papua"], a:2, exp:"Kalimantan adalah pulau terbesar di Indonesia (≈540.000 km²). Catatan: pulau Papua secara keseluruhan lebih besar tapi sebagian milik PNG."},
-      {q:"Lagu kebangsaan Indonesia diciptakan oleh...", opts:["Ismail Marzuki","WR Supratman","Kusbini","C. Simanjuntak"], a:1, exp:"Indonesia Raya diciptakan oleh Wage Rudolf Supratman, pertama dinyanyikan pada Sumpah Pemuda 28 Oktober 1928."},
-      {q:"Kementerian yang membidangi koperasi dan UKM saat ini adalah...", opts:["Kemenkop UKM","Kemendag","Kemenperin","Kemenkeu"], a:0, exp:"Kementerian Koperasi dan UKM (Kemenkop UKM) membidangi pembinaan koperasi dan usaha kecil-menengah."},
-      {q:"Prinsip koperasi yang berarti anggota berhak ikut menentukan kebijakan adalah...", opts:["Otonomi","Demokratis","Kemandirian","Pendidikan"], a:1, exp:"Prinsip pengelolaan secara demokratis = setiap anggota memiliki hak suara yang sama (one member, one vote)."},
-      {q:"Rapat tertinggi dalam koperasi adalah...", opts:["Rapat Pengurus","Rapat Pengawas","Rapat Anggota","Rapat Manajer"], a:2, exp:"Rapat Anggota adalah pemegang kekuasaan tertinggi dalam koperasi."},
-      {q:"Lembaga keuangan mikro berbadan hukum koperasi disebut...", opts:["BPR","KSP","BMT","KUR"], a:1, exp:"KSP = Koperasi Simpan Pinjam, lembaga keuangan mikro berbadan hukum koperasi."},
-      {q:"Negara penghasil minyak sawit terbesar dunia adalah...", opts:["Malaysia","Indonesia","Thailand","Nigeria"], a:1, exp:"Indonesia adalah produsen CPO (minyak sawit) terbesar dunia, diikuti Malaysia."},
-      {q:"Pahlawan nasional dari Aceh yang berjuang melawan Belanda adalah...", opts:["Pattimura","Cut Nyak Dhien","Diponegoro","Imam Bonjol"], a:1, exp:"Cut Nyak Dhien adalah pahlawan dari Aceh yang berjuang dalam Perang Aceh melawan Belanda."},
-      {q:"Bencana tsunami besar di Aceh terjadi pada tahun...", opts:["2002","2004","2006","2008"], a:1, exp:"Gempa-tsunami Aceh terjadi 26 Desember 2004."},
-      {q:"Bahasa nasional Indonesia berasal dari rumpun bahasa...", opts:["Jawa","Melayu","Sunda","Minang"], a:1, exp:"Bahasa Indonesia berakar dari bahasa Melayu, dipilih sebagai bahasa persatuan dalam Sumpah Pemuda 1928."},
-      {q:"Lembaga yang berwenang melakukan pengawasan terhadap perbankan di Indonesia adalah...", opts:["BI","OJK","LPS","BPK"], a:1, exp:"OJK (Otoritas Jasa Keuangan) mengawasi sektor jasa keuangan termasuk perbankan sejak 2014."},
-      {q:"Gunung tertinggi di Indonesia adalah...", opts:["Semeru","Rinjani","Kerinci","Jaya Wijaya"], a:3, exp:"Puncak Jaya/Carstensz Pyramid di Pegunungan Jayawijaya, Papua, dengan tinggi ≈4.884 m."},
-      {q:"Koperasi pertama di Indonesia didirikan oleh...", opts:["Mohammad Hatta","R. Aria Wiraatmadja","Soekarno","KH Ahmad Dahlan"], a:1, exp:"Koperasi pertama di Indonesia didirikan R. Aria Wiraatmadja di Purwokerto tahun 1896 (Hulp en Spaarbank)."},
-      {q:"Provinsi termuda di Indonesia hasil pemekaran Papua adalah, kecuali...", opts:["Papua Selatan","Papua Tengah","Papua Pegunungan","Papua Timur"], a:3, exp:"Pemekaran 2022 menghasilkan Papua Selatan, Papua Tengah, Papua Pegunungan, dan Papua Barat Daya. Tidak ada 'Papua Timur'."},
-      {q:"BUMD yang mengelola air bersih di daerah disebut...", opts:["PDAM","PLN","PGN","BUMDes"], a:0, exp:"PDAM = Perusahaan Daerah Air Minum, BUMD pengelola air bersih."},
-      {q:"BUMDes adalah singkatan dari...", opts:["Badan Usaha Milik Desa","Badan Usaha Mandiri Desa","Bank Usaha Milik Desa","Balai Usaha Milik Desa"], a:0, exp:"BUMDes = Badan Usaha Milik Desa, lembaga usaha desa yang dikelola masyarakat dan pemerintah desa."},
-      {q:"Tanggal kemerdekaan negara Malaysia adalah...", opts:["31 Agustus 1957","17 Agustus 1957","31 Agustus 1945","9 Agustus 1965"], a:0, exp:"Malaysia (Federation of Malaya) merdeka 31 Agustus 1957. 9 Agustus 1965 = Singapura merdeka."},
-      {q:"Pembina utama koperasi di Indonesia menurut UU adalah...", opts:["Presiden","Menteri Koperasi dan UKM","Gubernur","Bupati"], a:1, exp:"Pembinaan koperasi secara nasional dilakukan oleh Menteri Koperasi dan UKM."},
-      {q:"Singkatan dari KUR adalah...", opts:["Kredit Usaha Rakyat","Koperasi Usaha Rakyat","Kredit Umum Rakyat","Kredit Usaha Rakyat Mikro"], a:0, exp:"KUR = Kredit Usaha Rakyat, program kredit dengan bunga rendah untuk UMKM."},
-      {q:"Sumber utama modal awal koperasi adalah...", opts:["Pinjaman bank","Hibah pemerintah","Simpanan pokok dan wajib","Saham"], a:2, exp:"Modal sendiri koperasi terdiri dari simpanan pokok, simpanan wajib, dana cadangan, dan hibah."},
-      {q:"Koperasi yang menjual barang kebutuhan anggota disebut koperasi...", opts:["Produsen","Konsumen","Jasa","Pemasaran"], a:1, exp:"Koperasi konsumen menyediakan barang kebutuhan anggota seperti sembako, alat rumah tangga, dsb."},
-      {q:"Singkatan dari APBN adalah...", opts:["Anggaran Pendapatan dan Belanja Nasional","Anggaran Pemasukan dan Belanja Negara","Anggaran Pendapatan dan Belanja Negara","Asas Pengeluaran Belanja Negara"], a:2, exp:"APBN = Anggaran Pendapatan dan Belanja Negara, disahkan setiap tahun oleh DPR."},
-      {q:"Koperasi Desa Merah Putih (Kopdes) merupakan inisiatif untuk...", opts:["Memperkuat ekonomi desa","Investasi saham","Pinjaman luar negeri","Ekspor barang mewah"], a:0, exp:"Kopdes Merah Putih adalah program penguatan ekonomi desa berbasis koperasi sebagai bagian dari ketahanan ekonomi nasional."}
+      {q:"Kementerian yang menaungi Kopdes Merah Putih adalah...", opts:["Kemendagri","Kemendes PDTT","Kemenkop UKM","Kemenkeu"], a:2, exp:"Pembinaan koperasi termasuk Kopdes Merah Putih berada di bawah Kementerian Koperasi dan UKM."},
+      {q:"Akronim 'PHTC' dalam program Kopdes Merah Putih merujuk pada...", opts:["Pelatihan Hari Tunggal Cipta","Program Hari Tani Cooperative","Pendidikan, Pelatihan & Pendampingan","Penilaian Hasil Tes Cepat"], a:2, exp:"Dalam program Kopdes Merah Putih, kerangka PHTC terkait pendidikan, pelatihan, dan pendampingan koperasi."},
+      {q:"Nilai koperasi yang terkait partisipasi anggota dalam keputusan adalah...", opts:["Demokrasi","Persaingan","Profit","Hierarki"], a:0, exp:"Demokrasi/demokratis = nilai inti koperasi: anggota berhak ikut menentukan kebijakan."},
+      {q:"Hari Lahir Pancasila diperingati tanggal...", opts:["1 Mei","1 Juni","17 Agustus","28 Oktober"], a:1, exp:"Hari Lahir Pancasila diperingati 1 Juni, mengacu pidato Soekarno di sidang BPUPKI 1 Juni 1945."},
+      {q:"UUD 1945 disahkan sebagai konstitusi pada...", opts:["17 Agustus 1945","18 Agustus 1945","22 Juni 1945","1 Juni 1945"], a:1, exp:"UUD 1945 disahkan PPKI pada 18 Agustus 1945."},
+      {q:"Lembaga yang berwenang menguji UU terhadap UUD adalah...", opts:["Mahkamah Agung","Mahkamah Konstitusi","DPR","Komisi Yudisial"], a:1, exp:"MK menguji UU terhadap UUD (judicial review). MA menguji peraturan di bawah UU."},
+      {q:"Lambang sila ke-4 Pancasila adalah...", opts:["Bintang","Rantai","Pohon Beringin","Kepala Banteng"], a:3, exp:"Sila 1 bintang, 2 rantai, 3 pohon beringin, 4 kepala banteng, 5 padi-kapas."},
+      {q:"Mata uang resmi Filipina adalah...", opts:["Baht","Dong","Ringgit","Peso"], a:3, exp:"Filipina menggunakan Peso Filipina (PHP)."},
+      {q:"Ibu kota Vietnam adalah...", opts:["Ho Chi Minh City","Hanoi","Hue","Da Nang"], a:1, exp:"Hanoi adalah ibu kota Vietnam."},
+      {q:"Negara yang menjadi anggota ke-11 ASEAN melalui aksesi adalah...", opts:["Timor Leste","Papua Nugini","Bangladesh","Sri Lanka"], a:0, exp:"Timor Leste resmi menjadi anggota ke-11 ASEAN."},
+      {q:"Singkatan UMKM adalah...", opts:["Usaha Mikro Kecil dan Menengah","Unit Modal Kerja Mandiri","Usaha Mandiri Kelompok Masyarakat","Unit Mikro Koperasi Mandiri"], a:0, exp:"UMKM = Usaha Mikro, Kecil, dan Menengah (UU No. 20/2008)."},
+      {q:"Tingkatan koperasi berdasarkan jenjang adalah, kecuali...", opts:["Koperasi Primer","Koperasi Sekunder","Koperasi Internasional","Koperasi Pusat/Gabungan/Induk"], a:2, exp:"Tingkatan koperasi: primer (anggota orang) dan sekunder (anggota minimal 3 koperasi: pusat, gabungan, induk). Tidak ada 'koperasi internasional'."},
+      {q:"Lambang Garuda Pancasila memiliki bulu sayap berjumlah...", opts:["8","17","19","45"], a:1, exp:"Bulu sayap 17 (tanggal), ekor 8 (bulan), pangkal ekor 19 dan leher 45 (tahun 1945)."},
+      {q:"Provinsi paling barat Indonesia adalah...", opts:["Sumatera Utara","Aceh","Riau","Kepri"], a:1, exp:"Aceh adalah provinsi paling barat. Sabang = titik nol kilometer barat."},
+      {q:"Gunung berapi tertinggi di Pulau Jawa adalah...", opts:["Merapi","Bromo","Semeru","Slamet"], a:2, exp:"Gunung Semeru di Jawa Timur (≈3.676 m)."},
+      {q:"Selat yang memisahkan Sumatera dan Jawa adalah...", opts:["Selat Karimata","Selat Sunda","Selat Madura","Selat Bali"], a:1, exp:"Selat Sunda memisahkan Pulau Sumatera dan Jawa."},
+      {q:"Lembaga yang menjamin simpanan nasabah perbankan di Indonesia adalah...", opts:["BI","OJK","LPS","BPK"], a:2, exp:"LPS = Lembaga Penjamin Simpanan."},
+      {q:"Bank sentral Republik Indonesia adalah...", opts:["Bank Mandiri","BNI","Bank Indonesia","BCA"], a:2, exp:"Bank Indonesia menjaga stabilitas moneter dan sistem pembayaran."},
+      {q:"BUMDes adalah lembaga usaha yang dimiliki oleh...", opts:["Pemerintah pusat","Pemerintah daerah","Pemerintah desa","Swasta"], a:2, exp:"BUMDes (Badan Usaha Milik Desa) didirikan dan dimiliki pemerintah desa."},
+      {q:"Salah satu prinsip koperasi menurut UU No. 25 Tahun 1992 adalah...", opts:["Persaingan bebas","Pembagian SHU adil sebanding jasa usaha","Modal terbatas pendiri","Untung mutlak pengurus"], a:1, exp:"Pembagian SHU adil sebanding besarnya jasa usaha anggota."},
+      {q:"Tujuan utama koperasi sesuai UU adalah...", opts:["Maksimalkan profit","Sejahterakan anggota & masyarakat","Memonopoli pasar","Membayar pajak besar"], a:1, exp:"Tujuan koperasi: memajukan kesejahteraan anggota dan masyarakat, ikut membangun ekonomi nasional."},
+      {q:"Bapak Pendidikan Nasional Indonesia adalah...", opts:["Soekarno","Mohammad Hatta","Ki Hajar Dewantara","Tan Malaka"], a:2, exp:"Ki Hajar Dewantara, pendiri Taman Siswa."},
+      {q:"Hari Pendidikan Nasional diperingati tanggal...", opts:["2 Mei","17 Mei","20 Mei","21 Mei"], a:0, exp:"2 Mei, hari kelahiran Ki Hajar Dewantara."},
+      {q:"Bahasa Indonesia diresmikan sebagai bahasa nasional pada peristiwa...", opts:["Proklamasi 1945","Sumpah Pemuda 1928","Kongres Pemuda I","Budi Utomo 1908"], a:1, exp:"Sumpah Pemuda 28 Oktober 1928."},
+      {q:"Singkatan APBDes adalah...", opts:["Anggaran Pendapatan dan Belanja Desa","Asas Pengaturan Belanja Desa","Anggaran Pemerintah Belanja Desa","Aturan Pendapatan Belanja Daerah"], a:0, exp:"APBDes = Anggaran Pendapatan dan Belanja Desa."},
+      {q:"Yang BUKAN unsur pada kop surat resmi koperasi adalah...", opts:["Nama koperasi","Alamat & kontak","Logo koperasi","Saldo rekening pribadi pengurus"], a:3, exp:"Saldo rekening pribadi adalah informasi pribadi yang tidak boleh ada di kop surat resmi."},
+      {q:"Salah satu peran koperasi dalam ekonomi nasional adalah...", opts:["Menggerakkan ekonomi rakyat","Memonopoli pasar","Mengurangi pajak","Membatasi UMKM"], a:0, exp:"Koperasi sebagai sokoguru menggerakkan ekonomi rakyat, terutama akar rumput."},
+      {q:"Pihak yang berhak menjadi anggota koperasi primer adalah...", opts:["Hanya WNI","Hanya pengusaha","Orang yang memenuhi syarat AD/ART","Hanya tokoh masyarakat"], a:2, exp:"Anggota koperasi primer adalah perseorangan yang memenuhi syarat AD/ART koperasi."},
+      {q:"Hari Sumpah Pemuda diperingati tanggal...", opts:["28 Oktober","10 November","17 Agustus","2 Mei"], a:0, exp:"28 Oktober."},
+      {q:"BPD dalam pemerintahan desa adalah...", opts:["Badan Permusyawaratan Desa","Badan Pengawas Desa","Badan Pelaksana Desa","Badan Pengelola Desa"], a:0, exp:"BPD = Badan Permusyawaratan Desa, semacam parlemen desa."},
+      {q:"Mata pencaharian utama penduduk pedesaan Indonesia secara umum adalah...", opts:["Industri","Pertanian","Pariwisata","Jasa keuangan"], a:1, exp:"Sebagian besar penduduk pedesaan bekerja di sektor pertanian (termasuk perkebunan, perikanan, peternakan)."},
+      {q:"Negara penghasil kopi terbesar di dunia adalah...", opts:["Indonesia","Vietnam","Brasil","Kolombia"], a:2, exp:"Brasil produsen kopi terbesar dunia, lalu Vietnam, Kolombia, Indonesia."},
+      {q:"Singkatan NIK adalah...", opts:["Nomor Induk Kependudukan","Nomor Identitas Karyawan","Nomor Internal Koperasi","Nomor Identifikasi Kantor"], a:0, exp:"NIK = Nomor Induk Kependudukan."},
+      {q:"Provinsi yang TIDAK berbatasan langsung darat dengan Malaysia adalah...", opts:["Kalimantan Barat","Kalimantan Utara","Kalimantan Timur","Kalimantan Tengah"], a:3, exp:"Yang berbatasan darat dengan Malaysia: Kalbar, Kaltara, Kaltim. Kalteng tidak."},
+      {q:"Tugas utama Pengurus Koperasi adalah...", opts:["Mengawasi pengurus","Menjalankan kegiatan usaha sehari-hari","Membayar pajak anggota","Menjadi pelanggan utama"], a:1, exp:"Pengurus menjalankan kegiatan koperasi sehari-hari dan bertanggung jawab pada Rapat Anggota."},
+      {q:"Lembaga supranasional yang mengatur perdagangan dunia adalah...", opts:["WHO","WTO","UNESCO","FAO"], a:1, exp:"WTO = World Trade Organization."},
+      {q:"Kebijakan moneter Indonesia ditetapkan oleh...", opts:["Presiden","Bank Indonesia","Menteri Keuangan","DPR"], a:1, exp:"Bank Indonesia sebagai bank sentral menetapkan kebijakan moneter (BI Rate)."},
+      {q:"Produk hukum tertinggi Pemerintah Daerah adalah...", opts:["Peraturan Bupati","Peraturan Daerah","Keputusan Gubernur","Surat Edaran"], a:1, exp:"Perda ditetapkan kepala daerah bersama DPRD."},
+      {q:"Sumber daya alam yang TIDAK dapat diperbarui adalah...", opts:["Air","Tanah","Minyak bumi","Hutan"], a:2, exp:"Minyak bumi terbentuk jutaan tahun, tidak bisa diperbarui dalam skala manusia."},
+      {q:"Forum kerjasama negara Asia Pasifik di bidang ekonomi adalah...", opts:["NATO","ASEAN","APEC","OPEC"], a:2, exp:"APEC = Asia-Pacific Economic Cooperation."}
     ]
   },
-  
-  // ============== SUBTES 4 — POLA GAMBAR (55 soal) ==============
-  // Karena tidak bisa menggambar, kami pakai notasi ASCII/karakter agar tetap visual
   {
     name: "Pola Gambar",
     duration: 7 * 60,
     questions: [
-      {q:"Lengkapi pola: △ ○ △ ○ △ ?", opts:["△","○","□","◇"], a:1, exp:"Pola berselang-seling △ dan ○. Setelah △ harus ○."},
-      {q:"Lengkapi pola: ■ ■ □ ■ ■ □ ■ ■ ?", opts:["■","□","◯","△"], a:1, exp:"Pola berulang setiap 3 simbol: ■ ■ □. Posisi ke-9 adalah □."},
-      {q:"2, 4, 8, 16, 32, ?", opts:["48","56","64","72"], a:2, exp:"Setiap suku dikalikan 2. 32 × 2 = 64."},
-      {q:"3, 6, 12, 24, ?", opts:["36","42","48","60"], a:2, exp:"Setiap suku dikalikan 2. 24 × 2 = 48."},
-      {q:"1, 4, 9, 16, 25, ?", opts:["30","32","36","49"], a:2, exp:"Pola: kuadrat bilangan 1², 2², 3², 4², 5². Berikutnya 6² = 36."},
-      {q:"Lengkapi pola: ABA BAB ABA ?", opts:["BAB","ABA","BBB","AAA"], a:0, exp:"Pola berselang ABA dan BAB. Setelah ABA, berikutnya BAB."},
-      {q:"5, 10, 20, 40, ?", opts:["60","70","80","100"], a:2, exp:"Setiap suku dikalikan 2. 40 × 2 = 80."},
-      {q:"100, 90, 81, 73, ?", opts:["64","65","66","67"], a:2, exp:"Selisih: −10, −9, −8, −7. Maka 73 − 7 = 66."},
-      {q:"A, C, E, G, ?", opts:["H","I","J","K"], a:1, exp:"Loncat satu huruf (selisih 2): A→C→E→G→I."},
-      {q:"Z, X, V, T, ?", opts:["R","Q","P","S"], a:0, exp:"Mundur 2 huruf: Z→X→V→T→R."},
-      {q:"♠ ♥ ♣ ♠ ♥ ♣ ♠ ?", opts:["♠","♥","♣","♦"], a:1, exp:"Pola berulang ♠ ♥ ♣. Setelah ♠ adalah ♥."},
-      {q:"1, 1, 2, 3, 5, 8, ?", opts:["11","12","13","14"], a:2, exp:"Deret Fibonacci: setiap suku = jumlah dua suku sebelumnya. 5+8 = 13."},
-      {q:"81, 27, 9, 3, ?", opts:["0","1","2","6"], a:1, exp:"Setiap suku dibagi 3. 3 ÷ 3 = 1."},
-      {q:"3, 7, 11, 15, 19, ?", opts:["21","22","23","24"], a:2, exp:"Beda tetap +4. 19 + 4 = 23."},
-      {q:"2, 3, 5, 8, 12, ?", opts:["15","16","17","18"], a:2, exp:"Selisih bertambah 1: +1, +2, +3, +4, +5. Maka 12+5 = 17."},
-      {q:"AZ, BY, CX, DW, ?", opts:["EU","EV","FU","FV"], a:1, exp:"Huruf depan maju (A,B,C,D,E), huruf belakang mundur (Z,Y,X,W,V). Maka EV."},
-      {q:"100, 50, 25, 12.5, ?", opts:["5","6.25","7.5","10"], a:1, exp:"Setiap suku dibagi 2. 12.5 ÷ 2 = 6.25."},
-      {q:"○ ○ ○ □ ○ ○ ○ □ ○ ○ ?", opts:["○","□","△","◇"], a:0, exp:"Pola: 3 lingkaran lalu 1 kotak. Posisi ke-11 adalah lingkaran ke-3 setelah □."},
-      {q:"6, 12, 24, 48, ?", opts:["72","84","96","100"], a:2, exp:"Dikalikan 2. 48 × 2 = 96."},
-      {q:"144, 72, 36, 18, ?", opts:["6","9","12","15"], a:1, exp:"Dibagi 2. 18 ÷ 2 = 9."},
-      {q:"B, D, G, K, ?", opts:["O","P","Q","R"], a:1, exp:"Selisih posisi: +2, +3, +4, +5. K(11) + 5 = P(16)."},
-      {q:"1, 3, 6, 10, 15, ?", opts:["18","20","21","24"], a:2, exp:"Bilangan segitiga. Selisih +2,+3,+4,+5,+6. Maka 15+6 = 21."},
-      {q:"Lengkapi: 2A, 4B, 8C, 16D, ?", opts:["20E","24E","32E","64E"], a:2, exp:"Angka dikalikan 2 (2,4,8,16,32). Huruf maju 1 (A,B,C,D,E). Maka 32E."},
-      {q:"7, 14, 28, 56, ?", opts:["84","100","112","128"], a:2, exp:"Dikalikan 2. 56 × 2 = 112."},
-      {q:"99, 88, 77, 66, ?", opts:["44","55","65","56"], a:1, exp:"Beda −11. 66 − 11 = 55."},
-      {q:"A1, B2, C3, D4, ?", opts:["E4","E5","F5","D5"], a:1, exp:"Huruf maju (A→B→C→D→E), angka maju (1,2,3,4,5). Jawaban E5."},
-      {q:"3, 9, 27, 81, ?", opts:["162","200","243","324"], a:2, exp:"Dikalikan 3. 81 × 3 = 243."},
-      {q:"500, 100, 20, 4, ?", opts:["0,5","0,8","1","2"], a:1, exp:"Dibagi 5. 4 ÷ 5 = 0,8."},
-      {q:"M, K, I, G, ?", opts:["E","F","D","H"], a:0, exp:"Mundur 2 huruf: M(13)→K(11)→I(9)→G(7)→E(5)."},
-      {q:"1, 2, 4, 7, 11, 16, ?", opts:["20","21","22","23"], a:2, exp:"Beda bertambah 1: +1,+2,+3,+4,+5,+6. Maka 16+6 = 22."},
-      {q:"4, 9, 16, 25, 36, ?", opts:["42","45","49","50"], a:2, exp:"Kuadrat: 2²,3²,4²,5²,6²,7². Berikutnya 7² = 49."},
-      {q:"1, 8, 27, 64, ?", opts:["100","125","144","216"], a:1, exp:"Pangkat tiga: 1³,2³,3³,4³,5³ = 125."},
-      {q:"X, V, T, R, ?", opts:["P","Q","O","S"], a:0, exp:"Mundur 2: X(24)→V(22)→T(20)→R(18)→P(16)."},
-      {q:"15, 20, 30, 45, ?", opts:["55","60","65","70"], a:2, exp:"Beda: +5,+10,+15,+20. Maka 45+20 = 65."},
-      {q:"AAA BBB CCC DDD ?", opts:["EE","EEE","FFF","DDDD"], a:1, exp:"Setiap kelompok 3 huruf yang sama, urutan abjad. Berikutnya EEE."},
-      {q:"2, 6, 18, 54, ?", opts:["108","126","162","216"], a:2, exp:"Dikalikan 3. 54 × 3 = 162."},
-      {q:"1000, 100, 10, 1, ?", opts:["0,01","0,1","0,5","1"], a:1, exp:"Dibagi 10. 1 ÷ 10 = 0,1."},
-      {q:"A, B, D, G, K, ?", opts:["O","P","Q","R"], a:1, exp:"Selisih: +1,+2,+3,+4,+5. K(11)+5 = P(16)."},
-      {q:"5, 11, 23, 47, ?", opts:["89","94","95","96"], a:2, exp:"Pola: ×2 + 1. 5×2+1=11; 11×2+1=23; 47×2+1 = 95."},
-      {q:"2, 5, 10, 17, 26, ?", opts:["35","36","37","40"], a:2, exp:"Beda: +3,+5,+7,+9,+11. Maka 26+11 = 37."},
-      {q:"Z, Y, W, T, P, ?", opts:["K","L","M","N"], a:0, exp:"Mundur dengan jarak bertambah: −1,−2,−3,−4,−5. P(16)−5 = K(11)."},
-      {q:"7, 14, 21, 28, ?", opts:["32","35","36","42"], a:1, exp:"Kelipatan 7. 28 + 7 = 35."},
-      {q:"1, 3, 9, 27, 81, ?", opts:["162","200","243","300"], a:2, exp:"Dikalikan 3. 81 × 3 = 243."},
-      {q:"2, 3, 5, 7, 11, ?", opts:["12","13","14","15"], a:1, exp:"Bilangan prima berurutan. Setelah 11 adalah 13."},
-      {q:"ABC, DEF, GHI, ?", opts:["JKL","KLM","HIJ","JLK"], a:0, exp:"Tiga huruf abjad berurutan, lompat 3. Setelah GHI adalah JKL."},
-      {q:"100, 81, 64, 49, ?", opts:["25","36","42","45"], a:1, exp:"Kuadrat menurun: 10²,9²,8²,7²,6²=36."},
-      {q:"5, 6, 8, 11, 15, 20, ?", opts:["24","25","26","27"], a:2, exp:"Beda: +1,+2,+3,+4,+5,+6. Maka 20+6 = 26."},
-      {q:"1, 4, 13, 40, ?", opts:["80","100","121","144"], a:2, exp:"Pola ×3 + 1: 1×3+1=4; 4×3+1=13; 13×3+1=40; 40×3+1=121."},
-      {q:"3, 4, 6, 9, 13, 18, ?", opts:["22","23","24","25"], a:2, exp:"Beda: +1,+2,+3,+4,+5,+6. Maka 18+6 = 24."},
-      {q:"Lingkaran berisi 1 titik, 2 titik, 3 titik, 4 titik, ?", opts:["3 titik","4 titik","5 titik","6 titik"], a:2, exp:"Jumlah titik bertambah 1 setiap gambar. Setelah 4 adalah 5."},
-      {q:"1, 2, 6, 24, 120, ?", opts:["240","480","600","720"], a:3, exp:"Faktorial: 1!,2!,3!,4!,5!. Berikutnya 6! = 720."},
-      {q:"AB, BC, CD, DE, ?", opts:["EF","FG","DF","EE"], a:0, exp:"Sepasang huruf berurutan, maju satu. Setelah DE adalah EF."},
-      {q:"2, 3, 5, 8, 13, 21, ?", opts:["28","30","34","35"], a:2, exp:"Pola Fibonacci: tiap suku = jumlah dua suku sebelumnya. 13+21 = 34."},
-      {q:"6, 10, 15, 21, 28, ?", opts:["35","36","40","42"], a:1, exp:"Beda: +4,+5,+6,+7,+8. Maka 28+8 = 36."},
-      {q:"Pola: 1, 11, 21, 1211, 111221, ?", opts:["111321","312211","221121","11132211"], a:1, exp:"Look-and-say sequence. '111221' = 'tiga 1, dua 2, satu 1' → 312211."}
+      {q:"Lengkapi: △ ◯ □ △ ◯ □ △ ?", opts:["△","◯","□","◇"], a:1, exp:"Pola berulang setiap 3: △ ◯ □. Posisi ke-8 = ◯."},
+      {q:"Lengkapi: ★ ★ ☆ ★ ★ ☆ ★ ★ ?", opts:["★","☆","◯","△"], a:1, exp:"Pola berulang ★★☆ setiap 3. Posisi ke-9 = ☆."},
+      {q:"3, 6, 12, 24, 48, ?", opts:["72","84","96","100"], a:2, exp:"Setiap suku ×2. 48×2=96."},
+      {q:"5, 8, 11, 14, 17, ?", opts:["19","20","21","22"], a:1, exp:"Beda tetap +3. 17+3=20."},
+      {q:"1, 4, 9, 16, 25, 36, ?", opts:["42","45","49","54"], a:2, exp:"Kuadrat 1²,2²,...,7². 7²=49."},
+      {q:"B, D, F, H, J, ?", opts:["K","L","M","N"], a:1, exp:"Loncat 1 (jarak 2): J(10)→L(12)."},
+      {q:"7, 14, 28, 56, 112, ?", opts:["168","200","224","256"], a:2, exp:"×2. 112×2=224."},
+      {q:"100, 95, 85, 70, 50, ?", opts:["20","25","30","35"], a:1, exp:"Selisih: -5,-10,-15,-20,-25. 50-25=25."},
+      {q:"Y, V, S, P, ?", opts:["L","M","N","O"], a:1, exp:"Mundur 3: Y→V→S→P→M."},
+      {q:"♣ ♥ ♣ ♥ ♣ ♥ ?", opts:["♣","♥","♠","♦"], a:0, exp:"Berselang. Posisi ke-7 = ♣."},
+      {q:"1, 1, 2, 3, 5, 8, 13, ?", opts:["18","19","21","22"], a:2, exp:"Fibonacci. 8+13=21."},
+      {q:"243, 81, 27, 9, ?", opts:["1","3","6","9"], a:1, exp:"÷3. 9÷3=3."},
+      {q:"6, 11, 16, 21, 26, ?", opts:["29","30","31","32"], a:2, exp:"+5. 26+5=31."},
+      {q:"3, 5, 9, 17, 33, ?", opts:["49","57","65","73"], a:2, exp:"×2-1. 33×2-1=65."},
+      {q:"AB, CD, EF, GH, ?", opts:["IJ","JK","KL","HI"], a:0, exp:"Pasangan huruf berurutan. Setelah GH = IJ."},
+      {q:"60, 30, 15, 7.5, ?", opts:["3","3.25","3.75","4"], a:2, exp:"÷2. 7.5÷2=3.75."},
+      {q:"○○○ ★★★ ○○○ ★★★ ○○○ ?", opts:["○","○○","★","★★★"], a:3, exp:"Setelah ○○○ adalah ★★★."},
+      {q:"4, 12, 36, 108, ?", opts:["216","288","324","432"], a:2, exp:"×3. 108×3=324."},
+      {q:"200, 100, 50, 25, 12.5, ?", opts:["6","6.25","6.5","8"], a:1, exp:"÷2. 12.5÷2=6.25."},
+      {q:"C, F, I, L, O, ?", opts:["P","Q","R","S"], a:2, exp:"+3. O(15)→R(18)."},
+      {q:"1, 4, 10, 22, 46, ?", opts:["80","90","94","100"], a:2, exp:"×2+2. 46×2+2=94."},
+      {q:"A1, C3, E5, G7, ?", opts:["I9","H8","J9","I10"], a:0, exp:"Huruf loncat 2, angka loncat 2. Maka I9."},
+      {q:"2, 6, 18, 54, 162, ?", opts:["324","486","648","729"], a:1, exp:"×3. 162×3=486."},
+      {q:"99, 88, 77, 66, 55, ?", opts:["33","44","45","54"], a:1, exp:"-11. 55-11=44."},
+      {q:"Z, Y, X, W, V, ?", opts:["T","U","S","R"], a:1, exp:"Mundur 1. V→U."},
+      {q:"5, 7, 11, 17, 25, ?", opts:["33","35","37","39"], a:1, exp:"Selisih +2,+4,+6,+8,+10. 25+10=35."},
+      {q:"1, 8, 27, 64, 125, ?", opts:["180","196","216","225"], a:2, exp:"Pangkat 3. 6³=216."},
+      {q:"M, J, G, D, ?", opts:["A","B","C","E"], a:0, exp:"Mundur 3. D→A."},
+      {q:"2, 5, 11, 23, 47, ?", opts:["89","94","95","96"], a:2, exp:"×2+1. 47×2+1=95."},
+      {q:"100, 81, 64, 49, 36, ?", opts:["18","20","25","27"], a:2, exp:"Kuadrat menurun. 5²=25."},
+      {q:"5, 6, 8, 11, 15, 20, 26, ?", opts:["32","33","34","35"], a:1, exp:"Selisih +1,+2,...,+7. 26+7=33."},
+      {q:"1, 3, 7, 15, 31, ?", opts:["47","55","63","127"], a:2, exp:"×2+1. 31×2+1=63."},
+      {q:"Z, X, U, Q, L, ?", opts:["E","F","G","H"], a:1, exp:"Mundur -2,-3,-4,-5,-6. L(12)-6=F(6)."},
+      {q:"6, 13, 27, 55, ?", opts:["108","109","110","111"], a:3, exp:"×2+1. 55×2+1=111."},
+      {q:"AAAA BBBB CCCC ?", opts:["DD","DDD","DDDD","DDDDD"], a:2, exp:"4 huruf identik berurutan. Setelah CCCC = DDDD."},
+      {q:"3, 6, 11, 18, 27, ?", opts:["36","37","38","40"], a:2, exp:"Selisih +3,+5,+7,+9,+11. 27+11=38."},
+      {q:"4, 9, 16, 25, 36, 49, ?", opts:["56","60","63","64"], a:3, exp:"Kuadrat. 8²=64."},
+      {q:"1000, 200, 40, 8, ?", opts:["1","1.2","1.6","2"], a:2, exp:"÷5. 8÷5=1.6."},
+      {q:"E, J, O, T, ?", opts:["X","Y","W","Z"], a:1, exp:"+5. T(20)→Y(25)."},
+      {q:"2, 4, 8, 14, 22, 32, ?", opts:["42","44","46","48"], a:1, exp:"Selisih +2,+4,+6,+8,+10,+12. 32+12=44."},
+      {q:"1, 2, 4, 8, 16, 32, ?", opts:["48","56","64","72"], a:2, exp:"×2. 32×2=64."},
+      {q:"3, 5, 7, 11, 13, 17, ?", opts:["18","19","21","23"], a:1, exp:"Bilangan prima. Setelah 17 = 19."},
+      {q:"BCD, FGH, JKL, ?", opts:["NOP","MNO","OPQ","PQR"], a:0, exp:"3 huruf urut, jarak antar kelompok 4. Setelah JKL = NOP."},
+      {q:"144, 121, 100, 81, ?", opts:["64","72","49","60"], a:0, exp:"Kuadrat menurun. 8²=64."},
+      {q:"1, 4, 13, 40, 121, ?", opts:["240","320","364","400"], a:2, exp:"×3+1. 121×3+1=364."},
+      {q:"2, 4, 7, 11, 16, 22, 29, ?", opts:["35","36","37","38"], a:2, exp:"Selisih +2,+3,+4,+5,+6,+7,+8. 29+8=37."},
+      {q:"Lingkaran berisi 1, 3, 6, 10, 15 titik. Selanjutnya?", opts:["18","20","21","24"], a:2, exp:"Bilangan segitiga. 15+6=21."},
+      {q:"1, 2, 6, 24, 120, ?", opts:["240","360","600","720"], a:3, exp:"Faktorial. 6!=720."},
+      {q:"AC, EG, IK, MO, ?", opts:["PR","QS","RT","NP"], a:1, exp:"Loncat: A,E,I,M,Q (jarak 4). Maka QS."},
+      {q:"3, 4, 7, 11, 18, 29, ?", opts:["40","43","47","52"], a:2, exp:"Fibonacci-like. 18+29=47."},
+      {q:"7, 14, 28, 56, 112, 224, ?", opts:["336","400","448","512"], a:2, exp:"×2. 224×2=448."},
+      {q:"2, 3, 5, 8, 12, 17, 23, ?", opts:["28","29","30","31"], a:2, exp:"Selisih +1,+2,+3,...,+7. 23+7=30."},
+      {q:"X, U, Q, L, F, ?", opts:["A","B","Y","Z"], a:3, exp:"Mundur -3,-4,-5,-6,-7. F(6)-7 = -1, ke akhir abjad: Z."},
+      {q:"3, 9, 21, 45, 93, ?", opts:["165","177","189","201"], a:2, exp:"×2+3. 93×2+3=189."},
+      {q:"50, 48, 44, 38, 30, ?", opts:["18","20","22","24"], a:1, exp:"Selisih -2,-4,-6,-8,-10. 30-10=20."}
     ]
   },
-  
-  // ============== SUBTES 5 — ABSTRAKSI RUANG (27 soal) ==============
   {
     name: "Abstraksi Ruang",
     duration: 7 * 60,
     questions: [
-      {q:"Sebuah kubus memiliki berapa sisi?", opts:["4","5","6","8"], a:2, exp:"Kubus memiliki 6 sisi (semua berbentuk persegi)."},
-      {q:"Sebuah kubus memiliki berapa rusuk?", opts:["6","8","10","12"], a:3, exp:"Kubus memiliki 12 rusuk (4 di atas, 4 di bawah, 4 vertikal)."},
-      {q:"Sebuah kubus memiliki berapa titik sudut?", opts:["4","6","8","12"], a:2, exp:"Kubus memiliki 8 titik sudut."},
-      {q:"Jika sebuah kubus dipotong sejajar salah satu sisinya, bentuk penampangnya adalah...", opts:["Lingkaran","Segitiga","Persegi","Persegi panjang"], a:2, exp:"Memotong kubus sejajar sisi menghasilkan penampang berbentuk persegi (kongruen dengan sisinya)."},
-      {q:"Volume kubus dengan rusuk 4 cm adalah...", opts:["16 cm³","32 cm³","48 cm³","64 cm³"], a:3, exp:"V = s³ = 4³ = 64 cm³."},
-      {q:"Bangun ruang dengan alas lingkaran dan satu titik puncak adalah...", opts:["Tabung","Kerucut","Bola","Limas"], a:1, exp:"Kerucut memiliki alas berbentuk lingkaran dan satu titik puncak."},
-      {q:"Sebuah jaring-jaring kubus terdiri dari berapa persegi?", opts:["4","5","6","8"], a:2, exp:"Karena kubus memiliki 6 sisi, jaring-jaringnya juga terdiri dari 6 persegi yang terhubung."},
-      {q:"Jumlah sisi tabung (silinder) adalah...", opts:["1","2","3","4"], a:2, exp:"Tabung memiliki 3 sisi: dua lingkaran (atas-bawah) dan satu sisi lengkung selimut."},
-      {q:"Bangun ruang yang semua sisinya berbentuk segitiga sama sisi adalah...", opts:["Limas segitiga","Tetrahedron","Prisma segitiga","Limas segiempat"], a:1, exp:"Tetrahedron beraturan memiliki 4 sisi yang semuanya segitiga sama sisi."},
-      {q:"Bola memiliki berapa sisi?", opts:["0","1","2","Tak berhingga"], a:1, exp:"Bola memiliki 1 sisi yang berupa permukaan lengkung tertutup."},
-      {q:"Jika kertas persegi dilipat dua secara diagonal, terbentuk bangun...", opts:["Persegi panjang","Segitiga","Trapesium","Belah ketupat"], a:1, exp:"Lipat diagonal persegi menghasilkan segitiga (siku-siku sama kaki)."},
-      {q:"Limas segiempat memiliki berapa rusuk?", opts:["6","8","10","12"], a:1, exp:"Limas segiempat: 4 rusuk alas + 4 rusuk tegak ke puncak = 8 rusuk."},
-      {q:"Prisma segitiga memiliki berapa titik sudut?", opts:["4","5","6","8"], a:2, exp:"Prisma segitiga: 3 titik atas + 3 titik bawah = 6 titik sudut."},
-      {q:"Volume balok dengan p=10, l=5, t=4 adalah...", opts:["100","150","180","200"], a:3, exp:"V = p × l × t = 10 × 5 × 4 = 200 satuan kubik."},
-      {q:"Jika sebuah dadu menunjukkan angka 1 di atas, dan 2 di depan, maka di belakang adalah...", opts:["3","4","5","6"], a:2, exp:"Pada dadu standar, sisi yang berlawanan berjumlah 7. Jadi lawan 2 adalah 5."},
-      {q:"Pada dadu standar, jika 6 di atas, di bawah adalah...", opts:["1","2","3","4"], a:0, exp:"Sisi berlawanan dadu berjumlah 7. Lawan 6 adalah 1."},
-      {q:"Bangun ruang dengan 5 sisi (1 segiempat dan 4 segitiga) adalah...", opts:["Limas segiempat","Prisma segiempat","Tetrahedron","Kerucut"], a:0, exp:"Limas segiempat memiliki 1 alas segiempat dan 4 sisi tegak segitiga = total 5 sisi."},
-      {q:"Sebuah kotak berbentuk balok berukuran 2×3×4. Volumenya adalah...", opts:["9","12","18","24"], a:3, exp:"Volume balok = 2 × 3 × 4 = 24 satuan kubik."},
-      {q:"Jika sebuah kubus dipotong oleh bidang yang melewati 3 titik sudut tidak sebidang, bentuk penampangnya adalah...", opts:["Persegi","Segitiga","Persegi panjang","Segi enam"], a:1, exp:"Memotong kubus melalui 3 titik sudut yang tidak sebidang menghasilkan penampang berbentuk segitiga sama sisi."},
-      {q:"Bayangan kubus pada cahaya tegak lurus dari atas berbentuk...", opts:["Lingkaran","Segitiga","Persegi","Heksagon"], a:2, exp:"Proyeksi tegak lurus kubus dari atas menghasilkan bayangan persegi (sama dengan sisinya)."},
-      {q:"Sebuah gambar dirotasi 90° searah jarum jam, lalu dirotasi 180°. Total rotasi adalah...", opts:["90° searah","270° searah","180°","360°"], a:1, exp:"90° + 180° = 270° searah jarum jam (atau setara 90° berlawanan)."},
-      {q:"Jika benda dicerminkan terhadap sumbu vertikal, bagian kanan akan...", opts:["Tetap di kanan","Pindah ke kiri","Hilang","Membesar"], a:1, exp:"Pencerminan terhadap sumbu vertikal menukar kiri-kanan."},
-      {q:"Sebuah huruf 'b' jika dicerminkan secara horizontal akan menjadi...", opts:["b","d","p","q"], a:1, exp:"Huruf 'b' dicermin horizontal (kiri-kanan dibalik) menjadi 'd'."},
-      {q:"Huruf 'b' jika dicerminkan secara vertikal (atas-bawah) menjadi...", opts:["b","d","p","q"], a:2, exp:"Huruf 'b' dicermin vertikal (atas-bawah dibalik) menjadi 'p'."},
-      {q:"Bangun yang memiliki simetri putar tingkat 4 adalah...", opts:["Segitiga sama sisi","Persegi","Persegi panjang","Trapesium sama kaki"], a:1, exp:"Persegi memiliki simetri putar tingkat 4 (kembali ke posisi semula tiap rotasi 90°)."},
-      {q:"Jaring-jaring tabung terdiri dari...", opts:["1 lingkaran + 1 persegi","2 lingkaran + 1 persegi panjang","2 lingkaran + 1 segitiga","1 lingkaran + 1 segitiga"], a:1, exp:"Jaring tabung: 2 lingkaran (alas dan tutup) + 1 persegi panjang (selimut)."},
-      {q:"Sebuah kubus diwarnai semua sisinya, lalu dipotong menjadi 27 kubus kecil (3×3×3). Berapa kubus kecil yang memiliki tepat 3 sisi terwarnai?", opts:["4","6","8","12"], a:2, exp:"Kubus dengan 3 sisi terwarnai berada di pojok-pojok kubus besar. Sebuah kubus memiliki 8 pojok, jadi ada 8 kubus kecil."}
+      {q:"Sebuah balok memiliki berapa rusuk?", opts:["8","10","12","14"], a:2, exp:"Balok memiliki 12 rusuk: 4 panjang, 4 lebar, 4 tinggi."},
+      {q:"Limas segitiga (tetrahedron) memiliki berapa sisi?", opts:["3","4","5","6"], a:1, exp:"4 sisi: 1 alas + 3 sisi tegak segitiga."},
+      {q:"Prisma segitiga memiliki berapa sisi?", opts:["3","4","5","6"], a:2, exp:"2 segitiga (alas-tutup) + 3 persegi panjang (selimut) = 5 sisi."},
+      {q:"Volume tabung dengan jari-jari 7 cm dan tinggi 10 cm (π=22/7)?", opts:["1.470","1.540","1.620","1.760"], a:1, exp:"V = πr²t = 22/7 × 49 × 10 = 1.540 cm³."},
+      {q:"Jaring-jaring kerucut terdiri dari...", opts:["1 lingkaran + 1 juring lingkaran","2 lingkaran","1 segitiga + 1 lingkaran","1 persegi panjang + 1 lingkaran"], a:0, exp:"Kerucut: alas lingkaran + selimut juring lingkaran."},
+      {q:"Balok 4×6×8 dipotong menjadi kubus-kubus 2 cm. Berapa banyak kubus dihasilkan?", opts:["12","16","24","48"], a:2, exp:"4/2=2, 6/2=3, 8/2=4. Total = 2×3×4 = 24."},
+      {q:"Pada dadu standar, jika di atas 4 dan di depan 1, di belakang adalah...", opts:["2","3","5","6"], a:3, exp:"Sisi berlawanan dadu berjumlah 7. Lawan 1 = 6."},
+      {q:"Pada dadu, jika 5 di atas dan 3 di kanan, di kiri adalah...", opts:["1","2","4","6"], a:2, exp:"Lawan 3 adalah 4."},
+      {q:"Bola memiliki berapa rusuk?", opts:["0","1","2","Tak hingga"], a:0, exp:"Bola tidak memiliki rusuk maupun titik sudut, hanya 1 sisi lengkung."},
+      {q:"Kubus diwarnai semua sisi merah, lalu dipotong jadi 64 kubus kecil (4×4×4). Berapa kubus kecil tidak terwarnai sama sekali?", opts:["4","6","8","12"], a:2, exp:"Kubus tidak tercat = bagian dalam = (4-2)³ = 2³ = 8."},
+      {q:"Sudut putar terkecil simetri segitiga sama sisi adalah...", opts:["60°","90°","120°","180°"], a:2, exp:"Simetri putar tingkat 3, sudut terkecil = 360°/3 = 120°."},
+      {q:"Limas segiempat memiliki berapa titik sudut?", opts:["4","5","6","8"], a:1, exp:"4 titik alas + 1 titik puncak = 5."},
+      {q:"Volume kerucut r=3, t=7 (π=22/7)?", opts:["44","66","99","132"], a:1, exp:"V = ⅓πr²t = ⅓ × 22/7 × 9 × 7 = 66 cm³."},
+      {q:"Bayangan tabung tegak yang disinari tegak lurus dari atas adalah...", opts:["Persegi panjang","Segitiga","Lingkaran","Persegi"], a:2, exp:"Proyeksi tegak dari atas = lingkaran (sama dengan alas)."},
+      {q:"Bayangan kerucut tegak yang disinari tegak lurus dari samping adalah...", opts:["Lingkaran","Segitiga","Persegi","Trapesium"], a:1, exp:"Proyeksi kerucut dari samping = segitiga sama kaki."},
+      {q:"Persegi dilipat dua jadi persegi panjang, lalu dilipat dua lagi tegak lurus. Bentuk akhirnya adalah...", opts:["Segitiga","Persegi","Persegi panjang lebih kecil","Trapesium"], a:1, exp:"Hasil akhir = persegi yang ukurannya ¼ dari awal."},
+      {q:"Huruf 'p' jika dicerminkan kiri-kanan menjadi...", opts:["b","d","p","q"], a:3, exp:"'p' dicermin horizontal → 'q'."},
+      {q:"Huruf 'p' jika dicerminkan atas-bawah menjadi...", opts:["b","d","p","q"], a:0, exp:"'p' dicermin vertikal → 'b'."},
+      {q:"Bangun yang memiliki simetri putar tingkat 6 adalah...", opts:["Persegi","Segi enam beraturan","Segi lima","Trapesium"], a:1, exp:"Segi enam beraturan punya simetri putar tingkat 6 (rotasi 60°)."},
+      {q:"Banyaknya simetri lipat persegi adalah...", opts:["2","3","4","8"], a:2, exp:"Persegi: 4 simetri lipat (2 melalui titik tengah sisi, 2 melalui diagonal)."},
+      {q:"Diagonal ruang kubus dengan rusuk 6 cm adalah...", opts:["6","6√2","6√3","12"], a:2, exp:"Diagonal ruang = s√3 = 6√3 cm."},
+      {q:"Luas permukaan kubus rusuk 5 cm adalah...", opts:["25","75","125","150"], a:3, exp:"L = 6s² = 6×25 = 150 cm²."},
+      {q:"Banyak diagonal ruang kubus adalah...", opts:["2","4","6","8"], a:1, exp:"Kubus punya 4 diagonal ruang."},
+      {q:"Pada dadu, jika 6 di atas dan 5 di depan, sisi kanan kemungkinan adalah...", opts:["1 atau 4","3 atau 4","2 atau 5","2 atau 6"], a:1, exp:"6 atas → 1 bawah, 5 depan → 2 belakang. Sisanya 3 dan 4 untuk kanan/kiri."},
+      {q:"Memotong kubus tegak lurus salah satu sisi (sejajar rusuk) menghasilkan...", opts:["Dua kubus","Dua balok","Satu prisma segitiga","Satu piramid"], a:1, exp:"Hasil potongan: dua balok."},
+      {q:"Sebuah segitiga sama kaki memiliki berapa simetri lipat?", opts:["0","1","2","3"], a:1, exp:"Segitiga sama kaki: 1 simetri lipat (sumbu vertikal melalui puncak)."},
+      {q:"Banyak titik sudut pada prisma segi enam adalah...", opts:["6","8","10","12"], a:3, exp:"6 titik atas + 6 titik bawah = 12 titik sudut."}
     ]
   },
-  
-  // ============== SUBTES 6 — BENTUK (25 soal) ==============
   {
     name: "Bentuk",
     duration: 7 * 60,
     questions: [
-      {q:"Bangun datar dengan 4 sisi sama panjang dan 4 sudut siku-siku adalah...", opts:["Persegi","Belah ketupat","Layang-layang","Trapesium"], a:0, exp:"Persegi memiliki 4 sisi sama panjang DAN 4 sudut siku-siku. Belah ketupat hanya 4 sisi sama panjang tapi sudut belum tentu siku-siku."},
-      {q:"Jumlah sudut dalam segitiga adalah...", opts:["90°","180°","270°","360°"], a:1, exp:"Jumlah sudut dalam segitiga selalu 180°."},
-      {q:"Jumlah sudut dalam persegi panjang adalah...", opts:["180°","270°","360°","540°"], a:2, exp:"Persegi panjang = 4 sudut × 90° = 360°."},
-      {q:"Bangun datar dengan 3 sisi sama panjang adalah...", opts:["Segitiga sama kaki","Segitiga sama sisi","Segitiga siku-siku","Segitiga sembarang"], a:1, exp:"Segitiga sama sisi memiliki 3 sisi sama panjang dan 3 sudut sama besar (60°)."},
-      {q:"Sudut yang besarnya 90° disebut sudut...", opts:["Lancip","Tumpul","Siku-siku","Lurus"], a:2, exp:"Sudut siku-siku = tepat 90°. Lancip < 90°, tumpul > 90°, lurus = 180°."},
-      {q:"Bangun datar yang memiliki simetri lipat tak terhingga adalah...", opts:["Persegi","Lingkaran","Segi enam","Segitiga"], a:1, exp:"Lingkaran dapat dilipat melalui setiap diameternya, sehingga simetri lipatnya tak terhingga."},
-      {q:"Luas lingkaran berjari-jari 7 cm (π=22/7) adalah...", opts:["44","132","154","308"], a:2, exp:"L = πr² = 22/7 × 7² = 22/7 × 49 = 154 cm²."},
-      {q:"Bangun datar dengan tepat satu pasang sisi sejajar adalah...", opts:["Trapesium","Jajaran genjang","Persegi","Belah ketupat"], a:0, exp:"Trapesium memiliki tepat satu pasang sisi sejajar. Jajaran genjang punya dua pasang."},
-      {q:"Jumlah sudut segi enam beraturan adalah...", opts:["360°","540°","720°","900°"], a:2, exp:"Rumus jumlah sudut: (n−2) × 180°. Untuk segi enam: (6−2) × 180° = 720°."},
-      {q:"Bangun yang sudut-sudutnya semua tumpul adalah...", opts:["Segitiga sama sisi","Segitiga siku-siku","Segitiga tumpul","Tidak mungkin"], a:3, exp:"Tidak mungkin segitiga semua sudutnya tumpul karena jumlah sudut harus 180°. Tumpul saja sudah > 90°."},
-      {q:"Keliling persegi dengan sisi 9 cm adalah...", opts:["18 cm","27 cm","36 cm","81 cm"], a:2, exp:"K = 4 × s = 4 × 9 = 36 cm."},
-      {q:"Sudut antara jarum jam pukul 03.00 adalah...", opts:["60°","90°","120°","180°"], a:1, exp:"Pada jam 03.00, jarum panjang di 12 dan jarum pendek di 3. Sudutnya = 3/12 × 360° = 90°."},
-      {q:"Bangun datar yang diagonalnya berpotongan tegak lurus dan saling membagi dua sama panjang adalah...", opts:["Persegi panjang","Belah ketupat","Trapesium","Layang-layang"], a:1, exp:"Belah ketupat: diagonal saling tegak lurus DAN membagi dua sama panjang. Layang-layang hanya tegak lurus tapi tidak membagi sama panjang."},
-      {q:"Berapa banyak diagonal pada persegi panjang?", opts:["1","2","3","4"], a:1, exp:"Persegi panjang memiliki 2 diagonal yang sama panjang dan saling membagi dua sama panjang."},
-      {q:"Bangun dengan 5 sisi disebut...", opts:["Segi empat","Pentagon","Heksagon","Oktagon"], a:1, exp:"Pentagon = segi lima (5 sisi). Heksagon=6, Oktagon=8."},
-      {q:"Jumlah sudut dalam pentagon (segi lima) adalah...", opts:["360°","450°","540°","720°"], a:2, exp:"(n−2) × 180° = (5−2) × 180° = 540°."},
-      {q:"Sudut pelurus dari 70° adalah...", opts:["20°","90°","110°","290°"], a:2, exp:"Sudut berpelurus berjumlah 180°. 180° − 70° = 110°."},
-      {q:"Sudut penyiku dari 35° adalah...", opts:["45°","55°","65°","145°"], a:1, exp:"Sudut berpenyiku berjumlah 90°. 90° − 35° = 55°."},
-      {q:"Luas segitiga dengan alas 8 cm dan tinggi 5 cm adalah...", opts:["13","20","24","40"], a:1, exp:"L = ½ × a × t = ½ × 8 × 5 = 20 cm²."},
-      {q:"Bentuk yang memiliki 8 sisi disebut...", opts:["Heksagon","Heptagon","Oktagon","Nonagon"], a:2, exp:"Oktagon = segi delapan. Heksagon=6, Heptagon=7, Nonagon=9."},
-      {q:"Diagonal pada segi-n dirumuskan sebagai n(n−3)/2. Diagonal pada heksagon adalah...", opts:["6","8","9","12"], a:2, exp:"6(6−3)/2 = 6×3/2 = 9 diagonal."},
-      {q:"Garis yang menghubungkan dua titik pada lingkaran melalui pusat disebut...", opts:["Tali busur","Diameter","Jari-jari","Garis singgung"], a:1, exp:"Diameter = tali busur yang melalui pusat lingkaran. Panjangnya = 2 × jari-jari."},
-      {q:"Sudut yang besarnya antara 90° dan 180° disebut sudut...", opts:["Lancip","Siku-siku","Tumpul","Refleks"], a:2, exp:"Lancip < 90°, siku = 90°, tumpul antara 90°−180°, refleks > 180°."},
-      {q:"Trapesium siku-siku memiliki berapa sudut siku-siku?", opts:["1","2","3","4"], a:1, exp:"Trapesium siku-siku memiliki tepat 2 sudut siku-siku (di salah satu sisi tegak)."},
-      {q:"Hubungan antara dua segitiga yang ukurannya sama persis disebut...", opts:["Sebangun","Kongruen","Sejajar","Simetris"], a:1, exp:"Kongruen = sama bentuk DAN sama ukuran. Sebangun = sama bentuk tapi ukuran bisa berbeda."}
+      {q:"Bangun datar dengan empat sisi sejajar dan sudut bukan siku-siku adalah...", opts:["Persegi","Persegi panjang","Jajaran genjang","Belah ketupat"], a:2, exp:"Jajaran genjang: dua pasang sisi sejajar, sudut tidak siku-siku."},
+      {q:"Jumlah sudut dalam segi delapan beraturan adalah...", opts:["720°","900°","1.080°","1.260°"], a:2, exp:"(n-2)×180° = 6×180° = 1.080°."},
+      {q:"Sudut yang besarnya kurang dari 90° disebut...", opts:["Lancip","Siku-siku","Tumpul","Lurus"], a:0, exp:"Lancip < 90°."},
+      {q:"Bangun datar dengan dua sisi sejajar tapi tidak sama panjang dan tanpa sudut siku-siku adalah...", opts:["Trapesium sama kaki","Trapesium siku-siku","Trapesium sembarang","Jajaran genjang"], a:2, exp:"Trapesium sembarang: dua sisi sejajar tanpa kekhususan sudut."},
+      {q:"Yang BUKAN sifat diagonal persegi adalah...", opts:["Sama panjang","Berpotongan tegak lurus","Saling membagi dua sama panjang","Tidak sama panjang"], a:3, exp:"Diagonal persegi sama panjang, tegak lurus, dan saling membagi sama panjang."},
+      {q:"Keliling segitiga dengan sisi 7, 8, 9 cm adalah...", opts:["20","24","25","28"], a:1, exp:"7+8+9 = 24 cm."},
+      {q:"Luas persegi panjang p=15 cm, l=8 cm adalah...", opts:["100","115","120","135"], a:2, exp:"L = 15×8 = 120 cm²."},
+      {q:"Sudut antara jarum jam pada pukul 06.00 adalah...", opts:["90°","120°","180°","360°"], a:2, exp:"Jarum panjang di 12, pendek di 6 = berlawanan = 180°."},
+      {q:"Sudut antara jarum jam pada pukul 09.00 adalah...", opts:["60°","90°","120°","180°"], a:1, exp:"3/12 × 360° = 90°."},
+      {q:"Bangun yang memiliki tepat 2 simetri lipat adalah...", opts:["Persegi","Persegi panjang","Lingkaran","Segitiga sama sisi"], a:1, exp:"Persegi panjang punya 2 simetri lipat (vertikal & horizontal)."},
+      {q:"Sudut pelurus dari 125° adalah...", opts:["35°","45°","55°","65°"], a:2, exp:"180° - 125° = 55°."},
+      {q:"Sudut penyiku dari 28° adalah...", opts:["52°","62°","72°","152°"], a:1, exp:"90° - 28° = 62°."},
+      {q:"Banyaknya diagonal pada segi delapan adalah...", opts:["16","18","20","24"], a:2, exp:"n(n-3)/2 = 8×5/2 = 20."},
+      {q:"Bangun yang sudut-sudutnya berjumlah 360° adalah...", opts:["Segitiga","Segiempat","Segilima","Segienam"], a:1, exp:"(4-2)×180° = 360°."},
+      {q:"Luas lingkaran dengan diameter 28 cm (π=22/7)?", opts:["176","308","616","1.232"], a:2, exp:"r=14. L = 22/7 × 196 = 616 cm²."},
+      {q:"Keliling lingkaran jari-jari 14 cm (π=22/7)?", opts:["44","66","88","176"], a:2, exp:"K = 2πr = 2×22/7×14 = 88 cm."},
+      {q:"Bentuk dengan 7 sisi disebut...", opts:["Heksagon","Heptagon","Oktagon","Pentagon"], a:1, exp:"Heptagon = segi tujuh."},
+      {q:"Setiap sudut dalam segi enam beraturan besarnya...", opts:["108°","120°","135°","144°"], a:1, exp:"720°/6 = 120°."},
+      {q:"Setiap sudut dalam segi lima beraturan besarnya...", opts:["108°","120°","135°","144°"], a:0, exp:"540°/5 = 108°."},
+      {q:"Dua bangun yang sebangun (similar) berarti...", opts:["Bentuk dan ukuran sama","Bentuk sama tapi ukuran berbeda","Hanya ukuran sama","Tidak ada hubungan"], a:1, exp:"Sebangun: bentuk sama, sudut bersesuaian sama, sisi-sisi punya rasio sama."},
+      {q:"Bangun datar dengan 4 sisi sama panjang dan 4 sudut siku-siku adalah...", opts:["Belah ketupat","Persegi","Jajaran genjang","Layang-layang"], a:1, exp:"Empat sisi sama DAN empat sudut siku-siku = persegi."},
+      {q:"Garis yang menghubungkan dua titik pada lingkaran TANPA melalui pusat disebut...", opts:["Diameter","Jari-jari","Tali busur","Garis singgung"], a:2, exp:"Tali busur tidak melalui pusat. Yang melalui pusat = diameter."},
+      {q:"Sudut yang besarnya 180° disebut...", opts:["Lancip","Siku","Tumpul","Lurus"], a:3, exp:"Sudut lurus = 180°."},
+      {q:"Trapesium sama kaki memiliki...", opts:["1 simetri lipat","2 simetri lipat","Tidak punya simetri lipat","4 simetri lipat"], a:0, exp:"Trapesium sama kaki: 1 simetri lipat (sumbu vertikal)."},
+      {q:"Luas juring lingkaran dengan jari-jari 14 cm dan sudut pusat 90° (π=22/7)?", opts:["77","154","308","616"], a:1, exp:"(90/360) × πr² = ¼ × 616 = 154 cm²."}
     ]
   },
-  
-  // ============== SUBTES 7 — MANAJEMEN BIDANG KDKMP/KNMP (20 soal, 20 menit) ==============
   {
     name: "Manajemen Bidang (KDKMP/KNMP)",
     duration: 20 * 60,
     questions: [
-      {q:"Tujuan utama Koperasi Desa Merah Putih (Kopdes Merah Putih) adalah...", opts:["Memaksimalkan keuntungan investor","Memperkuat ekonomi desa dan kesejahteraan anggota","Memonopoli usaha desa","Mengganti BUMDes"], a:1, exp:"Kopdes Merah Putih bertujuan memperkuat ekonomi desa berbasis koperasi untuk kesejahteraan anggota dan masyarakat desa, sebagai bagian dari ketahanan ekonomi nasional."},
-      {q:"Landasan idiil koperasi Indonesia adalah...", opts:["UUD 1945","Pancasila","UU Koperasi","Tri Dharma Koperasi"], a:1, exp:"Landasan idiil = Pancasila; landasan struktural = UUD 1945 Pasal 33; landasan operasional = UU Perkoperasian."},
-      {q:"Rapat Anggota dalam koperasi memutuskan hal-hal berikut, KECUALI...", opts:["Anggaran Dasar","Pemilihan Pengurus","Operasional harian koperasi","Pembagian SHU"], a:2, exp:"Rapat Anggota memutuskan kebijakan strategis (AD/ART, pengurus, SHU). Operasional harian dijalankan oleh pengurus/pengelola, bukan diputus dalam Rapat Anggota."},
-      {q:"Dalam struktur koperasi, pengawas berfungsi untuk...", opts:["Menjalankan kegiatan harian","Mengawasi kebijakan dan pengelolaan koperasi","Membuat keputusan investasi","Menggantikan pengurus"], a:1, exp:"Pengawas mengawasi pelaksanaan kebijakan dan pengelolaan koperasi yang dilakukan pengurus, lalu melaporkan hasilnya pada Rapat Anggota."},
-      {q:"Sumber permodalan koperasi yang BUKAN modal sendiri adalah...", opts:["Simpanan pokok","Simpanan wajib","Pinjaman bank","Dana cadangan"], a:2, exp:"Modal sendiri: simpanan pokok, simpanan wajib, dana cadangan, hibah. Pinjaman bank termasuk modal pinjaman/asing."},
-      {q:"Prinsip koperasi yang menyatakan setiap anggota memiliki satu suara dalam Rapat Anggota disebut...", opts:["One member, one vote","Proporsional saham","Mayoritas pemodal","Hak veto"], a:0, exp:"Prinsip 'one member, one vote' = setiap anggota memiliki hak suara yang sama, terlepas dari besar modalnya. Ini ciri pengelolaan demokratis koperasi."},
-      {q:"Sisa Hasil Usaha (SHU) yang diterima anggota dipengaruhi oleh...", opts:["Hanya jumlah simpanan","Hanya jumlah transaksi","Jasa modal dan jasa usaha anggota","Lama jadi anggota"], a:2, exp:"SHU bagian anggota dihitung dari kombinasi jasa modal (proporsional simpanan) dan jasa usaha (proporsional transaksi anggota dengan koperasi)."},
-      {q:"Yang dimaksud dengan 'koperasi multi pihak' (sebagaimana didorong dalam program Kopdes Merah Putih) adalah koperasi yang...", opts:["Hanya melibatkan satu jenis usaha","Anggotanya terdiri dari berbagai kategori (produsen, konsumen, pekerja, dst)","Hanya berlaku di kota","Dimiliki swasta penuh"], a:1, exp:"Koperasi multi pihak adalah koperasi dengan beragam kelas keanggotaan (produsen, konsumen, pekerja, pendukung) yang masing-masing punya hak proporsional."},
-      {q:"Manakah yang BUKAN ciri manajemen koperasi yang sehat?", opts:["Transparansi keuangan","Akuntabilitas pengurus","Pengambilan keputusan oleh satu orang","Partisipasi aktif anggota"], a:2, exp:"Pengambilan keputusan oleh satu orang bertentangan dengan prinsip demokratis koperasi. Manajemen sehat: transparan, akuntabel, partisipatif."},
-      {q:"Strategi pemasaran yang paling tepat untuk koperasi desa adalah...", opts:["Iklan TV nasional","Berbasis komunitas dan kebutuhan lokal","Hanya online","Mengikuti tren mall"], a:1, exp:"Koperasi desa paling efektif memasarkan produk berbasis komunitas, kebutuhan riil anggota, dan jaringan lokal — bukan pendekatan korporat besar."},
-      {q:"Risiko terbesar yang harus dimitigasi dalam pengelolaan Koperasi Simpan Pinjam (KSP) adalah...", opts:["Risiko kredit macet","Risiko desain logo","Risiko cuaca","Risiko popularitas"], a:0, exp:"Risiko utama KSP adalah kredit macet (NPL). Mitigasi: analisis kelayakan, agunan, monitoring, cadangan kerugian piutang."},
-      {q:"Dokumen tertinggi yang mengatur tata kelola koperasi adalah...", opts:["SOP","Anggaran Dasar","Memo internal","Notula rapat"], a:1, exp:"Anggaran Dasar (AD) adalah dokumen konstitusional tertinggi koperasi, ditetapkan oleh Rapat Anggota."},
-      {q:"Indikator keberhasilan koperasi yang paling holistik adalah...", opts:["Jumlah aset","SHU saja","Manfaat ekonomi dan sosial bagi anggota","Jumlah anggota"], a:2, exp:"Koperasi sukses bukan hanya dari laba, melainkan dari manfaat ekonomi (harga, akses) dan sosial (pendidikan, gotong royong) yang dirasakan anggota."},
-      {q:"Dalam menjalankan unit usaha ritel (sembako/kebutuhan harian), koperasi desa sebaiknya...", opts:["Menetapkan harga setinggi mungkin","Menetapkan harga wajar dengan kualitas terjamin","Hanya menjual ke pengurus","Mengabaikan kualitas"], a:1, exp:"Koperasi konsumen ritel memberikan manfaat melalui harga wajar dan kualitas terjamin agar anggota mendapat nilai lebih dibanding belanja di luar koperasi."},
-      {q:"Pelatihan dan pendidikan bagi anggota koperasi merupakan...", opts:["Pemborosan biaya","Salah satu prinsip koperasi","Hanya untuk pengurus","Opsional"], a:1, exp:"Pendidikan dan pelatihan merupakan SALAH SATU prinsip koperasi (sesuai prinsip ICA/UU): koperasi memberi pendidikan kepada anggota, pengurus, pengawas, dan masyarakat."},
-      {q:"Audit eksternal pada koperasi besar berfungsi untuk...", opts:["Mengganti laporan keuangan","Memberi opini independen atas kewajaran laporan keuangan","Membuat keputusan bisnis","Menentukan SHU"], a:1, exp:"Audit eksternal memberikan opini independen atas kewajaran penyajian laporan keuangan, sebagai bentuk akuntabilitas kepada anggota dan stakeholder."},
-      {q:"Dalam digitalisasi koperasi, manfaat utama penggunaan sistem informasi adalah...", opts:["Hanya gengsi","Transparansi data dan efisiensi pelayanan anggota","Memperumit proses","Mengurangi anggota"], a:1, exp:"Digitalisasi koperasi memberi: transparansi data simpan/pinjam, kecepatan layanan, akuntabilitas, dan analisis untuk pengambilan keputusan."},
-      {q:"Konflik kepentingan dalam koperasi dapat terjadi jika...", opts:["Pengurus juga menjadi anggota","Pengurus mendapatkan pinjaman dengan syarat istimewa","Anggota membayar simpanan","Pengawas memeriksa laporan"], a:1, exp:"Konflik kepentingan terjadi saat pengurus memanfaatkan posisinya untuk keuntungan pribadi (misal: pinjaman dengan syarat istimewa). Pengurus boleh dan harus jadi anggota."},
-      {q:"Strategi paling tepat menghadapi anggota yang menunggak pinjaman di KSP adalah...", opts:["Langsung dilaporkan polisi","Pendekatan musyawarah, restrukturisasi, dan penagihan bertahap sesuai SOP","Diabaikan","Diumumkan ke publik desa"], a:1, exp:"Pendekatan koperasi mengedepankan kekeluargaan: musyawarah, identifikasi penyebab, restrukturisasi (perpanjangan tenor/keringanan), penagihan sesuai SOP. Eskalasi hukum hanya jalan terakhir."},
-      {q:"Output yang diharapkan dari Kopdes Merah Putih dalam jangka panjang adalah...", opts:["Ketergantungan pada bantuan pemerintah","Kemandirian ekonomi desa dan kesejahteraan kolektif","Konsentrasi modal pada segelintir orang","Hilangnya BUMDes"], a:1, exp:"Tujuan jangka panjang Kopdes Merah Putih: kemandirian ekonomi desa, kesejahteraan kolektif anggota, dan ketahanan ekonomi nasional dari basis perdesaan — bukan ketergantungan."}
+      {q:"Visi utama Kopdes Merah Putih adalah membangun ekonomi desa berdasarkan asas...", opts:["Kompetisi bebas","Kekeluargaan dan gotong royong","Privatisasi penuh","Hierarki kapital"], a:1, exp:"Asas dasar koperasi termasuk Kopdes Merah Putih adalah kekeluargaan dan gotong royong, sesuai amanat Pasal 33 UUD 1945."},
+      {q:"Perangkat organisasi koperasi menurut UU Perkoperasian terdiri dari...", opts:["Hanya Pengurus","Rapat Anggota, Pengurus, Pengawas","Direksi dan Komisaris","Pemegang Saham, Direksi, Komisaris"], a:1, exp:"Perangkat koperasi: Rapat Anggota (kekuasaan tertinggi), Pengurus (eksekutif), Pengawas (kontrol)."},
+      {q:"Wewenang pengangkatan Pengurus Koperasi berada di tangan...", opts:["Pemerintah","Rapat Anggota","Pengawas","Manajer"], a:1, exp:"Pengurus dipilih dari, oleh, dan untuk anggota dalam Rapat Anggota."},
+      {q:"Modal awal yang harus disetor anggota saat masuk pertama kali disebut...", opts:["Simpanan wajib","Simpanan pokok","Simpanan sukarela","Iuran tahunan"], a:1, exp:"Simpanan pokok dibayar sekali saat menjadi anggota dan tidak dapat diambil selama menjadi anggota."},
+      {q:"Pembagian SHU didasarkan pada...", opts:["Kebijakan pengurus","Jasa modal dan jasa usaha anggota","Lama keanggotaan saja","Sama rata"], a:1, exp:"SHU bagian anggota = jasa modal (proporsional simpanan) + jasa usaha (proporsional transaksi anggota dengan koperasi)."},
+      {q:"Prinsip yang paling membedakan koperasi dari PT adalah...", opts:["Mencari laba sebesar-besarnya","Satu anggota satu suara","Saham diperjualbelikan","Hak veto pemegang modal terbesar"], a:1, exp:"Prinsip 'one member, one vote' adalah ciri khas koperasi, berbeda dengan PT yang suaranya proporsional saham."},
+      {q:"Dana Cadangan dalam koperasi berfungsi untuk...", opts:["Bonus pengurus","Memupuk modal sendiri & menutup kerugian","Pembagian SHU","Investasi spekulatif"], a:1, exp:"Dana cadangan disisihkan dari SHU untuk memupuk modal sendiri dan menutup kemungkinan kerugian."},
+      {q:"Koperasi simpan pinjam yang melayani lebih dari satu provinsi mengajukan izin ke...", opts:["Kepala Desa","Bupati","Gubernur","Kementerian Koperasi & UKM"], a:3, exp:"Lintas provinsi/skala nasional → izin Kementerian. Lintas kabupaten dalam satu provinsi → provinsi. Lintas kelurahan/desa dalam kab/kota → kab/kota."},
+      {q:"Yang BUKAN ciri manajemen koperasi yang sehat adalah...", opts:["Transparansi laporan keuangan","Akuntabilitas pengurus & pengawas","Konsentrasi keputusan pada satu orang","Partisipasi aktif anggota"], a:2, exp:"Konsentrasi keputusan pada satu orang bertentangan dengan prinsip demokratis koperasi."},
+      {q:"Risiko terbesar dalam KSP yang harus dimitigasi adalah...", opts:["Risiko desain logo","Risiko cuaca","Risiko kredit macet (NPL)","Risiko tren mode"], a:2, exp:"Risiko utama KSP: kredit macet/NPL. Mitigasi: analisis 5C (Character, Capacity, Capital, Collateral, Condition), monitoring, cadangan kerugian piutang."},
+      {q:"Indikator keberhasilan koperasi yang paling holistik adalah...", opts:["Jumlah aset semata","SHU sebesar-besarnya","Manfaat ekonomi DAN sosial bagi anggota","Banyaknya cabang"], a:2, exp:"Sukses koperasi diukur dari manfaat anggota: ekonomi (harga, akses) dan sosial (pendidikan, gotong royong)."},
+      {q:"Strategi pengembangan unit usaha Kopdes Merah Putih yang paling tepat adalah...", opts:["Mengikuti tren ekonomi global","Berbasis potensi lokal & kebutuhan riil anggota","Spekulasi investasi tinggi","Konsentrasi satu jenis usaha tunggal"], a:1, exp:"Koperasi desa paling efektif memanfaatkan potensi lokal dan menjawab kebutuhan riil anggota."},
+      {q:"Dokumen tertinggi yang mengatur tata kelola internal koperasi adalah...", opts:["SOP","Anggaran Dasar (AD)","Notula rapat","Memo internal"], a:1, exp:"Anggaran Dasar adalah konstitusi koperasi, ditetapkan dan diubah HANYA melalui Rapat Anggota."},
+      {q:"Konflik kepentingan yang paling perlu diwaspadai dalam Kopdes adalah...", opts:["Pengurus juga jadi anggota","Pengurus mengambil pinjaman dengan syarat istimewa","Anggota memberi saran","Pengawas memeriksa laporan"], a:1, exp:"Konflik kepentingan: pengurus memanfaatkan posisinya untuk keuntungan pribadi (pinjaman istimewa, vendor keluarga). Pengurus WAJIB anggota."},
+      {q:"Pendekatan terbaik menghadapi anggota yang menunggak pinjaman adalah...", opts:["Langsung lapor polisi","Diumumkan ke kampung","Musyawarah, identifikasi sebab, restrukturisasi sesuai SOP","Diabaikan saja"], a:2, exp:"Sesuai semangat kekeluargaan: musyawarah, identifikasi penyebab, restrukturisasi (perpanjangan tenor/keringanan). Eskalasi hukum jalan terakhir."},
+      {q:"Audit internal pada koperasi dilakukan oleh...", opts:["Pengurus","Pengawas","Anggota biasa","Manajer"], a:1, exp:"Pengawas adalah perangkat koperasi yang melakukan pengawasan internal terhadap kebijakan dan pelaksanaan oleh pengurus."},
+      {q:"Pendidikan dan pelatihan anggota dalam koperasi merupakan...", opts:["Pemborosan biaya","Salah satu prinsip koperasi yang wajib","Hanya untuk pengurus","Bersifat opsional"], a:1, exp:"Pendidikan koperasi adalah prinsip ICA dan UU Perkoperasian: koperasi memberi pendidikan kepada anggota, pengurus, pengawas, dan masyarakat."},
+      {q:"Manfaat utama digitalisasi koperasi adalah...", opts:["Hanya gengsi","Transparansi data, efisiensi layanan, akuntabilitas","Mempersulit pengurus","Mengurangi anggota"], a:1, exp:"Digitalisasi memberi: transparansi (cek simpanan/pinjaman real-time), efisiensi layanan, akuntabilitas, basis data untuk keputusan."},
+      {q:"Tujuan jangka panjang Kopdes Merah Putih dalam ekosistem ekonomi desa adalah...", opts:["Mengganti BUMDes","Ketergantungan permanen pada bantuan","Kemandirian ekonomi desa & kesejahteraan kolektif","Konsentrasi modal pada elite desa"], a:2, exp:"Kopdes Merah Putih bertujuan membangun kemandirian ekonomi desa, kesejahteraan kolektif, dan ketahanan ekonomi nasional dari basis pedesaan."},
+      {q:"Pada Tes Manajemen Kelautan & Perikanan, prinsip pengelolaan sumber daya laut yang berkelanjutan adalah...", opts:["Tangkap sebanyak-banyaknya","Pengelolaan berbasis ekosistem & quota tangkap","Mengabaikan ukuran ikan","Mengizinkan semua alat tangkap"], a:1, exp:"Pengelolaan perikanan berkelanjutan: quota tangkap, batasan ukuran (tidak juvenil), zonasi, larangan alat merusak (cantrang ekstrem, bom, sianida)."}
     ]
   }
 ];
 
-// Verifikasi total soal
-let total = 0;
-SUBTESTS.forEach(s => total += s.questions.length);
-console.log("Total soal:", total); // harusnya 248
-
-// =============================================
-// STATE & LOGIC
-// =============================================
 let currentSub = 0;
 let currentQ = 0;
-let answers = []; // [subIdx][qIdx] = chosen index or null
+let answers = [];
 let timerInterval = null;
 let timeLeft = 0;
+const TPK_THRESHOLD = 110;
 
-// Init answers array
 SUBTESTS.forEach(s => answers.push(new Array(s.questions.length).fill(null)));
 
 function startExam(){
@@ -652,7 +577,6 @@ function loadSubtest(){
   updateTimer();
   startTimer();
   renderQuestion();
-  renderGrid();
 }
 
 function startTimer(){
@@ -752,7 +676,7 @@ function confirmFinishSubtest(){
   const unanswered = answers[currentSub].filter(a => a === null).length;
   let msg = `Anda yakin ingin menyelesaikan Subtes "${sub.name}"?`;
   if(unanswered > 0){
-    msg += `\n\n${unanswered} soal belum dijawab dan akan dianggap kosong.`;
+    msg += `\n\n${unanswered} soal belum dijawab dan akan dianggap kosong (skor 0).`;
   }
   msg += `\n\nAnda TIDAK BISA kembali ke subtes ini.`;
   if(confirm(msg)){
@@ -777,7 +701,7 @@ function showTransition(){
   const sub = SUBTESTS[currentSub];
   const mins = Math.floor(sub.duration/60);
   document.getElementById('trans-title').textContent = `Subtes ${currentSub+1} — ${sub.name}`;
-  document.getElementById('trans-desc').textContent = `${sub.questions.length} soal · ${mins} menit. Bersiap-siap, klik mulai ketika sudah siap mengerjakan.`;
+  document.getElementById('trans-desc').textContent = `${sub.questions.length} soal · ${mins} menit. Klik mulai ketika sudah siap.`;
 }
 
 function startNextSubtest(){
@@ -790,59 +714,121 @@ function showReview(){
   document.getElementById('screen-exam').classList.add('hidden');
   document.getElementById('screen-review').classList.remove('hidden');
   
-  // Hitung skor
-  let totalCorrect = 0;
-  let totalWrong = 0;
-  let totalSkipped = 0;
-  let totalQ = 0;
-  const subStats = [];
-  
-  SUBTESTS.forEach((sub, si) => {
+  // Hitung skor per subtes
+  const subStats = SUBTESTS.map((sub, si) => {
     let correct = 0, wrong = 0, skip = 0;
     sub.questions.forEach((q, qi) => {
-      totalQ++;
       const ans = answers[si][qi];
-      if(ans === null) { skip++; totalSkipped++; }
-      else if(ans === q.a) { correct++; totalCorrect++; }
-      else { wrong++; totalWrong++; }
+      if(ans === null) skip++;
+      else if(ans === q.a) correct++;
+      else wrong++;
     });
-    subStats.push({name: sub.name, correct, wrong, skip, total: sub.questions.length});
+    return {name: sub.name, correct, wrong, skip, total: sub.questions.length};
   });
   
-  document.getElementById('score-num').textContent = totalCorrect;
+  // TPK = subtes 0-5, skor 1 per benar
+  let tpkScore = 0;
+  let tpkMax = 0;
+  for(let i=0; i<6; i++){
+    tpkScore += subStats[i].correct;
+    tpkMax += subStats[i].total;
+  }
   
-  const pct = Math.round((totalCorrect/totalQ)*100);
-  let verdict = '';
-  if(pct >= 80) verdict = '"Excellent — siap maju ujian."';
-  else if(pct >= 65) verdict = '"Bagus — masih ada area untuk dipertajam."';
-  else if(pct >= 50) verdict = '"Cukup — perbanyak latihan di subtes lemah."';
-  else verdict = '"Perlu kerja keras — fokus perbaiki dasar konsep."';
-  document.getElementById('verdict').textContent = verdict;
+  // Manajemen Bidang = subtes 6, skor 5 per benar
+  const mbScore = subStats[6].correct * 5;
+  const mbMax = subStats[6].total * 5;
   
-  // Summary grid
-  const sumHtml = `
-    <div class="sum-cell"><div class="num" style="color:var(--green)">${totalCorrect}</div><div class="lbl">Benar</div></div>
-    <div class="sum-cell"><div class="num" style="color:var(--accent-2)">${totalWrong}</div><div class="lbl">Salah</div></div>
-    <div class="sum-cell"><div class="num" style="color:var(--muted)">${totalSkipped}</div><div class="lbl">Tidak Dijawab</div></div>
-    <div class="sum-cell"><div class="num">${pct}%</div><div class="lbl">Persentase</div></div>
+  const tpkPass = tpkScore >= TPK_THRESHOLD;
+  
+  // Verdict
+  let verdictHtml = '';
+  if(tpkPass){
+    verdictHtml = `
+      <div class="verdict-stamp lulus">✓ Lolos Ambang Batas TPK</div>
+      <div class="verdict-reason">Skor TPK Anda <strong>${tpkScore}</strong> mencapai ambang batas <strong>${TPK_THRESHOLD}</strong>. Skor Manajemen Bidang menjadi nilai pendukung untuk perangkingan kelulusan akhir.</div>
+    `;
+  } else {
+    const gap = TPK_THRESHOLD - tpkScore;
+    verdictHtml = `
+      <div class="verdict-stamp gagal">✗ Belum Lolos Ambang Batas</div>
+      <div class="verdict-reason">Skor TPK Anda <strong>${tpkScore}</strong> masih kurang <strong>${gap} poin</strong> dari ambang batas <strong>${TPK_THRESHOLD}</strong>. Fokus perbaiki subtes dengan skor terendah.</div>
+    `;
+  }
+  document.getElementById('verdict-area').innerHTML = verdictHtml;
+  
+  // Score cards
+  let cardsHtml = '';
+  
+  cardsHtml += `
+    <div class="score-card">
+      <div class="score-card-head">
+        <div>
+          <div class="score-card-title">Tes Potensi Kognitif (TPK)</div>
+          <div class="score-threshold">Ambang batas: ${TPK_THRESHOLD} poin · Skor maksimum: ${tpkMax}</div>
+        </div>
+        <div class="score-card-status ${tpkPass?'pass':'fail'}">${tpkPass?'LOLOS':'TIDAK LOLOS'}</div>
+      </div>
   `;
-  document.getElementById('summary-grid').innerHTML = sumHtml;
+  for(let i=0; i<6; i++){
+    const s = subStats[i];
+    cardsHtml += `
+      <div class="score-row">
+        <span class="lbl">${i+1}. ${escapeHtml(s.name)}</span>
+        <span class="val" style="color:var(--green)">✓ ${s.correct}</span>
+        <span class="val" style="color:var(--muted)">/ ${s.total}</span>
+      </div>
+    `;
+  }
+  cardsHtml += `
+      <div class="score-final">
+        <div>
+          <div class="score-final-lbl">Total Skor TPK</div>
+          <div class="score-threshold">${tpkPass?`Lolos +${tpkScore-TPK_THRESHOLD} dari ambang`:`Kurang ${TPK_THRESHOLD-tpkScore} dari ambang`}</div>
+        </div>
+        <div class="score-final-val" style="color:${tpkPass?'var(--green)':'var(--accent-2)'}">${tpkScore}<span style="color:var(--muted);font-size:24px"> / ${tpkMax}</span></div>
+      </div>
+    </div>
+  `;
   
-  // Per-subtest breakdown + review
-  let reviewHtml = '<div style="margin-bottom:24px;background:#fff;border:1px solid var(--border);padding:20px"><h4 style="font-family:Fraunces;font-size:18px;font-weight:700;margin-bottom:12px">Rincian Per Subtes</h4>';
-  subStats.forEach(s => {
-    const subPct = Math.round((s.correct/s.total)*100);
-    reviewHtml += `<div style="display:grid;grid-template-columns:1fr auto auto auto auto;gap:14px;padding:8px 0;border-bottom:1px dashed rgba(10,17,48,0.15);font-size:14px;align-items:center">
-      <div style="font-family:Fraunces;font-weight:600">${escapeHtml(s.name)}</div>
-      <div style="font-family:JetBrains Mono;color:var(--green)">✓ ${s.correct}</div>
-      <div style="font-family:JetBrains Mono;color:var(--accent-2)">✗ ${s.wrong}</div>
-      <div style="font-family:JetBrains Mono;color:var(--muted)">− ${s.skip}</div>
-      <div style="font-family:JetBrains Mono;font-weight:700">${subPct}%</div>
-    </div>`;
-  });
-  reviewHtml += '</div>';
+  const mbStat = subStats[6];
+  cardsHtml += `
+    <div class="score-card">
+      <div class="score-card-head">
+        <div>
+          <div class="score-card-title">Tes Manajemen Bidang</div>
+          <div class="score-threshold">Bobot benar: 5 poin · Salah/kosong: 0 · Maks: ${mbMax}</div>
+        </div>
+        <div class="score-card-status neutral">NILAI PENDUKUNG</div>
+      </div>
+      <div class="score-row">
+        <span class="lbl">Jawaban Benar</span>
+        <span class="val" style="color:var(--green)">✓ ${mbStat.correct}</span>
+        <span class="val">× 5 = ${mbStat.correct*5}</span>
+      </div>
+      <div class="score-row">
+        <span class="lbl">Jawaban Salah</span>
+        <span class="val" style="color:var(--accent-2)">✗ ${mbStat.wrong}</span>
+        <span class="val">× 0 = 0</span>
+      </div>
+      <div class="score-row">
+        <span class="lbl">Tidak Dijawab</span>
+        <span class="val" style="color:var(--muted)">− ${mbStat.skip}</span>
+        <span class="val">× 0 = 0</span>
+      </div>
+      <div class="score-final">
+        <div>
+          <div class="score-final-lbl">Total Skor Manajemen</div>
+          <div class="score-threshold">${mbScore >= 70 ? 'Sangat baik' : mbScore >= 50 ? 'Cukup' : 'Perlu pendalaman'}</div>
+        </div>
+        <div class="score-final-val">${mbScore}<span style="color:var(--muted);font-size:24px"> / ${mbMax}</span></div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('score-cards').innerHTML = cardsHtml;
   
   // Review per soal
+  let reviewHtml = '';
   SUBTESTS.forEach((sub, si) => {
     reviewHtml += `<h4 style="font-family:Fraunces;font-size:22px;font-weight:700;margin:32px 0 12px;padding-top:8px;border-top:2px solid var(--border)">Subtes ${si+1} — ${escapeHtml(sub.name)}</h4>`;
     sub.questions.forEach((q, qi) => {
@@ -855,10 +841,19 @@ function showReview(){
       const yourAns = ans === null ? '—' : `${letters[ans]}. ${escapeHtml(q.opts[ans])}`;
       const correctAns = `${letters[q.a]}. ${escapeHtml(q.opts[q.a])}`;
       
+      let pointInfo = '';
+      if(si === 6){
+        if(ans === q.a) pointInfo = '<span style="color:var(--green);font-weight:700">+5 poin</span>';
+        else pointInfo = '<span style="color:var(--muted)">0 poin</span>';
+      } else {
+        if(ans === q.a) pointInfo = '<span style="color:var(--green);font-weight:700">+1 poin</span>';
+        else pointInfo = '<span style="color:var(--muted)">0 poin</span>';
+      }
+      
       reviewHtml += `
         <div class="review-q ${cls}" data-status="${dataCls}">
           <div class="review-q-head">
-            <span>SOAL #${qi+1}</span>
+            <span>SOAL #${qi+1} · ${pointInfo}</span>
             <span class="status ${statCls}">${stat}</span>
           </div>
           <div class="review-q-text">${escapeHtml(q.q)}</div>
@@ -877,8 +872,7 @@ function filterReview(type, btn){
   document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   
-  const items = document.querySelectorAll('.review-q');
-  items.forEach(item => {
+  document.querySelectorAll('.review-q').forEach(item => {
     const status = item.dataset.status;
     if(type === 'all') item.style.display = '';
     else if(type === status) item.style.display = '';
@@ -891,7 +885,6 @@ function escapeHtml(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// Cegah refresh tidak sengaja saat ujian
 window.addEventListener('beforeunload', (e) => {
   if(!document.getElementById('screen-exam').classList.contains('hidden')){
     e.preventDefault();
@@ -899,5 +892,6 @@ window.addEventListener('beforeunload', (e) => {
   }
 });
 </script>
+
 </body>
 </html>
